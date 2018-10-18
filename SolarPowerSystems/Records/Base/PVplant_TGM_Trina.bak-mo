@@ -1,0 +1,9 @@
+within SolarPowerSystems.Records.Base;
+record PVplant_TGM_Trina
+  "The smaller PV plant on the roof of TGM in Vienna"
+  extends PVplant(
+    panelArea = 10,
+    panelAzimuth = Modelica.SIunits.Conversions.from_deg(0),
+    panelTilt = Modelica.SIunits.Conversions.from_deg(0));
+                    // value actually unknown!!
+end PVplant_TGM_Trina;
