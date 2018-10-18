@@ -1,0 +1,9 @@
+[submodule "PhotoVoltaics"]
+	path = PhotoVoltaics
+	url = https://github.com/christiankral/PhotoVoltaics.git
+[submodule "PVSystems"]
+	path = PVSystems
+	url = https://github.com/raulrpearson/PVSystems
+[submodule "modelica-buildings"]
+	path = modelica-buildings
+	url = https://github.com/lbl-srg/modelica-buildings
