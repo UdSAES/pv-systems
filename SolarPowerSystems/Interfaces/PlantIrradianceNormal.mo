@@ -1,13 +1,17 @@
 within SolarPowerSystems.Interfaces;
 partial model PlantIrradianceNormal
   "PV modules, irradiance normal to surface"
-  extends Modelica.Electrical.Analog.Interfaces.OnePort;
   Modelica.Blocks.Interfaces.RealInput I_G_normal(unit="W/m2", min=0)
     "Total irradiance normal to module surface" annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={0,100})));
+  Modelica.Blocks.Interfaces.RealOutput P_DC(unit="W")
+    "Generated power across all panels" annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={0,-100})));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                      Rectangle(lineColor = {0, 0, 0}, fillPattern = FillPattern.Solid, extent = {{-76, 76}, {76, -76}}, fillColor = {85, 85, 255}), Line(points = {{-80, 0}, {80, 0}}, color = {255, 255, 255}), Rectangle(extent = {{-84, 84}, {84, -84}}, lineColor = {0, 0, 0}), Polygon(points = {{-84, 76}, {-76, 84}, {-68, 76}, {-76, 68}, {-84, 76}}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                                                                                                                        FillPattern.Solid, pattern = LinePattern.None), Line(points = {{-24, 76}, {-24, -76}}, color = {255, 255, 255}), Polygon(points = {{-8, 76}, {0, 84}, {8, 76}, {0, 68}, {-8, 76}}, fillColor = {255, 255, 255},

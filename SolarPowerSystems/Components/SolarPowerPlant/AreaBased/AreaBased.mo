@@ -76,7 +76,7 @@ equation
   // use parameter for now
   (1 - (25 - module_temperature)*temp_eta) = eta_mod;
 
-  v*i = panel_area * overall_efficiency * total_irra_on_panel * eta_mod;
+  P_DC = panel_area * overall_efficiency * total_irra_on_panel * eta_mod;
 
   total_irra_on_panel = I_G_normal;
 //  v = V_nominal;
@@ -100,26 +100,14 @@ equation
 //   connect(Zenith, solarZenith.y) annotation (Line(points={{110,0},{36,0},{36,
 //           50.2},{-39,50.2}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-        Text(
-          extent={{-72,88},{-72,74}},
-          lineColor={0,0,0},
-          textString="GHI"),
-        Text(
-          extent={{-68,-72},{-68,-86}},
-          lineColor={0,0,0},
-          textString="DHI"),
         Rectangle(extent={{-100,100},{100,-100}}, lineColor={28,108,200}),
         Text(
-          extent={{80,76},{80,62}},
+          extent={{18,-86},{18,-100}},
           lineColor={0,0,0},
           textString="P"),
         Text(
-          extent={{72,-30},{72,-44}},
+          extent={{44,100},{44,86}},
           lineColor={0,0,0},
-          textString="Zenith"),
-        Text(
-          extent={{74,-74},{74,-88}},
-          lineColor={0,0,0},
-          textString="Azimuth")}),
+          textString="I_G_normal")}),
       Diagram(coordinateSystem(preserveAspectRatio=false)));
 end AreaBased;

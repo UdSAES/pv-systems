@@ -1,8 +1,7 @@
 within SolarPowerSystems.Components.SolarPowerPlant.ModuleBased;
 model ModuleBased "Module-based PV plant model (PhotoVoltaics-Lib)"
   extends Interfaces.PlantIrradianceNormal;
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(final T=T)
-    if                                                                                  not useHeatPort
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(final T=T) if not useHeatPort
     annotation (Placement(transformation(extent={{-60,-90},{-80,-70}})));
   PhotoVoltaics.Components.Diodes.Diode2Module diode(
     final m=m,

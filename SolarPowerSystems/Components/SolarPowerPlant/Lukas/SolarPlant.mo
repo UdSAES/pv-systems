@@ -79,7 +79,7 @@ equation
 
   // DNI (beam), simple workaround to avoid devision by zero
   DNI = noEvent(max(0,(GHI-DHI))) /noEvent(max(cos(zenith), 0.1));
-  angle_of_incidence =Lukas.get_AngleOfIncidence(
+  angle_of_incidence =SolarPowerSystems.Functions.angleOfIncidence(
     zenith,
     azimuth,
     panel_slope,
