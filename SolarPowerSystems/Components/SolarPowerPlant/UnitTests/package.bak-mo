@@ -1,0 +1,6 @@
+within SolarPowerSystems.Components.SolarPowerPlant;
+package UnitTests
+  extends Modelica.Icons.InternalPackage;
+
+
+end UnitTests;

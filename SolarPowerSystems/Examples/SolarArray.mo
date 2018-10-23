@@ -8,7 +8,7 @@ model SolarArray
   Modelica.Blocks.Sources.Constant       epochOffset(k=1356998400)
     "The time at the start of the simulation as Epoch in s"
     annotation (Placement(transformation(extent={{-50,70},{-30,90}})));
-  SolarPowerPlant.SolarPlant solarPlant(
+  Components.SolarPowerPlant.Lukas.SolarPlant solarPlant(
     latitude=location.latitude,
     longitude=location.longitude,
     simu_start_epochs=epochOffset.k,
