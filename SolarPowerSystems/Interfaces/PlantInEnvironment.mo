@@ -1,6 +1,11 @@
 within SolarPowerSystems.Interfaces;
 partial model PlantInEnvironment
   "Accounts for inclination/orientation of a PV plant in its environment"
+  extends Modelica.Blocks.Icons.Block;
+
+  parameter Modelica.SIunits.Angle surfaceTilt "Surface tilt angle";
+  parameter Modelica.SIunits.Angle surfaceAzimuth
+    "Azimuth angle of surface in degrees";
   Modelica.Blocks.Interfaces.RealInput I_diff_horizontal(unit="W/m2")
     "Diffuse irradiance in horizontal plane" annotation (Placement(
         transformation(
