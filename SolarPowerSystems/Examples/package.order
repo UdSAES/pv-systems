@@ -1,5 +1,3 @@
 SolarPosition
-SolarArrayFromHorizontalIrradiance
-SolarArrayFromNormalIrradiance
+AreaBasedFromHorizontalIrradiance
 ModuleBasedFromNormalIrradiance
-TGM_Trina_Measurement_20160629
