@@ -96,12 +96,11 @@ equation
   connect(solarZenith.y, environmentModel.zenithOfSun) annotation (Line(points={{91,80.2},
           {96,80.2},{96,68},{7,68},{7,26}},            color={0,0,127}));
   connect(ASWDIR_S__ASWDIFD_S.y[1], environmentModel.I_diff_horizontal)
-    annotation (Line(points={{49,50},{-8.2,50},{-8.2,26}},  color={0,0,127}));
+    annotation (Line(points={{49,50},{-5,50},{-5,26}},      color={0,0,127}));
   connect(ASWDIR_S__ASWDIFD_S.y[2], environmentModel.I_dir_horizontal)
-    annotation (Line(points={{49,50},{-5,50},{-5,26}},  color={0,0,127}));
+    annotation (Line(points={{49,50},{-2,50},{-2,26}},  color={0,0,127}));
   connect(albedo.y, environmentModel.albedo)
-    annotation (Line(points={{-29,50},{-20,50},{-20,46},{-2,46},{-2,26}},
-                                                        color={0,0,127}));
+    annotation (Line(points={{-29,50},{-8,50},{-8,26}}, color={0,0,127}));
   connect(environmentModel.I_dir_inclined, add3_1.u2)
     annotation (Line(points={{0,6},{0,-2},{2.22045e-15,-2}},
                                              color={0,0,127}));

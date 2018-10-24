@@ -84,8 +84,8 @@ equation
   connect(prescribedTemperature.port, plantModelModuleBased.heatPort)
     annotation (Line(points={{-80,50},{-80,56},{-22,56},{-22,60}}, color={191,0,
           0}));
-  connect(prescribedTemperature.port, plantModelAreaBased.heatPort) annotation
-    (Line(points={{-80,50},{-80,56},{-22,56},{-22,-74},{10,-74},{10,-70}},
+  connect(prescribedTemperature.port, plantModelAreaBased.heatPort) annotation (
+     Line(points={{-80,50},{-80,56},{-22,56},{-22,-74},{10,-74},{10,-70}},
         color={191,0,0}));
   annotation (
     experiment(

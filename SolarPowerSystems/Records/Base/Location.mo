@@ -6,6 +6,6 @@ partial record Location
     "Latitude in decimal degrees";
   parameter Real longitude(unit = "deg", min = -180, max = 180)
     "Longitude in decimal degrees";
-  parameter Real elevation(unit = "m", min = 0, max = 4000)
+  parameter Real elevation(unit = "m", min = 0, max = 8848)
     "Height above sea level (elevation) in metres";
 end Location;

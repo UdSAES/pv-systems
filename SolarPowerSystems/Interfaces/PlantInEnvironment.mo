@@ -3,27 +3,27 @@ partial model PlantInEnvironment
   "Accounts for inclination/orientation of a PV plant in its environment"
   extends Modelica.Blocks.Icons.Block;
 
-  parameter Modelica.SIunits.Angle surfaceTilt "Surface tilt angle";
+  parameter Modelica.SIunits.Angle surfaceTilt "Surface tilt angle in rad";
   parameter Modelica.SIunits.Angle surfaceAzimuth
-    "Azimuth angle of surface in degrees";
+    "Azimuth angle of surface in rad";
   Modelica.Blocks.Interfaces.RealInput I_diff_horizontal(unit="W/m2")
     "Diffuse irradiance in horizontal plane" annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
-        origin={-82,100})));
+        origin={-50,100})));
   Modelica.Blocks.Interfaces.RealInput I_dir_horizontal(unit="W/m2")
     "Direct irradiance in horizontal plane" annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
-        origin={-50,100})));
+        origin={-20,100})));
   Modelica.Blocks.Interfaces.RealInput albedo
     "The albedo of the plant's surroundings" annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
-        origin={-20,100})));
+        origin={-80,100})));
   Modelica.Blocks.Interfaces.RealOutput I_diff_inclined(unit="W/m2")
     "Diffuse irradiance on arbitrarily oriented surface" annotation (Placement(
         transformation(
