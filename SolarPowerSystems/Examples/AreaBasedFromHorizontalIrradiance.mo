@@ -1,6 +1,6 @@
 within SolarPowerSystems.Examples;
 model AreaBasedFromHorizontalIrradiance
-  "Calculate the electrical output of a (concentrated) solar array as a function of the global horizontal irradiance"
+  "Calculate the expected power output of a solar array as a function of the global horizontal irradiance and the panel area"
   extends Modelica.Icons.Example;
   replaceable parameter Records.Data.Location_UdS location constrainedby
     Records.Base.Location annotation (Placement(transformation(extent={{-90,70},
