@@ -75,9 +75,9 @@ model SolarArrayFromNormalIrradiance
   PhotoVoltaics.Components.Blocks.MPTrackerSample mpTracker(
     samplePeriod=10,
     VmpRef=plantModelModuleBased.nsModule*plantModelModuleBased.moduleData.VmpRef,
-
     ImpRef=plantModelModuleBased.npModule*plantModelModuleBased.moduleData.ImpRef)
     annotation (Placement(transformation(extent={{26,-96},{46,-76}})));
+
   Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground groundAC annotation (
     Placement(transformation(extent={{74,-100},{94,-80}})));
   Modelica.Electrical.QuasiStationary.SinglePhase.Sources.VoltageSource voltageSource(

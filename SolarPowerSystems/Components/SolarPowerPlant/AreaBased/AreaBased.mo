@@ -23,7 +23,7 @@ model AreaBased "PV plant model based on the overall panel area (Lukas)"
 //   parameter SI.Angle panel_azimuth = 0 "south equal 0, positive towards east";
 //   parameter SI.Angle panel_slope = 30 "horizontal equals 0";
 //   parameter Real surface_albedo = 0.2;
-  parameter SI.Temp_C module_temperature= 25;
+  SI.Temp_C module_temperature;
 
 //  parameter SI.Voltage V_nominal;
 
@@ -74,6 +74,7 @@ equation
 //   zenith = SI.Conversions.from_deg(solarZenith.y);
 
   // use parameter for now
+  module_temperature = T;
   (1 - (25 - module_temperature)*temp_eta) = eta_mod;
 
   P_DC = panel_area * overall_efficiency * total_irra_on_panel * eta_mod;

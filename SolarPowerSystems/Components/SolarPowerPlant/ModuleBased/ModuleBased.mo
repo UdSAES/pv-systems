@@ -14,9 +14,7 @@ model ModuleBased "Module-based PV plant model (PhotoVoltaics-Lib)"
     annotation (Placement(transformation(extent={{10,-10},{-10,10}})));
   parameter Integer nsModule=1 "Number of series connected modules";
   parameter Integer npModule=1 "Number of parallel connected modules";
-  parameter Boolean useHeatPort=false "=true, if HeatPort is enabled";
-  parameter Modelica.SIunits.Temperature T=298.15
-    "Fixed device temperature if useHeatPort = false";
+
   Modelica.Electrical.Analog.Sensors.PowerSensor powerSensor
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
   Modelica.Electrical.Analog.Interfaces.NegativePin nv1

@@ -1,6 +1,7 @@
 within SolarPowerSystems.Interfaces;
 partial model PlantIrradianceNormal
   "PV modules, irradiance normal to surface"
+  extends Modelica.Thermal.HeatTransfer.Interfaces.PartialConditionalHeatPort;
   Modelica.Blocks.Interfaces.RealInput I_G_normal(unit="W/m2", min=0)
     "Total irradiance normal to module surface" annotation (Placement(
         transformation(

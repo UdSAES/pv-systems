@@ -82,5 +82,6 @@ equation
 </html>",
         info="<html>
 <p>This example uses measured irradiance data to supply the photovoltaic modules.</p>
-</html>"));
+</html>"),
+    __Dymola_Commands(file="Scripts/plotResults.mos" "plotResults"));
 end TGM_Trina_Measurement_20160629;
