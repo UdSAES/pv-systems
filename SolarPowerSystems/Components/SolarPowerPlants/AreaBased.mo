@@ -1,10 +1,9 @@
 within SolarPowerSystems.Components.SolarPowerPlants;
 model AreaBased
   "Model of a solar power plant that computes the expected power output as a function of the direct and diffuse irradiance on the horizontal plane based on the area and orientation of the plant"
-  extends Interfaces.PhotoVoltaicPowerPlant(
-                                 redeclare PlantInEnvironment.Simple
+  extends Interfaces.PhotoVoltaicPowerPlant(redeclare PlantInEnvironment.Simple
       inclinationAndShadowing(surfaceTilt=Modelica.SIunits.Conversions.from_deg(
-           panelTilt), surfaceAzimuth=Modelica.SIunits.Conversions.from_deg(
+          panelTilt), surfaceAzimuth=Modelica.SIunits.Conversions.from_deg(
           panelAzimuth)), redeclare PhotoVoltaicArray.AreaBased.AreaBased
       plantIrradianceNormal(
       panel_area=panelArea,

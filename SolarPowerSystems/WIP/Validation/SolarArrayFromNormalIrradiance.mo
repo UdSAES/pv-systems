@@ -34,13 +34,13 @@ model SolarArrayFromNormalIrradiance
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-70,-50})), __Dymola_choicesAllMatching=true);
-  Components.SolarPosition.SolarAzimuth solarAzimuth(
+  Components.SolarPosition.SolarPositionAlgorithm.SolarAzimuth solarAzimuth(
     latitude=location.latitude,
     longitude=location.longitude,
     height_above_sealevel=location.elevation,
     simu_start_epochs=epochOffset.k)
     annotation (Placement(transformation(extent={{30,70},{50,90}})));
-  Components.SolarPosition.SolarZenith solarZenith(
+  Components.SolarPosition.SolarPositionAlgorithm.SolarZenith solarZenith(
     latitude=location.latitude,
     longitude=location.longitude,
     height_above_sealevel=location.elevation,

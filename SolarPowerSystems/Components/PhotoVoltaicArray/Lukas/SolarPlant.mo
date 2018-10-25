@@ -47,13 +47,13 @@ model SolarPlant
         transformation(extent={{-126,-110},{-86,-68}}), iconTransformation(
           extent={{-110,-92},{-86,-68}})));
 
-  Components.SolarPosition.SolarAzimuth solarAzimuth(
+  SolarPosition.SolarPositionAlgorithm.SolarAzimuth solarAzimuth(
     final latitude=latitude,
     final longitude=longitude,
     final height_above_sealevel=height_above_sealevel,
     final simu_start_epochs=simu_start_epochs)
     annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
-  Components.SolarPosition.SolarZenith solarZenith(
+  SolarPosition.SolarPositionAlgorithm.SolarZenith solarZenith(
     final latitude=latitude,
     final longitude=longitude,
     final height_above_sealevel=height_above_sealevel,

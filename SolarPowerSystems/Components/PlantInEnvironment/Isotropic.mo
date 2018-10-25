@@ -25,14 +25,14 @@ model Isotropic
 
 equation
   direct.HDirNor = noEvent(max(0, (I_dir_horizontal)))/noEvent(max(cos(zenithOfSun), 0.1));
-  connect(I_diff_horizontal, I_G_horizontal.u2) annotation (Line(points={{-82,100},
-          {-82,60},{-72,60},{-72,52}}, color={0,0,127}));
-  connect(I_dir_horizontal, I_G_horizontal.u1) annotation (Line(points={{-50,100},
-          {-50,60},{-60,60},{-60,52}}, color={0,0,127}));
+  connect(I_diff_horizontal, I_G_horizontal.u2) annotation (Line(points={{-50,100},
+          {-50,60},{-72,60},{-72,52}}, color={0,0,127}));
+  connect(I_dir_horizontal, I_G_horizontal.u1) annotation (Line(points={{-20,100},
+          {-20,60},{-60,60},{-60,52}}, color={0,0,127}));
   connect(I_G_horizontal.y, diffuse.HGloHor) annotation (Line(points={{-66,29},{
           -66,20},{-36,20},{-36,12}}, color={0,0,127}));
-  connect(I_dir_horizontal, diffuse.HDifHor) annotation (Line(points={{-50,100},
-          {-50,22},{-44,22},{-44,12}}, color={0,0,127}));
+  connect(I_dir_horizontal, diffuse.HDifHor) annotation (Line(points={{-20,100},
+          {-20,22},{-44,22},{-44,12}}, color={0,0,127}));
   connect(direct.HDirTil, I_dir_inclined) annotation (Line(points={{40,-11},{40,
           -40},{0,-40},{0,-100}}, color={0,0,127}));
   connect(diffuse.HSkyDifTil, I_diff_inclined) annotation (Line(points={{-36,-11},

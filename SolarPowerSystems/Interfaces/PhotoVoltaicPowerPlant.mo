@@ -87,13 +87,13 @@ partial model PhotoVoltaicPowerPlant
     Dialog(group="PV Modules", enable=false));
   Modelica.Blocks.Continuous.Integrator integrator
     annotation (Placement(transformation(extent={{64,30},{84,50}})));
-  Components.SolarPosition.SolarAzimuth solarAzimuth(
+  Components.SolarPosition.SolarPositionAlgorithm.SolarAzimuth solarAzimuth(
     latitude=latitude,
     longitude=longitude,
     height_above_sealevel=elevation,
     simu_start_epochs=epochOffset)
     annotation (Placement(transformation(extent={{-90,50},{-70,70}})));
-  Components.SolarPosition.SolarZenith solarZenith(
+  Components.SolarPosition.SolarPositionAlgorithm.SolarZenith solarZenith(
     latitude=latitude,
     longitude=longitude,
     height_above_sealevel=elevation,

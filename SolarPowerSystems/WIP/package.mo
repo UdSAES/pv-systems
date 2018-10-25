@@ -93,23 +93,23 @@ package WIP "Work in progress"
           extent={{-10,-10},{10,10}},
           rotation=0,
           origin={0,-50})), __Dymola_choicesAllMatching=true);
-    Components.SolarPosition.SolarAzimuth solarAzimuth(
-      latitude=location.latitude,
-      longitude=location.longitude,
-      height_above_sealevel=location.elevation,
-      simu_start_epochs=epochOffset.k)
-      annotation (Placement(transformation(extent={{30,70},{50,90}})));
-    Components.SolarPosition.SolarZenith solarZenith(
-      latitude=location.latitude,
-      longitude=location.longitude,
-      height_above_sealevel=location.elevation,
-      simu_start_epochs=epochOffset.k)
-      annotation (Placement(transformation(extent={{70,70},{90,90}})));
-    replaceable Components.PlantInEnvironment.Simple environmentModel(
-        surfaceAzimuth=plantRecord.panelAzimuth, surfaceTilt=plantRecord.panelTilt)
-      constrainedby Interfaces.PlantInEnvironment annotation (Placement(
-          transformation(extent={{-10,0},{10,20}})), __Dymola_choicesAllMatching=
-          true);
+  Components.SolarPosition.SolarPositionAlgorithm.SolarAzimuth solarAzimuth(
+    latitude=location.latitude,
+    longitude=location.longitude,
+    height_above_sealevel=location.elevation,
+    simu_start_epochs=epochOffset.k)
+    annotation (Placement(transformation(extent={{30,70},{50,90}})));
+  Components.SolarPosition.SolarPositionAlgorithm.SolarZenith solarZenith(
+    latitude=location.latitude,
+    longitude=location.longitude,
+    height_above_sealevel=location.elevation,
+    simu_start_epochs=epochOffset.k)
+    annotation (Placement(transformation(extent={{70,70},{90,90}})));
+  replaceable Components.PlantInEnvironment.Simple environmentModel(
+      surfaceAzimuth=plantRecord.panelAzimuth, surfaceTilt=plantRecord.panelTilt)
+    constrainedby Interfaces.PlantInEnvironment annotation (Placement(
+        transformation(extent={{-10,0},{10,20}})), __Dymola_choicesAllMatching=
+        true);
     Modelica.Blocks.Sources.Constant albedo(k=plantRecord.environmentAlbedo)
       annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
     Modelica.Blocks.Math.Add3 add3_1 annotation (Placement(transformation(
