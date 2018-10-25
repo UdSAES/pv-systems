@@ -1,12 +1,12 @@
-within SolarPowerSystems.Components.SolarPowerPlants;
-model AreaBased
-  "Model of a solar power plant that computes the expected power output as a function of the direct and diffuse irradiance on the horizontal plane based on the area and orientation of the plant"
+within SolarPowerSystems.WIP;
+model AreaBasedNoInclination
+  "Model of a solar power plant that computes the expected power output as a function of the global irradiance normal to the PV array based on its area"
   extends Interfaces.PhotoVoltaicPowerPlant(
-                                 redeclare PlantInEnvironment.Simple
-      inclinationAndShadowing(surfaceTilt=Modelica.SIunits.Conversions.from_deg(
-           panelTilt), surfaceAzimuth=Modelica.SIunits.Conversions.from_deg(
-          panelAzimuth)), redeclare PhotoVoltaicArray.AreaBased.AreaBased
-      plantIrradianceNormal(
+                                 redeclare Components.PlantInEnvironment.None inclinationAndShadowing(
+        surfaceTilt=Modelica.SIunits.Conversions.from_deg(panelTilt),
+        surfaceAzimuth=Modelica.SIunits.Conversions.from_deg(panelAzimuth)),
+                          redeclare
+      Components.PhotoVoltaicArray.AreaBased.AreaBased plantIrradianceNormal(
       panel_area=panelArea,
       overall_efficiency=plantEfficiency,
       temp_eta=temperatureCoefficient,
@@ -20,4 +20,4 @@ model AreaBased
 equation
   connect(internalHeatPort, plantIrradianceNormal.heatPort)
     annotation (Line(points={{-40,-80},{42,-80},{42,-10}}, color={191,0,0}));
-end AreaBased;
+end AreaBasedNoInclination;

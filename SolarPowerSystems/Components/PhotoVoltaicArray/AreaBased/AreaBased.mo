@@ -1,6 +1,6 @@
 within SolarPowerSystems.Components.PhotoVoltaicArray.AreaBased;
 model AreaBased "PV plant model based on the overall panel area (Lukas)"
-  extends SolarPowerSystems.Interfaces.PlantIrradianceNormal;
+  extends SolarPowerSystems.Interfaces.PhotoVoltaicArray;
 
   import SI = Modelica.SIunits;
 //   parameter Real latitude(unit = "deg", min = 47.0, max = 56.0) = 49.26

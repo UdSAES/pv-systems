@@ -1,8 +1,7 @@
 within SolarPowerSystems.WIP.Validation;
 model TGM_Trina_20160629
   extends Modelica.Icons.Example;
-  SolarPowerSystems.Components.SolarPowerPlants.AreaBased
-    solarPowerPlantAreaBased(
+  SolarPowerSystems.WIP.AreaBasedNoInclination solarPowerPlantAreaBased(
     latitude=location.latitude,
     longitude=location.longitude,
     elevation=location.elevation,

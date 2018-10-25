@@ -1,6 +1,6 @@
 within SolarPowerSystems.Components.PhotoVoltaicArray.ModuleBased;
 model ModuleBased "Module-based PV plant model (PhotoVoltaics-Lib)"
-  extends Interfaces.PlantIrradianceNormal;
+  extends Interfaces.PhotoVoltaicArray;
 
   PhotoVoltaics.Components.SimplePhotoVoltaics.SimplePlantSymmetric
     simplePlantSymmetric(

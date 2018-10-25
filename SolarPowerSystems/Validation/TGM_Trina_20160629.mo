@@ -46,7 +46,8 @@ model TGM_Trina_20160629
   Components.PhotoVoltaicArray.AreaBased.AreaBased plantModelAreaBased(
     overall_efficiency=0.141,
     panel_area=1.650*0.992*8,
-    useHeatPort=false) annotation (Placement(transformation(
+    useHeatPort=false,
+    T=298.15) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={0,-60})));
