@@ -1,5 +1,4 @@
 SolarPosition
-SolarPowerPlant
+PhotoVoltaicArray
 PlantInEnvironment
-FMUs
-SolarPowerPlantAreaBased
+SolarPowerPlants

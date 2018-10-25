@@ -35,19 +35,18 @@ model TGM_Trina_20160629_withTemperature
     fileName=fileName,
     columns=2:10)
     annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
-  Components.SolarPowerPlant.ModuleBased.ModuleBased plantModelModuleBased(
+  Components.PhotoVoltaicArray.ModuleBased.ModuleBased plantModelModuleBased(
     nsModule=nsModule,
     npModule=npModule,
     redeclare PhotoVoltaics.Records.TSM_230_PC05 moduleData,
-    useHeatPort=true)                                        annotation (
-      Placement(transformation(
+    useHeatPort=true) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-32,70})));
-  Components.SolarPowerPlant.AreaBased.AreaBased plantModelAreaBased(
-      overall_efficiency=0.141, panel_area=1.650*0.992*8,
-    useHeatPort=false)                                    annotation (Placement(
-        transformation(
+  Components.PhotoVoltaicArray.AreaBased.AreaBased plantModelAreaBased(
+    overall_efficiency=0.141,
+    panel_area=1.650*0.992*8,
+    useHeatPort=false) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={0,-60})));

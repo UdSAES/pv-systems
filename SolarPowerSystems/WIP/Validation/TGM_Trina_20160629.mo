@@ -1,4 +1,4 @@
-within SolarPowerSystems.Validation.WIP;
+within SolarPowerSystems.WIP.Validation;
 model TGM_Trina_20160629
   extends Modelica.Icons.Example;
   SolarPowerSystems.Components.SolarPowerPlants.AreaBased

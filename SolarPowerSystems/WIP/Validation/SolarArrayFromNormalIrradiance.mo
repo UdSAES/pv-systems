@@ -1,4 +1,4 @@
-within SolarPowerSystems.Validation.WIP;
+within SolarPowerSystems.WIP.Validation;
 model SolarArrayFromNormalIrradiance
   "Calculate the electrical output of a (concentrated) solar array as a function of the global irradiance normal to the panel surface"
   extends Modelica.Icons.Example;
