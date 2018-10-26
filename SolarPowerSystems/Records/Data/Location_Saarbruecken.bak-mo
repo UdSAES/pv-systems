@@ -1,7 +1,0 @@
-within SolarPowerSystems.Records.Data;
-record Location_Saarbruecken "The city of Saarbruecken in Germany"
-  extends Base.Location(
-    latitude = 49.2553,
-    longitude = 7.0405,
-    elevation = 273);
-end Location_Saarbruecken;
