@@ -9,12 +9,12 @@ partial model PhotoVoltaicPowerPlant
     "Fixed environment temperature if useTemperatureInput = false"
     annotation(Dialog(enable=not useTemperatureInput));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(final T=T) if not useTemperatureInput
-    annotation (Placement(transformation(extent={{-70,-64},{-54,-48}})));
+    annotation (Placement(transformation(extent={{-64,-70},{-56,-62}})));
   parameter Boolean useAlbedoInput = false "=true, if environment albedo is provided" annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
   parameter Real Albedo=0.2 "Fixed albedo value if useAlbedoInput = false"
     annotation(Dialog(enable=not useAlbedoInput));
   Modelica.Blocks.Sources.Constant fixedAlbedo(k=Albedo) if not useAlbedoInput
-    annotation (Placement(transformation(extent={{-12,-48},{-28,-32}})));
+    annotation (Placement(transformation(extent={{-56,-24},{-64,-16}})));
 
   parameter Real latitude(unit = "deg", min = -90, max = 90)
     "Latitude in decimal degrees" annotation(Dialog(group="Location"));
@@ -33,20 +33,20 @@ partial model PhotoVoltaicPowerPlant
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
-        origin={-100,0})));
+        origin={-100,20})));
 
   Modelica.Blocks.Interfaces.RealInput I_dir_horizontal(unit="W/m2")
     "Direct irradiance in horizontal plane" annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
-        origin={-100,40})));
+        origin={-100,60})));
   Modelica.Blocks.Interfaces.RealInput albedo if useAlbedoInput
     "The albedo of the plant's surroundings" annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
-        origin={-100,-40})));
+        origin={-100,-20})));
   Modelica.Blocks.Interfaces.RealInput temperature(unit="K") if useTemperatureInput
     "The temperature at the plant's site (optional input)" annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
@@ -66,8 +66,8 @@ partial model PhotoVoltaicPowerPlant
 //     annotation (Placement(transformation(extent={{90,-90},{110,-70}})));
   replaceable           PlantInEnvironment inclinationAndShadowing(surfaceTilt=
         Modelica.SIunits.Conversions.from_deg(panelTilt), surfaceAzimuth=
-        Modelica.SIunits.Conversions.from_deg(panelAzimuth)) constrainedby
-    PlantInEnvironment "Select model to account for inclination and shadowing"
+        Modelica.SIunits.Conversions.from_deg(panelAzimuth)) constrainedby PlantInEnvironment
+                       "Select model to account for inclination and shadowing"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -77,8 +77,8 @@ partial model PhotoVoltaicPowerPlant
     k2=1,
     k3=1) "Global irradiance normal to panel surface"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-  replaceable PhotoVoltaicArray plantIrradianceNormal constrainedby
-    PhotoVoltaicArray "Select model of photovoltaic modules" annotation (
+  replaceable PhotoVoltaicArray plantIrradianceNormal constrainedby PhotoVoltaicArray
+                      "Select model of photovoltaic modules" annotation (
     Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -92,16 +92,16 @@ partial model PhotoVoltaicPowerPlant
     longitude=longitude,
     height_above_sealevel=elevation,
     simu_start_epochs=epochOffset)
-    annotation (Placement(transformation(extent={{-90,50},{-70,70}})));
+    annotation (Placement(transformation(extent={{-60,72},{-40,92}})));
   Components.SolarPosition.SolarPositionAlgorithm.SolarZenith solarZenith(
     latitude=latitude,
     longitude=longitude,
     height_above_sealevel=elevation,
     simu_start_epochs=epochOffset)
-    annotation (Placement(transformation(extent={{-90,74},{-70,94}})));
+    annotation (Placement(transformation(extent={{-60,50},{-40,70}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     environmentTemperature if useTemperatureInput "The temperature of the surrounding air"
-    annotation (Placement(transformation(extent={{-70,-88},{-54,-72}})));
+    annotation (Placement(transformation(extent={{-64,-84},{-56,-76}})));
 
 protected
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalHeatPort
@@ -117,31 +117,31 @@ equation
          {0,0,127}));
   connect(I_G_normal.y, plantIrradianceNormal.I_G_normal)
     annotation (Line(points={{11,0},{22,0}}, color={0,0,127}));
-  connect(inclinationAndShadowing.I_refl_inclined, I_G_normal.u1)
-    annotation (Line(points={{-22,6},{-22,8},{-12,8}}, color={0,0,127}));
-  connect(inclinationAndShadowing.I_dir_inclined, I_G_normal.u2)
-    annotation (Line(points={{-22,0},{-12,0}}, color={0,0,127}));
-  connect(inclinationAndShadowing.I_diff_inclined, I_G_normal.u3)
-    annotation (Line(points={{-22,-6},{-22,-8},{-12,-8}}, color={0,0,127}));
-  connect(I_diff_horizontal, inclinationAndShadowing.I_diff_horizontal)
-    annotation (Line(points={{-100,0},{-62,0},{-62,-5},{-42,-5}}, color={0,0,127}));
-  connect(I_dir_horizontal, inclinationAndShadowing.I_dir_horizontal)
-    annotation (Line(points={{-100,40},{-60,40},{-60,-2},{-42,-2}}, color={0,0,127}));
-  connect(albedo, inclinationAndShadowing.albedo) annotation (Line(points={{-100,
-          -40},{-60,-40},{-60,-8},{-42,-8}}, color={0,0,127}));
-  connect(solarAzimuth.y, inclinationAndShadowing.azimuthOfSun) annotation (
-      Line(points={{-69,60.2},{-58,60.2},{-58,3},{-42,3}}, color={0,0,127}));
-  connect(solarZenith.y, inclinationAndShadowing.zenithOfSun) annotation (Line(
-        points={{-69,84.2},{-56,84.2},{-56,7},{-42,7}}, color={0,0,127}));
+  connect(inclinationAndShadowing.reflectedInclinedIrradiance, I_G_normal.u1)
+    annotation (Line(points={{-22,-6},{-22,8},{-12,8}}, color={0,0,127}));
+  connect(inclinationAndShadowing.directInclinedIrradiance, I_G_normal.u2)
+    annotation (Line(points={{-22,6},{-18,6},{-18,0},{-12,0}}, color={0,0,127}));
+  connect(inclinationAndShadowing.diffuseInclinedIrradiance, I_G_normal.u3)
+    annotation (Line(points={{-22,-8.88178e-16},{-22,-8},{-12,-8}}, color={0,0,127}));
+  connect(I_diff_horizontal, inclinationAndShadowing.diffuseHorizontalIrradiance)
+    annotation (Line(points={{-100,20},{-72,20},{-72,4.44089e-16},{-42,4.44089e-16}}, color={0,0,127}));
+  connect(I_dir_horizontal, inclinationAndShadowing.directHorizontalIrradiance)
+    annotation (Line(points={{-100,60},{-70,60},{-70,6},{-42,6}}, color={0,0,127}));
+  connect(albedo, inclinationAndShadowing.albedo) annotation (Line(points={{-100,-20},{-70,-20},{-70,-6},{-42,-6}},
+                                             color={0,0,127}));
+  connect(solarAzimuth.y,inclinationAndShadowing.solarAzimuth)  annotation (
+      Line(points={{-39,82.2},{-26,82.2},{-26,10}},        color={0,0,127}));
+  connect(solarZenith.y,inclinationAndShadowing.solarZenith)  annotation (Line(
+        points={{-39,60.2},{-30,60.2},{-30,10}},        color={0,0,127}));
   connect(temperature, environmentTemperature.T)
-    annotation (Line(points={{-100,-80},{-71.6,-80}},
+    annotation (Line(points={{-100,-80},{-64.8,-80}},
                                                     color={0,0,127}));
   connect(environmentTemperature.port, internalHeatPort)
-    annotation (Line(points={{-54,-80},{-40,-80}}, color={191,0,0}));
+    annotation (Line(points={{-56,-80},{-40,-80}}, color={191,0,0}));
   connect(fixedTemperature.port, internalHeatPort)
-    annotation (Line(points={{-54,-56},{-40,-56},{-40,-80}}, color={191,0,0}));
+    annotation (Line(points={{-56,-66},{-40,-66},{-40,-80}}, color={191,0,0}));
   connect(fixedAlbedo.y, inclinationAndShadowing.albedo) annotation (Line(
-        points={{-28.8,-40},{-60,-40},{-60,-8},{-42,-8}}, color={0,0,127}));
+        points={{-64.4,-20},{-70,-20},{-70,-6},{-42,-6}}, color={0,0,127}));
   annotation (Icon(graphics={
                      Rectangle(lineColor = {0, 0, 0}, fillPattern = FillPattern.Solid, extent = {{-76, 76}, {76, -76}}, fillColor = {85, 85, 255}), Line(points = {{-80, 0}, {80, 0}}, color = {255, 255, 255}), Rectangle(extent = {{-84, 84}, {84, -84}}, lineColor = {0, 0, 0}), Polygon(points = {{-84, 76}, {-76, 84}, {-68, 76}, {-76, 68}, {-84, 76}}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                                                                                                                        FillPattern.Solid, pattern = LinePattern.None), Line(points = {{-24, 76}, {-24, -76}}, color = {255, 255, 255}), Polygon(points = {{-8, 76}, {0, 84}, {8, 76}, {0, 68}, {-8, 76}}, fillColor = {255, 255, 255},

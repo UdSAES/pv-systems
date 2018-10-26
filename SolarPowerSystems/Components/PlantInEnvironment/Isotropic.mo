@@ -6,51 +6,55 @@ model Isotropic
     diffuse(til=surfaceTilt, rho=0.2) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={-40,0})));
+        origin={-4,0})));
   Buildings.BoundaryConditions.SolarIrradiation.BaseClasses.DirectTiltedSurface
     direct annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={40,0})));
-  Modelica.Blocks.Math.Add I_G_horizontal annotation (Placement(transformation(
+        origin={60,0})));
+  Modelica.Blocks.Math.Add globalHorizontalIrradiance
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={-66,40})));
+        origin={6,48})));
   Functions.angleOfIncidenceAsBlock angleOfIncidenceAsBlock(surfaceTilt=
         surfaceTilt, surfaceAzimuth=surfaceAzimuth) annotation (Placement(
         transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=0,
-        origin={34,38})));
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={40,-40})));
 
 equation
-  direct.HDirNor = noEvent(max(0, (I_dir_horizontal)))/noEvent(max(cos(zenithOfSun), 0.1));
-  connect(I_diff_horizontal, I_G_horizontal.u2) annotation (Line(points={{-50,100},
-          {-50,60},{-72,60},{-72,52}}, color={0,0,127}));
-  connect(I_dir_horizontal, I_G_horizontal.u1) annotation (Line(points={{-20,100},
-          {-20,60},{-60,60},{-60,52}}, color={0,0,127}));
-  connect(I_G_horizontal.y, diffuse.HGloHor) annotation (Line(points={{-66,29},{
-          -66,20},{-36,20},{-36,12}}, color={0,0,127}));
-  connect(I_dir_horizontal, diffuse.HDifHor) annotation (Line(points={{-20,100},
-          {-20,22},{-44,22},{-44,12}}, color={0,0,127}));
-  connect(direct.HDirTil, I_dir_inclined) annotation (Line(points={{40,-11},{40,
-          -40},{0,-40},{0,-100}}, color={0,0,127}));
-  connect(diffuse.HSkyDifTil, I_diff_inclined) annotation (Line(points={{-36,-11},
-          {-36,-60},{-60,-60},{-60,-100}}, color={0,0,127}));
-  connect(diffuse.HGroDifTil, I_refl_inclined) annotation (Line(points={{-44,-11},
-          {-44,-20},{60,-20},{60,-100}}, color={0,0,127}));
-  connect(azimuthOfSun, angleOfIncidenceAsBlock.azimuth)
-    annotation (Line(points={{30,100},{30,48}}, color={0,0,127}));
-  connect(zenithOfSun, angleOfIncidenceAsBlock.zenith) annotation (Line(points={
-          {70,100},{70,60},{38,60},{38,48}}, color={0,0,127}));
-  connect(angleOfIncidenceAsBlock.angleOfIncidence, direct.incAng)
-    annotation (Line(points={{34,28},{34,12}}, color={0,0,127}));
+  direct.HDirNor =noEvent(max(0, (directHorizontalIrradiance)))/noEvent(max(cos(solarZenith), 0.1));
+  connect(globalHorizontalIrradiance.y, diffuse.HGloHor)
+    annotation (Line(points={{6,37},{6,34},{1.77636e-15,34},{1.77636e-15,12}}, color={0,0,127}));
+  connect(direct.HDirTil, directInclinedIrradiance) annotation (Line(points={{60,-11},{60,-100}}, color={0,0,127}));
+  connect(diffuse.HSkyDifTil, diffuseInclinedIrradiance)
+    annotation (Line(points={{-2.22045e-15,-11},{-2.22045e-15,-20},{0,-20},{0,-100}}, color={0,0,127}));
+  connect(diffuse.HGroDifTil, reflectedInclinedIrradiance)
+    annotation (Line(points={{-8,-11},{-8,-74},{-60,-74},{-60,-100}}, color={0,0,127}));
+  connect(diffuseHorizontalIrradiance, diffuse.HDifHor)
+    annotation (Line(points={{0,100},{0,66},{-8,66},{-8,12}}, color={0,0,127}));
+  connect(diffuseHorizontalIrradiance, globalHorizontalIrradiance.u2)
+    annotation (Line(points={{0,100},{0,66},{1.77636e-15,66},{1.77636e-15,60}}, color={0,0,127}));
+  connect(directHorizontalIrradiance, globalHorizontalIrradiance.u1)
+    annotation (Line(points={{60,100},{60,66},{12,66},{12,60}}, color={0,0,127}));
+  connect(solarZenith, angleOfIncidenceAsBlock.zenith)
+    annotation (Line(points={{100,-20},{70,-20},{70,-36},{50,-36}}, color={0,0,127}));
+  connect(solarAzimuth, angleOfIncidenceAsBlock.azimuth)
+    annotation (Line(points={{100,-60},{70,-60},{70,-44},{50,-44}}, color={0,0,127}));
+  connect(directHorizontalIrradiance, direct.HDirNor)
+    annotation (Line(points={{60,100},{60,66},{66,66},{66,12}}, color={0,0,127}));
+  connect(angleOfIncidenceAsBlock.angleOfIncidence, angleOfIncidence)
+    annotation (Line(points={{30,-40},{-100,-40}}, color={0,0,127}));
   annotation (Diagram(graphics={Text(
-          extent={{-42,72},{20,78}},
+          extent={{-94,70},{-32,76}},
           lineColor={28,108,200},
           textString="Variability 'albedo' higher than parameter
 => __not used__"), Text(
-          extent={{44,20},{92,14}},
+          extent={{-24,3},{24,-3}},
           lineColor={28,108,200},
-          textString="connected on text layer")}));
+          textString="connected on text layer",
+          origin={40,19},
+          rotation=180)}));
 end Isotropic;
