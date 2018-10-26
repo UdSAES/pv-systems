@@ -13,19 +13,19 @@ package WIP "Work in progress"
     Modelica.Blocks.Sources.Constant       epochOffset(k=1356998400)
       "The time at the start of the simulation as Epoch in s"
       annotation (Placement(transformation(extent={{-50,70},{-30,90}})));
-    Components.PhotoVoltaicArray.Lukas.SolarPlant solarPlant(
-      latitude=location.latitude,
-      longitude=location.longitude,
-      simu_start_epochs=epochOffset.k,
-      height_above_sealevel=location.elevation,
-      panel_area=plant.panelArea,
-      overall_efficiency=plant.plantEfficiency,
-      temp_eta=plant.temp_eta,
-      panel_azimuth=plant.panelAzimuth,
-      panel_slope=plant.panelTilt,
-      surface_albedo=plant.environmentAlbedo,
-      module_temperature=plant.moduleTemperature)
-      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  Components.SolarPowerPlants.Lukas solarPlant(
+    latitude=location.latitude,
+    longitude=location.longitude,
+    simu_start_epochs=epochOffset.k,
+    height_above_sealevel=location.elevation,
+    panel_area=plant.panelArea,
+    overall_efficiency=plant.plantEfficiency,
+    temp_eta=plant.temp_eta,
+    panel_azimuth=plant.panelAzimuth,
+    panel_slope=plant.panelTilt,
+    surface_albedo=plant.environmentAlbedo,
+    module_temperature=plant.moduleTemperature)
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     Modelica.Blocks.Tables.CombiTable1Ds ASWDIR_S__ASWDIFD_S(
       tableOnFile=true,
       tableName="tab1",
