@@ -1,7 +1,9 @@
 within SolarPowerSystems.Components.SolarPosition.SolarPositionAlgorithm.UnitTests;
 model SolarPositionVsIrradiance
   "A comparison of the solar position models in this library to the irradiance model of the `PhotoVoltaics`-library"
-
+  Modelica.SIunits.Angle z0 = Modelica.SIunits.Conversions.from_deg(90);
+  Modelica.SIunits.Angle south = Modelica.SIunits.Conversions.from_deg(180);
+  Modelica.SIunits.Angle altitudeOfSun;
   PhotoVoltaics.Sources.Irradiance.Irradiance irradiance(
     startDay=18,
     startMonth=10,
@@ -30,5 +32,7 @@ model SolarPositionVsIrradiance
     simu_start_epochs=epochOffset.k,
     height_above_sealevel=location.elevation)
     annotation (Placement(transformation(extent={{70,-30},{90,-10}})));
+equation
+  altitudeOfSun = Modelica.SIunits.Conversions.from_deg(90 - solarZenith.y);
   annotation ();
 end SolarPositionVsIrradiance;
