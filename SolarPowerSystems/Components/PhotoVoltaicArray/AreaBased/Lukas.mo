@@ -1,5 +1,5 @@
 within SolarPowerSystems.Components.PhotoVoltaicArray.AreaBased;
-model AreaBased "PV plant model based on the overall panel area (Lukas)"
+model Lukas "PV plant model based on the overall panel area (Lukas)"
   extends SolarPowerSystems.Interfaces.PhotoVoltaicArray;
 
   import SI = Modelica.SIunits;
@@ -31,4 +31,4 @@ equation
           lineColor={0,0,0},
           textString="I_G_normal")}),
       Diagram(coordinateSystem(preserveAspectRatio=false)));
-end AreaBased;
+end Lukas;

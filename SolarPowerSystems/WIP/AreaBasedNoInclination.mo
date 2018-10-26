@@ -5,8 +5,8 @@ model AreaBasedNoInclination
                                  redeclare Components.PlantInEnvironment.None inclinationAndShadowing(
         surfaceTilt=Modelica.SIunits.Conversions.from_deg(panelTilt),
         surfaceAzimuth=Modelica.SIunits.Conversions.from_deg(panelAzimuth)),
-                          redeclare
-      Components.PhotoVoltaicArray.AreaBased.AreaBased plantIrradianceNormal(
+      redeclare Components.PhotoVoltaicArray.AreaBased.Lukas
+      plantIrradianceNormal(
       panel_area=panelArea,
       overall_efficiency=plantEfficiency,
       temp_eta=temperatureCoefficient,

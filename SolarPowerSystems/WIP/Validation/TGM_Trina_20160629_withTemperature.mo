@@ -43,7 +43,7 @@ model TGM_Trina_20160629_withTemperature
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-32,70})));
-  Components.PhotoVoltaicArray.AreaBased.AreaBased plantModelAreaBased(
+  Components.PhotoVoltaicArray.AreaBased.Lukas plantModelAreaBased(
     overall_efficiency=0.141,
     panel_area=1.650*0.992*8,
     useHeatPort=false) annotation (Placement(transformation(

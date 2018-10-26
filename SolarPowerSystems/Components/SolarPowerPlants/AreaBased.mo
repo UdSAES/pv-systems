@@ -4,7 +4,7 @@ model AreaBased
   extends Interfaces.PhotoVoltaicPowerPlant(redeclare PlantInEnvironment.Simple
       inclinationAndShadowing(surfaceTilt=Modelica.SIunits.Conversions.from_deg(
           panelTilt), surfaceAzimuth=Modelica.SIunits.Conversions.from_deg(
-          panelAzimuth)), redeclare PhotoVoltaicArray.AreaBased.AreaBased
+          panelAzimuth)), redeclare PhotoVoltaicArray.AreaBased.Lukas
       plantIrradianceNormal(
       panel_area=panelArea,
       overall_efficiency=plantEfficiency,

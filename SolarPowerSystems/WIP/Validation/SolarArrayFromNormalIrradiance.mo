@@ -25,7 +25,7 @@ model SolarArrayFromNormalIrradiance
   replaceable parameter Records.Data.PVplant_TGM_Trina plantRecord
     constrainedby Records.Base.PVplant annotation (Placement(transformation(
           extent={{-90,40},{-70,60}})),__Dymola_choicesAllMatching=true);
-  Components.PhotoVoltaicArray.AreaBased.AreaBased plantModelAreaBased(
+  Components.PhotoVoltaicArray.AreaBased.Lukas plantModelAreaBased(
     panel_area=plantRecord.panelArea,
     overall_efficiency=plantRecord.plantEfficiency,
     temp_eta=plantRecord.temp_eta,
