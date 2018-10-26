@@ -9,7 +9,7 @@ model Danny "TRNSYS Type 835 mode 2, using Faiman-model (Danny)"
   parameter Real b = -0.047 "compare Jonas et al. 2018, tab. 2" annotation(Dialog(group="Irradiance losses"));
   parameter Real c = -1.4 "compare Jonas et al. 2018, tab. 2" annotation(Dialog(group="Irradiance losses"));
   parameter Modelica.SIunits.Temp_C T_cell_ref "PV cell temperature at reference conditions (usually STC)" annotation(Dialog(group="Temperature dependency"));
-  parameter Real beta(final unit="1/K") = 0.43 "Power temperature coefficient" annotation(Dialog(group="Temperature dependency"));
+  parameter Real beta(final unit="1/K") = 0.43/100 "Power temperature coefficient" annotation(Dialog(group="Temperature dependency"));
   parameter Real U_0(final unit="W/(m2.K)") = 25 "Coefficient accounting for heating by radiation" annotation(Dialog(group="Temperature dependency"));
   parameter Real U_1(final unit="W.s/(m3.K)") = 6.84 "Coefficient accounting for cooling by wind" annotation(Dialog(group="Temperature dependency"));
 
@@ -32,14 +32,14 @@ equation
   performanceRatioOverall = performanceRatioIAM * performanceRatioIrradiance * performanceRatioTemperature;
 
   // Incidence angle losses
-  performanceRatioIAM = 1 + b0*(1/cos(angleOfIncidence) - 1);
+  performanceRatioIAM = 1; //1 + b0*(1/cos(angleOfIncidence) - 1); // Division by Zero!!
 
   // Irradiance losses
   performanceRatioIrradiance = a*G + b*log(G + 1) + c*((log(G + Modelica.Constants.e))^2 / (G + 1) - 1);
 
   // Temperature dependency
   performanceRatioTemperature = 1 - beta*(T_cell - T_cell_ref);
-  T_cell = internalHeatPort.T + G/(U_0 + U_1*u); // Faiman 2008
+  T_cell = Modelica.SIunits.Conversions.to_degC(internalHeatPort.T) + G/(U_0 + U_1*u); // Faiman 2008
 
   // Input-Output-Mapping
   G = I_G_normal;

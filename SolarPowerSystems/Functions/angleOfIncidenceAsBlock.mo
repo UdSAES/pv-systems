@@ -3,20 +3,20 @@ block angleOfIncidenceAsBlock
   "SI2SO block that applies angleOfIncidence()"
   extends Modelica.Blocks.Icons.Block;
 
-  parameter Modelica.SIunits.Angle surfaceTilt "Surface tilt angle in degrees";
-  parameter Modelica.SIunits.Angle surfaceAzimuth "Azimuth angle of surface in degrees";
+  parameter Modelica.SIunits.Angle arrayTilt "Array tilt angle";
+  parameter Modelica.SIunits.Angle arrayAzimuth "Azimuth angle of array";
 
-  Modelica.Blocks.Interfaces.RealInput zenith "Solar zenith angle" annotation (
+  Modelica.Blocks.Interfaces.RealInput solarZenith(final unit="rad", displayUnit="deg") "Solar zenith angle" annotation (
       Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={-40,100})));
-  Modelica.Blocks.Interfaces.RealInput azimuth "Solar azimuth angle"
+  Modelica.Blocks.Interfaces.RealInput solarAzimuth(final unit="rad", displayUnit="deg") "Solar azimuth angle"
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={40,100})));
-  Modelica.Blocks.Interfaces.RealOutput angleOfIncidence
+  Modelica.Blocks.Interfaces.RealOutput angleOfIncidence(final unit="rad", displayUnit="deg")
     "Angle of incidence between surface normal and sun beam" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -24,8 +24,8 @@ block angleOfIncidenceAsBlock
         origin={0,-100})));
 equation
   angleOfIncidence = SolarPowerSystems.Functions.angleOfIncidence(
-    zenith,
-    azimuth,
-    surfaceTilt,
-    surfaceAzimuth);
+    solarZenith,
+    solarAzimuth,
+    arrayTilt,
+    arrayAzimuth);
 end angleOfIncidenceAsBlock;

@@ -22,22 +22,21 @@ partial model PhotoVoltaicPowerPlant
     "Longitude in decimal degrees" annotation(Dialog(group="Location"));
   parameter Real elevation(unit = "m", min = 0, max = 8848)
     "Height above sea level (elevation) in metres" annotation(Dialog(group="Location"));
-  parameter Real panelTilt(unit="deg", min = 0, max = 90) "Surface tilt in degree (Horizontal equals 0°, vertical equals 90°)" annotation(Dialog(group="PV Plant"));
-  parameter Real panelAzimuth(unit="deg", min = -180, max = 180) "Surface azimuth in degree (South equals 0°, positive towards east)" annotation(Dialog(group="PV Plant"));
+  parameter Modelica.SIunits.Angle arrayTilt(min = 0, max = 90) "Array tilt in degree (horizontal equals 0°, vertical equals 90°)" annotation(Dialog(group="PV Plant"));
+  parameter Modelica.SIunits.Angle arrayAzimuth(min = -180, max = 180) "Array azimuth in degree (South equals 0°, positive towards east)" annotation(Dialog(group="PV Plant"));
 
 //   parameter Modelica.SIunits.Area panelArea "Overall surface area of all panels (combined)" annotation(Dialog(group="PV Modules"));
 //   parameter Modelica.SIunits.Efficiency plantEfficiency = 0.2 "Overall efficiency" annotation(Dialog(group="PV Modules"));
 
-  Modelica.Blocks.Interfaces.RealInput I_diff_horizontal(unit="W/m2")
-    "Diffuse irradiance in horizontal plane" annotation (Placement(
-        transformation(
+  Modelica.Blocks.Interfaces.RealInput diffuseHorizontalIrradiance(unit="W/m2")
+    "Diffuse irradiance in horizontal plane"
+    annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
         origin={-100,20})));
 
-  Modelica.Blocks.Interfaces.RealInput I_dir_horizontal(unit="W/m2")
-    "Direct irradiance in horizontal plane" annotation (Placement(
-        transformation(
+  Modelica.Blocks.Interfaces.RealInput directHorizontalIrradiance(unit="W/m2") "Direct irradiance in horizontal plane"
+    annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
         origin={-100,60})));
@@ -64,19 +63,17 @@ partial model PhotoVoltaicPowerPlant
 //   Modelica.Blocks.Interfaces.RealOutput totalEnergyAC
 //     "The generated energy on the AC side"
 //     annotation (Placement(transformation(extent={{90,-90},{110,-70}})));
-  replaceable           PlantInEnvironment inclinationAndShadowing(surfaceTilt=
-        Modelica.SIunits.Conversions.from_deg(panelTilt), surfaceAzimuth=
-        Modelica.SIunits.Conversions.from_deg(panelAzimuth)) constrainedby PlantInEnvironment
+  replaceable           PlantInEnvironment inclinationAndShadowing(arrayTilt=arrayTilt, arrayAzimuth=arrayAzimuth)
+                                                                   constrainedby PlantInEnvironment
                        "Select model to account for inclination and shadowing"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-32,0})), __Dymola_choicesAllMatching=true, Dialog(group="PV Plant", enable=false));
-  Modelica.Blocks.Math.Add3 I_G_normal(
+  Modelica.Blocks.Math.Add3 globalIrradiance(
     k1=1,
     k2=1,
-    k3=1) "Global irradiance normal to panel surface"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+    k3=1) "Global irradiance normal to panel surface" annotation (Placement(transformation(extent={{-8,-8},{8,8}})));
   replaceable PhotoVoltaicArray plantIrradianceNormal constrainedby PhotoVoltaicArray
                       "Select model of photovoltaic modules" annotation (
     Placement(transformation(
@@ -115,17 +112,11 @@ equation
   connect(plantIrradianceNormal.P_DC, integrator.u) annotation (Line(points={{42,
           -4.44089e-16},{46,-4.44089e-16},{46,0},{50,0},{50,40},{62,40}}, color=
          {0,0,127}));
-  connect(I_G_normal.y, plantIrradianceNormal.I_G_normal)
-    annotation (Line(points={{11,0},{22,0}}, color={0,0,127}));
-  connect(inclinationAndShadowing.reflectedInclinedIrradiance, I_G_normal.u1)
-    annotation (Line(points={{-22,-6},{-22,8},{-12,8}}, color={0,0,127}));
-  connect(inclinationAndShadowing.directInclinedIrradiance, I_G_normal.u2)
-    annotation (Line(points={{-22,6},{-18,6},{-18,0},{-12,0}}, color={0,0,127}));
-  connect(inclinationAndShadowing.diffuseInclinedIrradiance, I_G_normal.u3)
-    annotation (Line(points={{-22,-8.88178e-16},{-22,-8},{-12,-8}}, color={0,0,127}));
-  connect(I_diff_horizontal, inclinationAndShadowing.diffuseHorizontalIrradiance)
+  connect(globalIrradiance.y, plantIrradianceNormal.I_G_normal)
+    annotation (Line(points={{8.8,0},{22,0}}, color={0,0,127}));
+  connect(diffuseHorizontalIrradiance, inclinationAndShadowing.diffuseHorizontalIrradiance)
     annotation (Line(points={{-100,20},{-72,20},{-72,4.44089e-16},{-42,4.44089e-16}}, color={0,0,127}));
-  connect(I_dir_horizontal, inclinationAndShadowing.directHorizontalIrradiance)
+  connect(directHorizontalIrradiance, inclinationAndShadowing.directHorizontalIrradiance)
     annotation (Line(points={{-100,60},{-70,60},{-70,6},{-42,6}}, color={0,0,127}));
   connect(albedo, inclinationAndShadowing.albedo) annotation (Line(points={{-100,-20},{-70,-20},{-70,-6},{-42,-6}},
                                              color={0,0,127}));
@@ -142,6 +133,12 @@ equation
     annotation (Line(points={{-56,-66},{-40,-66},{-40,-80}}, color={191,0,0}));
   connect(fixedAlbedo.y, inclinationAndShadowing.albedo) annotation (Line(
         points={{-64.4,-20},{-70,-20},{-70,-6},{-42,-6}}, color={0,0,127}));
+  connect(inclinationAndShadowing.directInclinedIrradiance, globalIrradiance.u1)
+    annotation (Line(points={{-22,6},{-22,6.4},{-9.6,6.4}}, color={0,0,127}));
+  connect(inclinationAndShadowing.diffuseInclinedIrradiance, globalIrradiance.u2)
+    annotation (Line(points={{-22,0},{-9.6,0}}, color={0,0,127}));
+  connect(inclinationAndShadowing.reflectedInclinedIrradiance, globalIrradiance.u3)
+    annotation (Line(points={{-22,-6},{-22,-6.4},{-9.6,-6.4}}, color={0,0,127}));
   annotation (Icon(graphics={
                      Rectangle(lineColor = {0, 0, 0}, fillPattern = FillPattern.Solid, extent = {{-76, 76}, {76, -76}}, fillColor = {85, 85, 255}), Line(points = {{-80, 0}, {80, 0}}, color = {255, 255, 255}), Rectangle(extent = {{-84, 84}, {84, -84}}, lineColor = {0, 0, 0}), Polygon(points = {{-84, 76}, {-76, 84}, {-68, 76}, {-76, 68}, {-84, 76}}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                                                                                                                        FillPattern.Solid, pattern = LinePattern.None), Line(points = {{-24, 76}, {-24, -76}}, color = {255, 255, 255}), Polygon(points = {{-8, 76}, {0, 84}, {8, 76}, {0, 68}, {-8, 76}}, fillColor = {255, 255, 255},

@@ -1,6 +1,5 @@
-within SolarPowerSystems.Components.PlantInEnvironment;
-model Simple
-  "Transform horizontal irradiance to normal of arbitrarily oriented surface, do not account for shadows"
+within SolarPowerSystems.WIP.Obsolete;
+model Simple "Transform horizontal irradiance to normal of arbitrarily oriented surface, do not account for shadows"
   extends Interfaces.PlantInEnvironment;
   import SI = Modelica.SIunits;
 

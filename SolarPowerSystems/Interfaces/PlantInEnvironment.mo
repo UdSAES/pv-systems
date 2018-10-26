@@ -1,10 +1,10 @@
-within SolarPowerSystems.Interfaces;
+﻿within SolarPowerSystems.Interfaces;
 partial model PlantInEnvironment
   "Accounts for inclination/orientation of a PV plant in its environment"
   extends Modelica.Blocks.Icons.Block;
 
-  parameter Modelica.SIunits.Angle arrayTilt "Array tilt angle in rad";
-  parameter Modelica.SIunits.Angle arrayAzimuth "Azimuth angle of array in rad";
+  parameter Modelica.SIunits.Angle arrayTilt "Array tilt angle";
+  parameter Modelica.SIunits.Angle arrayAzimuth "Azimuth angle of array (O° equals south, positive towards east)";
 
   Modelica.Blocks.Interfaces.RealInput diffuseHorizontalIrradiance(unit="W/m2")
     "Diffuse irradiance in horizontal plane"

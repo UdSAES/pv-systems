@@ -2,8 +2,8 @@ within SolarPowerSystems.WIP.Validation;
 model SolarArrayFromNormalIrradiance
   "Calculate the electrical output of a (concentrated) solar array as a function of the global irradiance normal to the panel surface"
   extends Modelica.Icons.Example;
-  replaceable parameter Records.Data.Location_UdS location constrainedby
-    Records.Base.Location annotation (Placement(transformation(extent={{-90,70},
+  replaceable parameter Records.Data.Location_UdS location constrainedby Records.Base.Location
+                          annotation (Placement(transformation(extent={{-90,70},
             {-70,90}})), __Dymola_choicesAllMatching=true);
   Modelica.Blocks.Sources.Constant       epochOffset(k=1356998400)
     "The time at the start of the simulation as Epoch in s"
@@ -46,11 +46,9 @@ model SolarArrayFromNormalIrradiance
     height_above_sealevel=location.elevation,
     simu_start_epochs=epochOffset.k)
     annotation (Placement(transformation(extent={{70,70},{90,90}})));
-  replaceable Components.PlantInEnvironment.Simple environmentModel(
-      surfaceAzimuth=plantRecord.panelAzimuth, surfaceTilt=plantRecord.panelTilt)
-    constrainedby Interfaces.PlantInEnvironment annotation (Placement(
-        transformation(extent={{-10,6},{10,26}})), __Dymola_choicesAllMatching=
-        true);
+  replaceable Obsolete.Simple environmentModel(surfaceAzimuth=plantRecord.panelAzimuth, surfaceTilt=plantRecord.panelTilt)
+    constrainedby Interfaces.PlantInEnvironment
+    annotation (Placement(transformation(extent={{-10,6},{10,26}})), __Dymola_choicesAllMatching=true);
   Modelica.Blocks.Sources.Constant albedo(k=plantRecord.environmentAlbedo)
     annotation (Placement(transformation(extent={{-50,40},{-30,60}})));
   Modelica.Blocks.Math.Add3 add3_1 annotation (Placement(transformation(
@@ -91,25 +89,24 @@ equation
   ASWDIR_S__ASWDIFD_S.u = timeAsEpoch;
   connect(plantModelAreaBased.P_DC, totalEnergy.u)
     annotation (Line(points={{-70,-60},{-70,-66}}, color={0,0,127}));
-  connect(solarAzimuth.y, environmentModel.azimuthOfSun) annotation (Line(
+  connect(solarAzimuth.y,environmentModel.solarAzimuth)  annotation (Line(
         points={{51,80.2},{60,80.2},{60,70},{3,70},{3,26}}, color={0,0,127}));
-  connect(solarZenith.y, environmentModel.zenithOfSun) annotation (Line(points={{91,80.2},
+  connect(solarZenith.y,environmentModel.solarZenith)  annotation (Line(points={{91,80.2},
           {96,80.2},{96,68},{7,68},{7,26}},            color={0,0,127}));
-  connect(ASWDIR_S__ASWDIFD_S.y[1], environmentModel.I_diff_horizontal)
-    annotation (Line(points={{49,50},{-5,50},{-5,26}},      color={0,0,127}));
-  connect(ASWDIR_S__ASWDIFD_S.y[2], environmentModel.I_dir_horizontal)
-    annotation (Line(points={{49,50},{-2,50},{-2,26}},  color={0,0,127}));
+  connect(ASWDIR_S__ASWDIFD_S.y[1], environmentModel.diffuseHorizontalIrradiance)
+    annotation (Line(points={{49,50},{-5,50},{-5,26}}, color={0,0,127}));
+  connect(ASWDIR_S__ASWDIFD_S.y[2], environmentModel.directHorizontalIrradiance)
+    annotation (Line(points={{49,50},{-2,50},{-2,26}}, color={0,0,127}));
   connect(albedo.y, environmentModel.albedo)
     annotation (Line(points={{-29,50},{-8,50},{-8,26}}, color={0,0,127}));
-  connect(environmentModel.I_dir_inclined, add3_1.u2)
-    annotation (Line(points={{0,6},{0,-2},{2.22045e-15,-2}},
-                                             color={0,0,127}));
-  connect(environmentModel.I_refl_inclined, add3_1.u1)
-    annotation (Line(points={{6,6},{8,6},{8,-2}},  color={0,0,127}));
+  connect(environmentModel.directInclinedIrradiance, add3_1.u2)
+    annotation (Line(points={{0,6},{0,-2},{2.22045e-15,-2}}, color={0,0,127}));
+  connect(environmentModel.reflectedInclinedIrradiance, add3_1.u1)
+    annotation (Line(points={{6,6},{8,6},{8,-2}}, color={0,0,127}));
   connect(add3_1.y, plantModelAreaBased.I_G_normal) annotation (Line(points={{
           -2.22045e-15,-25},{-2.22045e-15,-34},{-70,-34},{-70,-40}}, color={0,0,
           127}));
-  connect(environmentModel.I_diff_inclined, add3_1.u3)
+  connect(environmentModel.diffuseInclinedIrradiance, add3_1.u3)
     annotation (Line(points={{-6,6},{-8,6},{-8,-2}}, color={0,0,127}));
   connect(plantModelModuleBased.P_DC, totalEnergy1.u)
     annotation (Line(points={{20,-60},{20,-86},{-8,-86}}, color={0,0,127}));

@@ -2,8 +2,8 @@ within SolarPowerSystems.WIP;
 model Lukas
   "Calculate the expected power output of a solar array as a function of the global horizontal irradiance and the panel area"
   extends Modelica.Icons.Example;
-  replaceable parameter Records.Data.Location_UdS location constrainedby
-    Records.Base.Location annotation (Placement(transformation(extent={{-90,70},
+  replaceable parameter Records.Data.Location_UdS location constrainedby Records.Base.Location
+                          annotation (Placement(transformation(extent={{-90,70},
             {-70,90}})), __Dymola_choicesAllMatching=true);
   Modelica.Blocks.Sources.Constant       epochOffset(k=1356998400)
     "The time at the start of the simulation as Epoch in s"
@@ -33,8 +33,8 @@ Components.SolarPowerPlants.Lukas solarPlant(
   Real timeAsEpoch;
   Modelica.Blocks.Continuous.Integrator totalEnergy(k=3.6e-6)
     annotation (Placement(transformation(extent={{52,-10},{72,10}})));
-  replaceable parameter Records.Data.PVplant_TGM_Trina plant constrainedby
-    Records.Base.PVplant annotation (Placement(transformation(extent={{-10,70},
+  replaceable parameter Records.Data.PVplant_TGM_Trina plant constrainedby Records.Base.PVplant
+                         annotation (Placement(transformation(extent={{-10,70},
             {10,90}})), __Dymola_choicesAllMatching=true);
 equation
   timeAsEpoch = time + epochOffset.y;
