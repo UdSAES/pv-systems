@@ -24,7 +24,7 @@ equation
   surfaceAlbedo = albedo;
 
   // Actual equations
-  angle_of_incidence = SolarPowerSystems.Functions.angleOfIncidence(
+  angle_of_incidence =SolarPowerSystems.WIP.Obsolete.Functions.angleOfIncidence(
     zenith,
     azimuth,
     surfaceTilt,

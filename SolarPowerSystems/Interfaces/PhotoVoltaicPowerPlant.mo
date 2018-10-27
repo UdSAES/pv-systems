@@ -5,16 +5,22 @@ partial model PhotoVoltaicPowerPlant
 
   parameter Integer epochOffset "The time at the start of the simulation as Epoch in s";
   parameter Boolean useTemperatureInput = false "=true, if environment temperature is provided" annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
-  parameter Modelica.SIunits.Temperature T=293.15
+  parameter Modelica.SIunits.Temperature constTemperature=293.15
     "Fixed environment temperature if useTemperatureInput = false"
     annotation(Dialog(enable=not useTemperatureInput));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(final T=T) if not useTemperatureInput
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(final T=constTemperature) if not useTemperatureInput
     annotation (Placement(transformation(extent={{-64,-70},{-56,-62}})));
+
   parameter Boolean useAlbedoInput = false "=true, if environment albedo is provided" annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
-  parameter Real Albedo=0.2 "Fixed albedo value if useAlbedoInput = false"
+  parameter Real constAlbedo=0.2 "Fixed albedo value if useAlbedoInput = false"
     annotation(Dialog(enable=not useAlbedoInput));
-  Modelica.Blocks.Sources.Constant fixedAlbedo(k=Albedo) if not useAlbedoInput
+  Modelica.Blocks.Sources.Constant fixedAlbedo(final k=constAlbedo) if not useAlbedoInput
     annotation (Placement(transformation(extent={{-56,-24},{-64,-16}})));
+
+  parameter Boolean useWindSpeedInput = false "=true, if wind speed is provided" annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
+  parameter Modelica.SIunits.Velocity constWindSpeed=1 "Fixed wind speed value if useWindSpeedInput = false" annotation(Dialog(enable=not useWindSpeedInput));
+  Modelica.Blocks.Sources.Constant fixedWindSpeed(y(unit="m/s"), final k=constWindSpeed) if not useWindSpeedInput annotation (Placement(transformation(extent={{-64,-44},
+            {-56,-36}})));
 
   parameter Real latitude(unit = "deg", min = -90, max = 90)
     "Latitude in decimal degrees" annotation(Dialog(group="Location"));
@@ -23,10 +29,7 @@ partial model PhotoVoltaicPowerPlant
   parameter Real elevation(unit = "m", min = 0, max = 8848)
     "Height above sea level (elevation) in metres" annotation(Dialog(group="Location"));
   parameter Modelica.SIunits.Angle arrayTilt(min = 0, max = 90) "Array tilt in degree (horizontal equals 0°, vertical equals 90°)" annotation(Dialog(group="PV Plant"));
-  parameter Modelica.SIunits.Angle arrayAzimuth(min = -180, max = 180) "Array azimuth in degree (South equals 0°, positive towards east)" annotation(Dialog(group="PV Plant"));
-
-//   parameter Modelica.SIunits.Area panelArea "Overall surface area of all panels (combined)" annotation(Dialog(group="PV Modules"));
-//   parameter Modelica.SIunits.Efficiency plantEfficiency = 0.2 "Overall efficiency" annotation(Dialog(group="PV Modules"));
+  parameter Modelica.SIunits.Angle arrayAzimuth(min = -180, max = 180) "Array azimuth in degree (South equals 0°, positive towards west)" annotation(Dialog(group="PV Plant"));
 
   Modelica.Blocks.Interfaces.RealInput diffuseHorizontalIrradiance(unit="W/m2")
     "Diffuse irradiance in horizontal plane"
@@ -41,7 +44,7 @@ partial model PhotoVoltaicPowerPlant
         rotation=0,
         origin={-100,60})));
   Modelica.Blocks.Interfaces.RealInput albedo if useAlbedoInput
-    "The albedo of the plant's surroundings" annotation (Placement(
+    "The albedo of the plant's surroundings (optional input)" annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
@@ -54,15 +57,9 @@ partial model PhotoVoltaicPowerPlant
   Modelica.Blocks.Interfaces.RealOutput powerDC(unit="W")
     "The generated power on the DC side"
     annotation (Placement(transformation(extent={{90,70},{110,90}})));
-//   Modelica.Blocks.Interfaces.RealOutput powerAC
-//     "The generated power on the AC side"
-//     annotation (Placement(transformation(extent={{90,-50},{110,-30}})));
-  Modelica.Blocks.Interfaces.RealOutput totalEnergyDC(unit="W.s")
+  Modelica.Blocks.Interfaces.RealOutput totalEnergyDC(unit="kW.h")
     "The generated energy on the DC side"
     annotation (Placement(transformation(extent={{90,30},{110,50}})));
-//   Modelica.Blocks.Interfaces.RealOutput totalEnergyAC
-//     "The generated energy on the AC side"
-//     annotation (Placement(transformation(extent={{90,-90},{110,-70}})));
   replaceable           PlantInEnvironment inclinationAndShadowing(arrayTilt=arrayTilt, arrayAzimuth=arrayAzimuth)
                                                                    constrainedby PlantInEnvironment
                        "Select model to account for inclination and shadowing"
@@ -74,7 +71,8 @@ partial model PhotoVoltaicPowerPlant
     k1=1,
     k2=1,
     k3=1) "Global irradiance normal to panel surface" annotation (Placement(transformation(extent={{-8,-8},{8,8}})));
-  replaceable PhotoVoltaicArray plantIrradianceNormal constrainedby PhotoVoltaicArray
+  replaceable PhotoVoltaicArray plantIrradianceNormal(useHeatPort=true)
+                                                      constrainedby PhotoVoltaicArray
                       "Select model of photovoltaic modules" annotation (
     Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -82,7 +80,7 @@ partial model PhotoVoltaicPowerPlant
         origin={32,0})),
     __Dymola_choicesAllMatching=true,
     Dialog(group="PV Modules", enable=false));
-  Modelica.Blocks.Continuous.Integrator integrator
+  Modelica.Blocks.Continuous.Integrator integrator(k=3.6e-6)
     annotation (Placement(transformation(extent={{64,30},{84,50}})));
   Components.SolarPosition.SolarPositionAlgorithm.SolarAzimuth solarAzimuth(
     latitude=latitude,
@@ -100,6 +98,11 @@ partial model PhotoVoltaicPowerPlant
     environmentTemperature if useTemperatureInput "The temperature of the surrounding air"
     annotation (Placement(transformation(extent={{-64,-84},{-56,-76}})));
 
+  Modelica.Blocks.Interfaces.RealInput windSpeed if useWindSpeedInput "The wind speed at the plant's site (optional input)"
+    annotation (Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=0,
+        origin={-100,-50})));
 protected
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalHeatPort
     annotation (Placement(transformation(extent={{-44,-84},{-36,-76}})));
@@ -139,6 +142,13 @@ equation
     annotation (Line(points={{-22,0},{-9.6,0}}, color={0,0,127}));
   connect(inclinationAndShadowing.reflectedInclinedIrradiance, globalIrradiance.u3)
     annotation (Line(points={{-22,-6},{-22,-6.4},{-9.6,-6.4}}, color={0,0,127}));
+  connect(inclinationAndShadowing.angleOfIncidence, plantIrradianceNormal.angleOfIncidence)
+    annotation (Line(points={{-28,-10},{-28,-18},{25,-18},{25,-10}}, color={0,0,127}));
+  connect(fixedWindSpeed.y, plantIrradianceNormal.u)
+    annotation (Line(points={{-55.6,-40},{29,-40},{29,-10}}, color={0,0,127}));
+  connect(windSpeed, plantIrradianceNormal.u) annotation (Line(points={{-100,-50},{29,-50},{29,-10}}, color={0,0,127}));
+  connect(internalHeatPort, plantIrradianceNormal.heatPort)
+    annotation (Line(points={{-40,-80},{42,-80},{42,-10}}, color={191,0,0}));
   annotation (Icon(graphics={
                      Rectangle(lineColor = {0, 0, 0}, fillPattern = FillPattern.Solid, extent = {{-76, 76}, {76, -76}}, fillColor = {85, 85, 255}), Line(points = {{-80, 0}, {80, 0}}, color = {255, 255, 255}), Rectangle(extent = {{-84, 84}, {84, -84}}, lineColor = {0, 0, 0}), Polygon(points = {{-84, 76}, {-76, 84}, {-68, 76}, {-76, 68}, {-84, 76}}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                                                                                                                        FillPattern.Solid, pattern = LinePattern.None), Line(points = {{-24, 76}, {-24, -76}}, color = {255, 255, 255}), Polygon(points = {{-8, 76}, {0, 84}, {8, 76}, {0, 68}, {-8, 76}}, fillColor = {255, 255, 255},

@@ -17,12 +17,6 @@ model Isotropic
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={6,48})));
-  Functions.angleOfIncidenceAsBlock angleOfIncidenceAsBlock(arrayTilt=
-        arrayTilt, arrayAzimuth=arrayAzimuth) annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={40,-40})));
 
 equation
 //   direct.HDirNor =noEvent(max(0, (directHorizontalIrradiance)))/noEvent(max(cos(solarZenith), 0.1));
@@ -39,16 +33,8 @@ equation
     annotation (Line(points={{0,100},{0,66},{1.77636e-15,66},{1.77636e-15,60}}, color={0,0,127}));
   connect(directHorizontalIrradiance, globalHorizontalIrradiance.u1)
     annotation (Line(points={{60,100},{60,66},{12,66},{12,60}}, color={0,0,127}));
-  connect(solarZenith, angleOfIncidenceAsBlock.solarZenith)
-    annotation (Line(points={{100,-20},{70,-20},{70,-36},{50,-36}}, color={0,0,127}));
-  connect(solarAzimuth, angleOfIncidenceAsBlock.solarAzimuth)
-    annotation (Line(points={{100,-60},{70,-60},{70,-44},{50,-44}}, color={0,0,127}));
   connect(directHorizontalIrradiance, direct.HDirNor)
     annotation (Line(points={{60,100},{60,66},{66,66},{66,12}}, color={0,0,127}));
-  connect(angleOfIncidenceAsBlock.angleOfIncidence, angleOfIncidence)
-    annotation (Line(points={{30,-40},{-100,-40}}, color={0,0,127}));
-  connect(angleOfIncidenceAsBlock.angleOfIncidence, direct.incAng)
-    annotation (Line(points={{30,-40},{20,-40},{20,20},{54,20},{54,12}}, color={0,0,127}));
   annotation (Diagram(graphics={Text(
           extent={{-94,70},{-32,76}},
           lineColor={28,108,200},

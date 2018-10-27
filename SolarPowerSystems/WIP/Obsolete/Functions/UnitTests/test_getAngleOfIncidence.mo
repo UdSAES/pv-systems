@@ -1,4 +1,4 @@
-within SolarPowerSystems.Functions.UnitTests;
+within SolarPowerSystems.WIP.Obsolete.Functions.UnitTests;
 model test_getAngleOfIncidence
   import CONV = Modelica.SIunits.Conversions;
   // some orientions

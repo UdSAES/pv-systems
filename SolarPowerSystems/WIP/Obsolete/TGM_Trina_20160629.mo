@@ -1,6 +1,5 @@
-within SolarPowerSystems.WIP.Validation;
-model TGM_Trina_20160629_withTemperature
-  "Measured irradiance model on 2016-06-29; Trina modules at TGM building in Vienna, Austria"
+within SolarPowerSystems.WIP.Obsolete;
+model TGM_Trina_20160629 "Measured irradiance model on 2016-06-29; Trina modules at TGM building in Vienna, Austria"
   extends Modelica.Icons.Example;
   parameter Integer nsModule = 8 "Number of series connected modules";
   parameter Integer npModule = 1 "Number of parallel connected modules";
@@ -39,7 +38,7 @@ model TGM_Trina_20160629_withTemperature
     nsModule=nsModule,
     npModule=npModule,
     redeclare PhotoVoltaics.Records.TSM_230_PC05 moduleData,
-    useHeatPort=true)
+    useHeatPort=false)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -47,15 +46,11 @@ model TGM_Trina_20160629_withTemperature
   Components.PhotoVoltaicArray.AreaBased.Lukas plantModelAreaBased(
     overall_efficiency=0.141,
     panel_area=1.650*0.992*8,
-    useHeatPort=false) annotation (Placement(transformation(
+    useHeatPort=false,
+    T=298.15) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={0,-60})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
-    prescribedTemperature annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-80,40})));
 equation
   connect(mpTracker.vRef, converter.vDCRef) annotation (
     Line(points={{21,30},{24,30},{24,58}},           color = {0, 0, 127}));
@@ -79,14 +74,6 @@ equation
           {-16,70},{-16,30},{-2,30}},           color={0,0,127}));
   connect(inputData.y[1], plantModelAreaBased.I_G_normal) annotation (Line(
         points={{-69,0},{-60,0},{-60,-60},{-10,-60}}, color={0,0,127}));
-  connect(inputData.y[8], prescribedTemperature.T) annotation (Line(points={{
-          -69,0},{-66,0},{-66,20},{-80,20},{-80,28}}, color={0,0,127}));
-  connect(prescribedTemperature.port, plantModelModuleBased.heatPort)
-    annotation (Line(points={{-80,50},{-80,56},{-22,56},{-22,60}}, color={191,0,
-          0}));
-  connect(prescribedTemperature.port, plantModelAreaBased.heatPort) annotation (
-     Line(points={{-80,50},{-80,56},{-22,56},{-22,-74},{10,-74},{10,-70}},
-        color={191,0,0}));
   annotation (
     experiment(
       StopTime=86400,
@@ -99,4 +86,4 @@ equation
 <p>This example uses measured irradiance data to supply the photovoltaic modules.</p>
 </html>"),
     __Dymola_Commands(file="Scripts/plotResults.mos" "plotResults"));
-end TGM_Trina_20160629_withTemperature;
+end TGM_Trina_20160629;

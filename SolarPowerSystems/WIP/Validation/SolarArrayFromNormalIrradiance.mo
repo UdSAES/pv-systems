@@ -57,7 +57,7 @@ model SolarArrayFromNormalIrradiance
         origin={0,-14})));
   Modelica.Blocks.Continuous.Integrator totalEnergy1(k=3.6e-6)
     annotation (Placement(transformation(extent={{-10,-96},{-30,-76}})));
-  Components.PhotoVoltaicArray.ModuleBased.ModuleBased plantModelModuleBased(
+  Components.PhotoVoltaicArray.ModuleBased.PhotoVoltaicsLib plantModelModuleBased(
     useHeatPort=false,
     T=plantRecord.moduleTemperature,
     redeclare PhotoVoltaics.Records.TSM_230_PC05 moduleData,
@@ -90,24 +90,25 @@ equation
   connect(plantModelAreaBased.P_DC, totalEnergy.u)
     annotation (Line(points={{-70,-60},{-70,-66}}, color={0,0,127}));
   connect(solarAzimuth.y,environmentModel.solarAzimuth)  annotation (Line(
-        points={{51,80.2},{60,80.2},{60,70},{3,70},{3,26}}, color={0,0,127}));
-  connect(solarZenith.y,environmentModel.solarZenith)  annotation (Line(points={{91,80.2},
-          {96,80.2},{96,68},{7,68},{7,26}},            color={0,0,127}));
+        points={{51,80.2},{60,80.2},{60,70},{10,70},{10,10}},
+                                                            color={0,0,127}));
+  connect(solarZenith.y,environmentModel.solarZenith)  annotation (Line(points={{91,80.2},{96,80.2},{96,68},{10,68},{10,
+          14}},                                        color={0,0,127}));
   connect(ASWDIR_S__ASWDIFD_S.y[1], environmentModel.diffuseHorizontalIrradiance)
-    annotation (Line(points={{49,50},{-5,50},{-5,26}}, color={0,0,127}));
+    annotation (Line(points={{49,50},{0,50},{0,26}},   color={0,0,127}));
   connect(ASWDIR_S__ASWDIFD_S.y[2], environmentModel.directHorizontalIrradiance)
-    annotation (Line(points={{49,50},{-2,50},{-2,26}}, color={0,0,127}));
+    annotation (Line(points={{49,50},{6,50},{6,26}},   color={0,0,127}));
   connect(albedo.y, environmentModel.albedo)
-    annotation (Line(points={{-29,50},{-8,50},{-8,26}}, color={0,0,127}));
+    annotation (Line(points={{-29,50},{-6,50},{-6,26}}, color={0,0,127}));
   connect(environmentModel.directInclinedIrradiance, add3_1.u2)
-    annotation (Line(points={{0,6},{0,-2},{2.22045e-15,-2}}, color={0,0,127}));
+    annotation (Line(points={{6,6},{6,-2},{2.22045e-15,-2}}, color={0,0,127}));
   connect(environmentModel.reflectedInclinedIrradiance, add3_1.u1)
-    annotation (Line(points={{6,6},{8,6},{8,-2}}, color={0,0,127}));
+    annotation (Line(points={{-6,6},{8,6},{8,-2}},color={0,0,127}));
   connect(add3_1.y, plantModelAreaBased.I_G_normal) annotation (Line(points={{
           -2.22045e-15,-25},{-2.22045e-15,-34},{-70,-34},{-70,-40}}, color={0,0,
           127}));
   connect(environmentModel.diffuseInclinedIrradiance, add3_1.u3)
-    annotation (Line(points={{-6,6},{-8,6},{-8,-2}}, color={0,0,127}));
+    annotation (Line(points={{0,6},{-8,6},{-8,-2}},  color={0,0,127}));
   connect(plantModelModuleBased.P_DC, totalEnergy1.u)
     annotation (Line(points={{20,-60},{20,-86},{-8,-86}}, color={0,0,127}));
   connect(mpTracker.vRef,converter. vDCRef) annotation (

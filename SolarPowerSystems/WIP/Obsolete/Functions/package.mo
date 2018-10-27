@@ -1,4 +1,4 @@
-within SolarPowerSystems;
+within SolarPowerSystems.WIP.Obsolete;
 package Functions
   extends Modelica.Icons.Package;
 

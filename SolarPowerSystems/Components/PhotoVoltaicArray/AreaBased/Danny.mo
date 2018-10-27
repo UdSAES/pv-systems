@@ -1,5 +1,5 @@
 within SolarPowerSystems.Components.PhotoVoltaicArray.AreaBased;
-model Danny "TRNSYS Type 835 mode 2, using Faiman-model (Danny)"
+model Danny "TRNSYS Type 835 mode 2 (Danny)"
   extends Interfaces.PhotoVoltaicArray;
 
   parameter Modelica.SIunits.Area A_PV "The total area of the PV modules";
@@ -20,11 +20,8 @@ model Danny "TRNSYS Type 835 mode 2, using Faiman-model (Danny)"
   Modelica.SIunits.Efficiency performanceRatioIrradiance "Instantaneous performance ratio due to irradiance losses";
   Modelica.SIunits.Efficiency performanceRatioTemperature "Instantaneous performance ratio to account for temperature dependency";
   Modelica.SIunits.Temp_C T_cell "PV cell temperature";
-  Modelica.Blocks.Interfaces.RealInput u(final unit="m/s") "Wind speed in PV plane"
-    annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
   Modelica.SIunits.Efficiency performanceRatioIAM "Instantaneous performance ratio due to incidence angle losses";
-  Modelica.Blocks.Interfaces.RealInput angleOfIncidence(final unit="rad") "Angle between direct beam and surface normal"
-    annotation (Placement(transformation(extent={{-120,40},{-80,80}})));
+
 equation
   // Electrical power output and overall efficiency
   eta_electrical = eta_ref * performanceRatioOverall;
@@ -32,14 +29,22 @@ equation
   performanceRatioOverall = performanceRatioIAM * performanceRatioIrradiance * performanceRatioTemperature;
 
   // Incidence angle losses
-  performanceRatioIAM = 1; //1 + b0*(1/cos(angleOfIncidence) - 1); // Division by Zero!!
+  // ASHRAE IAM model (Souka and Safat, 1966) with limitation of angle to avoid division by zero
+  performanceRatioIAM = 1 - b0*(1/cos(min(Modelica.SIunits.Conversions.from_deg(80), angleOfIncidence)) - 1);
 
-  // Irradiance losses
+  // suggestion Abella et al., 2003 for avoiding division by zero
+  //   if angleOfIncidence > Modelica.SIunits.Conversions.from_deg(80) then
+  //     performanceRatioIAM = ??;
+  //   else
+  //     performanceRatioIAM = 1 - b0*(1/cos(angleOfIncidence) - 1);
+  //   end if;
+
+  // Irradiance losses (Heydenreich et al., 2008)
   performanceRatioIrradiance = a*G + b*log(G + 1) + c*((log(G + Modelica.Constants.e))^2 / (G + 1) - 1);
 
   // Temperature dependency
   performanceRatioTemperature = 1 - beta*(T_cell - T_cell_ref);
-  T_cell = Modelica.SIunits.Conversions.to_degC(internalHeatPort.T) + G/(U_0 + U_1*u); // Faiman 2008
+  T_cell = Modelica.SIunits.Conversions.to_degC(internalHeatPort.T) + G/(U_0 + U_1*u); // Faiman, 2008
 
   // Input-Output-Mapping
   G = I_G_normal;

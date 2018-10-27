@@ -51,6 +51,19 @@ partial model PlantInEnvironment
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-100,-40})));
+  Components.SolarPosition.AngleOfIncidence
+                                 angleOfIncidenceAsBlock(arrayTilt=arrayTilt, arrayAzimuth=arrayAzimuth) annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={40,-40})));
+equation
+  connect(solarZenith, angleOfIncidenceAsBlock.solarZenith)
+    annotation (Line(points={{100,-20},{70,-20},{70,-36},{50,-36}}, color={0,0,127}));
+  connect(solarAzimuth, angleOfIncidenceAsBlock.solarAzimuth)
+    annotation (Line(points={{100,-60},{70,-60},{70,-44},{50,-44}}, color={0,0,127}));
+  connect(angleOfIncidenceAsBlock.angleOfIncidence, angleOfIncidence)
+    annotation (Line(points={{30,-40},{-100,-40}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end PlantInEnvironment;

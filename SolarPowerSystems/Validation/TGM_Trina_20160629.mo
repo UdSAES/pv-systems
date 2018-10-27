@@ -1,89 +1,51 @@
 within SolarPowerSystems.Validation;
 model TGM_Trina_20160629
-  "Measured irradiance model on 2016-06-29; Trina modules at TGM building in Vienna, Austria"
   extends Modelica.Icons.Example;
-  parameter Integer nsModule = 8 "Number of series connected modules";
-  parameter Integer npModule = 1 "Number of parallel connected modules";
-  parameter String fileName = Modelica.Utilities.Files.loadResource("modelica://PhotoVoltaics/Resources/WeatherData/TGM_Trina_20160629.txt") "File name";
-  parameter String csvFileName = Modelica.Utilities.Files.loadResource("modelica://PhotoVoltaics/TGM_Trina_Measurement_20160629_power.csv");
-  Modelica.SIunits.Irradiance irradiance=inputData.y[1] "Measured irradiance";
-  Modelica.SIunits.Power powerAC=inputData.y[2] "Measured AC power";
-  Modelica.SIunits.Voltage VAC=inputData.y[3] "Measured AC voltage";
-  Modelica.SIunits.Current IAC=inputData.y[4] "Measured AC current";
-  Modelica.SIunits.Power powerDC=inputData.y[5] "Measured DC power";
-  Modelica.SIunits.Voltage VDC=inputData.y[6] "Measured DC voltage";
-  Modelica.SIunits.Current IDC=inputData.y[7] "Measured DC current";
-  Modelica.SIunits.Temperature T1=inputData.y[8] "Temperature of ambient";
-  Modelica.SIunits.Temperature T2=inputData.y[9] "Temperature of PV modules";
-  Modelica.Electrical.Analog.Basic.Ground ground annotation (
-    Placement(visible = true, transformation(origin={-32,40},     extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  PhotoVoltaics.Components.Converters.QuasiStaticSinglePhaseConverter converter annotation (
-    Placement(transformation(extent={{20,60},{40,80}})));
-  PhotoVoltaics.Components.Blocks.MPTrackerSample mpTracker(
-    samplePeriod=10,
-    VmpRef=nsModule*plantModelModuleBased.moduleData.VmpRef,
-    ImpRef=npModule*plantModelModuleBased.moduleData.ImpRef)
-    annotation (Placement(transformation(extent={{0,20},{20,40}})));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground groundAC annotation (
-    Placement(transformation(extent={{70,30},{90,50}})));
-  Modelica.Electrical.QuasiStationary.SinglePhase.Sources.VoltageSource voltageSource(f = 50, V = 230, phi = 0,
-    gamma(start=0, fixed=true))                                                                                 annotation (
-    Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={80,70})));
+  Components.SolarPowerPlants.None_Danny None_Danny(
+    latitude=location.latitude,
+    longitude=location.longitude,
+    elevation=location.elevation,
+    panelArea=plantRecord.panelArea,
+    plantEfficiency=plantRecord.plantEfficiency,
+    epochOffset=1466899200,
+    arrayTilt=Modelica.SIunits.Conversions.from_deg(plantRecord.panelTilt),
+    arrayAzimuth=Modelica.SIunits.Conversions.from_deg(plantRecord.panelAzimuth),
+    useTemperatureInput=false,
+    useAlbedoInput=false,
+    useWindSpeedInput=false,
+    constTemperature(displayUnit="K") = 287.7) annotation (Placement(transformation(extent={{-12,24},{8,44}})));
   Modelica.Blocks.Sources.CombiTimeTable inputData(
     tableOnFile=true,
     tableName="trina",
-    fileName=fileName,
-    columns=2:10)
+    columns=2:10,
+    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://SolarPowerSystems/Resources/TGM_Trina_20160629.txt"))
+    annotation (Placement(transformation(extent={{-90,30},{-70,50}})));
+  Modelica.Blocks.Sources.Constant diffuseHorizontalIrradiance(k=0)
     annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
-  Components.PhotoVoltaicArray.ModuleBased.ModuleBased plantModelModuleBased(
-    nsModule=nsModule,
-    npModule=npModule,
-    redeclare PhotoVoltaics.Records.TSM_230_PC05 moduleData,
-    useHeatPort=false) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-32,70})));
-  Components.PhotoVoltaicArray.AreaBased.Lukas plantModelAreaBased(
-    overall_efficiency=0.141,
-    panel_area=1.650*0.992*8,
-    useHeatPort=false,
-    T=298.15) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={0,-60})));
+  Records.Data.Location_TGMVienna                   location "TGM Vienna"
+    annotation (Placement(transformation(extent={{-90,72},{-70,92}})), choicesAllMatching=true);
+
+  SolarPowerSystems.Records.Data.PVplant_TGM_Trina plantRecord "TGM Trina"
+    annotation (Placement(transformation(extent={{-50,72},{-30,92}})), __Dymola_choicesAllMatching=true);
+  Modelica.Blocks.Math.Variance variance annotation (Placement(transformation(extent={{70,30},{90,50}})));
+  Modelica.Blocks.Math.StandardDeviation standardDeviation
+    annotation (Placement(transformation(extent={{70,0},{90,20}})));
+  Modelica.Blocks.Math.Add absoluteErrorPowerDC(k1=-1) annotation (Placement(transformation(extent={{30,30},{50,50}})));
 equation
-  connect(mpTracker.vRef, converter.vDCRef) annotation (
-    Line(points={{21,30},{24,30},{24,58}},           color = {0, 0, 127}));
-  connect(converter.ac_n, groundAC.pin) annotation (
-    Line(points={{40,60},{40,50},{80,50}},           color = {85, 170, 255}));
-  connect(groundAC.pin, voltageSource.pin_n) annotation (
-    Line(points={{80,50},{80,60}},                   color = {85, 170, 255}));
-  connect(converter.ac_p, voltageSource.pin_p) annotation (
-    Line(points={{40,80},{40,90},{80,90},{80,80}},                 color = {85, 170, 255}));
-  connect(ground.p, converter.dc_n) annotation (
-    Line(points={{-32,50},{20,50},{20,60}},           color = {0, 0, 255}));
-  connect(inputData.y[1], plantModelModuleBased.I_G_normal) annotation (Line(
-        points={{-69,0},{-60,0},{-60,70},{-42,70}}, color={0,0,127}));
-  connect(plantModelModuleBased.n1, ground.p)
-    annotation (Line(points={{-32,60},{-32,50}}, color={0,0,255}));
-  connect(plantModelModuleBased.p1, converter.dc_p) annotation (Line(points={{-32,80},
-          {-32,90},{20,90},{20,80}},         color={0,0,255}));
-  connect(plantModelModuleBased.nv1, converter.dc_n) annotation (Line(points={{-22,75},
-          {-20,75},{-20,50},{20,50},{20,60}},         color={0,0,255}));
-  connect(plantModelModuleBased.P_DC, mpTracker.power) annotation (Line(points={{-22,70},
-          {-16,70},{-16,30},{-2,30}},           color={0,0,127}));
-  connect(inputData.y[1], plantModelAreaBased.I_G_normal) annotation (Line(
-        points={{-69,0},{-60,0},{-60,-60},{-10,-60}}, color={0,0,127}));
-  annotation (
-    experiment(
-      StopTime=86400,
-      Interval=60,
-      Tolerance=1e-08,
-      __Dymola_Algorithm="Dassl"),
-    Documentation(revisions = "<html>
-</html>",
-        info="<html>
-<p>This example uses measured irradiance data to supply the photovoltaic modules.</p>
-</html>"),
-    __Dymola_Commands(file="Scripts/plotResults.mos" "plotResults"));
+  connect(inputData.y[1], None_Danny.directHorizontalIrradiance)
+    annotation (Line(points={{-69,40},{-12,40}}, color={0,0,127}));
+  connect(None_Danny.powerDC, absoluteErrorPowerDC.u1)
+    annotation (Line(points={{8,42},{18,42},{18,46},{28,46}}, color={0,0,127}));
+  connect(inputData.y[5], absoluteErrorPowerDC.u2)
+    annotation (Line(points={{-69,40},{-60,40},{-60,20},{20,20},{20,34},{28,34}}, color={0,0,127}));
+  connect(absoluteErrorPowerDC.y, variance.u) annotation (Line(points={{51,40},{68,40}}, color={0,0,127}));
+  connect(absoluteErrorPowerDC.y, standardDeviation.u)
+    annotation (Line(points={{51,40},{60,40},{60,10},{68,10}}, color={0,0,127}));
+  connect(diffuseHorizontalIrradiance.y, None_Danny.diffuseHorizontalIrradiance)
+    annotation (Line(points={{-69,0},{-42,0},{-42,36},{-12,36}}, color={0,0,127}));
+  annotation (experiment(StopTime=86400, Interval=1), Diagram(graphics={Text(
+          extent={{-76,46},{-24,44}},
+          lineColor={28,108,200},
+          textString="TGM_Trina_20160629.txt")}),
+    __Dymola_Commands(file="Scripts/plotOverview_TGM_Trina_20160629.mos" "plotOverview_TGM_Trina_20160629"));
 end TGM_Trina_20160629;

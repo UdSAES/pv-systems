@@ -1,4 +1,4 @@
-within SolarPowerSystems.Functions;
+within SolarPowerSystems.WIP.Obsolete.Functions;
 package UnitTests
   extends Modelica.Icons.InternalPackage;
 

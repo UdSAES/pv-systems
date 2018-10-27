@@ -1,5 +1,5 @@
 within SolarPowerSystems.Components.PhotoVoltaicArray.ModuleBased;
-model ModuleBased "Module-based PV plant model (PhotoVoltaics-Lib)"
+model PhotoVoltaicsLib "Module-based PV plant model (PhotoVoltaics-Lib)"
   extends Interfaces.PhotoVoltaicArray;
 
   PhotoVoltaics.Components.SimplePhotoVoltaics.SimplePlantSymmetric
@@ -45,4 +45,4 @@ equation
     annotation (Line(points={{10,0},{40,0}}, color={0,0,255}));
   connect(powerSensor.nc, p1)
     annotation (Line(points={{60,0},{100,0}}, color={0,0,255}));
-end ModuleBased;
+end PhotoVoltaicsLib;
