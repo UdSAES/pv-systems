@@ -1,5 +1,5 @@
 within SolarPowerSystems.Validation;
-model TGM_Trina_20160629
+model TGM_Trina_20160629_None_Danny
   extends Modelica.Icons.Example;
   Components.SolarPowerPlants.None_Danny None_Danny(
     latitude=location.latitude,
@@ -31,18 +31,6 @@ model TGM_Trina_20160629
   Modelica.Blocks.Math.StandardDeviation standardDeviation
     annotation (Placement(transformation(extent={{70,0},{90,20}})));
   Modelica.Blocks.Math.Add absoluteErrorPowerDC(k1=-1) annotation (Placement(transformation(extent={{30,30},{50,50}})));
-  Components.SolarPowerPlants.None_PhotoVoltaicsLib None_PhotoVoltaicsLib(
-    epochOffset=1466899200,
-    useTemperatureInput=false,
-    useAlbedoInput=false,
-    useWindSpeedInput=false,
-    constTemperature(displayUnit="K") = 287.7,
-    latitude=location.latitude,
-    longitude=location.longitude,
-    elevation=location.elevation,
-    arrayTilt=Modelica.SIunits.Conversions.from_deg(plantRecord.panelTilt),
-    arrayAzimuth=Modelica.SIunits.Conversions.from_deg(plantRecord.panelAzimuth))
-      annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
   Modelica.Blocks.Continuous.Integrator totalEnergyMeasuredDC(k=3.6e-6, y(unit="kW.h"))
     annotation (Placement(transformation(extent={{-10,-90},{10,-70}})));
 equation
@@ -57,15 +45,11 @@ equation
     annotation (Line(points={{51,40},{60,40},{60,10},{68,10}}, color={0,0,127}));
   connect(diffuseHorizontalIrradiance.y, None_Danny.diffuseHorizontalIrradiance)
     annotation (Line(points={{-69,0},{-56,0},{-56,36},{-10,36}}, color={0,0,127}));
-  connect(inputData.y[1], None_PhotoVoltaicsLib.directHorizontalIrradiance)
-    annotation (Line(points={{-69,40},{-60,40},{-60,-34},{-10,-34}}, color={0,0,127}));
-  connect(diffuseHorizontalIrradiance.y, None_PhotoVoltaicsLib.diffuseHorizontalIrradiance)
-    annotation (Line(points={{-69,0},{-56,0},{-56,-38},{-10,-38}}, color={0,0,127}));
   connect(inputData.y[5], totalEnergyMeasuredDC.u)
     annotation (Line(points={{-69,40},{-60,40},{-60,-80},{-12,-80}}, color={0,0,127}));
-  annotation (experiment(StopTime=86400, Interval=60),Diagram(graphics={Text(
+  annotation (experiment(StopTime=86400, Interval=1), Diagram(graphics={Text(
           extent={{-76,46},{-24,44}},
           lineColor={28,108,200},
           textString="TGM_Trina_20160629.txt")}),
     __Dymola_Commands(file="Scripts/plotOverview_TGM_Trina_20160629.mos" "plotOverview_TGM_Trina_20160629"));
-end TGM_Trina_20160629;
+end TGM_Trina_20160629_None_Danny;

@@ -1,5 +1,5 @@
 within SolarPowerSystems.Records.Data;
-record PVplant_TGM_Trina "The smaller PV plant on the roof of TGM in Vienna"
+record PVplant_TGM_Trina "The larger PV plant on the roof of TGM in Vienna"
   extends Base.PVplant(
     panelArea=1.650*0.992*8,
     plantEfficiency=0.141,
