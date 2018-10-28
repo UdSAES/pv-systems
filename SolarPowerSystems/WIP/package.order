@@ -5,3 +5,4 @@ ModuleBased
 DiffuseHorizontalIrradianceFromGlobal
 AreaBasedNoInclination
 TemplateTGM
+HorizontalToInclined

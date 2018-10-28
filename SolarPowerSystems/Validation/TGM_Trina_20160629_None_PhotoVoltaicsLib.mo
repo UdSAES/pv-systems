@@ -15,7 +15,6 @@ model TGM_Trina_20160629_None_PhotoVoltaicsLib
   SolarPowerSystems.Records.Data.PVplant_TGM_Trina plantRecord "TGM Trina"
     annotation (Placement(transformation(extent={{-50,72},{-30,92}})), __Dymola_choicesAllMatching=true);
   Components.SolarPowerPlants.None_PhotoVoltaicsLib None_PhotoVoltaicsLib(
-    epochOffset=1466899200,
     useTemperatureInput=false,
     useAlbedoInput=false,
     useWindSpeedInput=false,
@@ -25,11 +24,14 @@ model TGM_Trina_20160629_None_PhotoVoltaicsLib
     elevation=location.elevation,
     arrayTilt=Modelica.SIunits.Conversions.from_deg(plantRecord.panelTilt),
     arrayAzimuth=Modelica.SIunits.Conversions.from_deg(plantRecord.panelAzimuth),
-    plantIrradianceNormal)
+    plantIrradianceNormal,
+    epochOffset=epochOffset.k)
       annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
   Modelica.Blocks.Continuous.Integrator totalEnergyMeasuredDC(k=3.6e-6, y(unit="kW.h"))
     annotation (Placement(transformation(extent={{-10,-90},{10,-70}})));
+  Modelica.Blocks.Sources.IntegerConstant epochOffset(k=1466899200)
+    annotation (Placement(transformation(extent={{-10,70},{10,90}})));
 equation
   connect(inputData.y[1], None_PhotoVoltaicsLib.directHorizontalIrradiance)
     annotation (Line(points={{-69,40},{-60,40},{-60,-34},{-10,-34}}, color={0,0,127}));
