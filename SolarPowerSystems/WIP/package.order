@@ -6,3 +6,5 @@ DiffuseHorizontalIrradianceFromGlobal
 AreaBasedNoInclination
 TemplateTGM
 HorizontalToInclined
+AngleOfIncidence
+PhysicalIAM

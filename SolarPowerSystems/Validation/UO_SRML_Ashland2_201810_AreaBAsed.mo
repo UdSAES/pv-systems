@@ -22,7 +22,7 @@ model UO_SRML_Ashland2_201810_AreaBAsed
   Records.Data.PVplant_Ashland_15kW                plantRecord "TGM Trina"
     annotation (Placement(transformation(extent={{-50,72},{-30,92}})), __Dymola_choicesAllMatching=true);
   Modelica.Blocks.Math.Add absoluteErrorPowerDC(k1=-1) annotation (Placement(transformation(extent={{30,26},{50,46}})));
-  Components.SolarPowerPlants.Isotropic_Danny Isotropic_Danny(
+  Components.SolarPowerPlants.Perez_Danny Perez_Danny(
     useAlbedoInput=false,
     constTemperature(displayUnit="K") = 287.7,
     latitude=location.latitude,
@@ -34,11 +34,12 @@ model UO_SRML_Ashland2_201810_AreaBAsed
     useTemperatureInput=true,
     useWindSpeedInput=true,
     panelArea=plantRecord.panelArea,
-    plantEfficiency=plantRecord.plantEfficiency,
-    T_cell_ref=25) annotation (Placement(transformation(extent={{-8,-50},{12,-30}})));
+    T_cell_ref=25,
+    plantEfficiency=1*plantRecord.plantEfficiency)
+                   annotation (Placement(transformation(extent={{-8,-50},{12,-30}})));
   Modelica.Blocks.Continuous.Integrator totalEnergyMeasuredDC(k=3.6e-6, y(unit="kW.h"))
     annotation (Placement(transformation(extent={{-10,-90},{10,-70}})));
-  Modelica.Blocks.Sources.IntegerConstant epochOffset(k=1540166400)
+  Modelica.Blocks.Sources.IntegerConstant epochOffset(k=1540191600)
     annotation (Placement(transformation(extent={{-10,70},{10,90}})));
   Utilities.MeasurementDataAshland measurementDataAshland(epochOffset=epochOffset.k)
     annotation (Placement(transformation(extent={{-94,-22},{-48,24}})));
@@ -59,19 +60,16 @@ equation
     annotation (Line(points={{-48,-17.4},{-40,-17.4},{-40,-18},{-28,-18},{-28,26},{-10,26}}, color={0,0,127}));
   connect(measurementDataAshland.windSpeed, None_Danny.windSpeed)
     annotation (Line(points={{-48,-12.8},{-40,-12.8},{-40,-12},{-30,-12},{-30,29},{-10,29}}, color={0,0,127}));
-  connect(measurementDataAshland.directHorizontalIrradiance, Isotropic_Danny.directHorizontalIrradiance)
+  connect(measurementDataAshland.directHorizontalIrradiance, Perez_Danny.directHorizontalIrradiance)
     annotation (Line(points={{-48,14.8},{-42,14.8},{-42,16},{-32,16},{-32,-34},{-8,-34}}, color={0,0,127}));
-  connect(measurementDataAshland.diffuseHorizontalIrradiance, Isotropic_Danny.diffuseHorizontalIrradiance)
+  connect(measurementDataAshland.diffuseHorizontalIrradiance, Perez_Danny.diffuseHorizontalIrradiance)
     annotation (Line(points={{-48,10.2},{-42,10.2},{-42,10},{-34,10},{-34,-38},{-8,-38}}, color={0,0,127}));
-  connect(measurementDataAshland.windSpeed, Isotropic_Danny.windSpeed)
+  connect(measurementDataAshland.windSpeed, Perez_Danny.windSpeed)
     annotation (Line(points={{-48,-12.8},{-40,-12.8},{-40,-12},{-30,-12},{-30,-45},{-8,-45}}, color={0,0,127}));
-  connect(measurementDataAshland.ambientTemperature, Isotropic_Danny.temperature)
+  connect(measurementDataAshland.ambientTemperature, Perez_Danny.temperature)
     annotation (Line(points={{-48,-17.4},{-36,-17.4},{-36,-48},{-8,-48}}, color={0,0,127}));
-  connect(measurementDataAshland.directNormalIrradiance, Isotropic_Danny.directNormalIrradiance1)
-    annotation (Line(points={{-48,5.6},{-26,5.6},{-26,6},{-1.6,6},{-1.6,-30}}, color={0,0,127}));
   annotation (experiment(
-      StartTime=43200,
-      StopTime=86400,
-      Interval=59.9999616),
-    __Dymola_Commands(file="Scripts/plotOverview_TGM_Trina_20160629.mos" "plotOverview_TGM_Trina_20160629"));
+      StartTime=18000,
+      StopTime=176400,
+      Interval=60.00012), __Dymola_Commands(file="Scripts/plotOverviewAshland.mos" "plotOverviewAshland"));
 end UO_SRML_Ashland2_201810_AreaBAsed;

@@ -22,6 +22,7 @@ model Danny "TRNSYS Type 835 mode 2 (Danny)"
   Modelica.SIunits.Temp_C T_cell "PV cell temperature";
   Modelica.SIunits.Efficiency performanceRatioIAM "Instantaneous performance ratio due to incidence angle losses";
 
+  ReflectionLosses.PhysicalIAMmodel physicalIAMmodel annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
 equation
   // Electrical power output and overall efficiency
   eta_electrical = eta_ref * performanceRatioOverall;
@@ -29,8 +30,11 @@ equation
   performanceRatioOverall = performanceRatioIAM * performanceRatioIrradiance * performanceRatioTemperature;
 
   // Incidence angle losses
-  // ASHRAE IAM model (Souka and Safat, 1966) with limitation of angle to avoid division by zero
-  performanceRatioIAM = 1 - b0*(1/cos(min(Modelica.SIunits.Conversions.from_deg(80), angleOfIncidence)) - 1);
+  // // ASHRAE IAM model (Souka and Safat, 1966) with limitation of angle to avoid division by zero
+  // performanceRatioIAM = - b0*(1/cos(min(Modelica.SIunits.Conversions.from_deg(80), angleOfIncidence)) - 1);
+
+  // Physical IAM model
+  performanceRatioIAM = physicalIAMmodel.incidenceAngleModifier;
 
   // suggestion Abella et al., 2003 for avoiding division by zero
   //   if angleOfIncidence > Modelica.SIunits.Conversions.from_deg(80) then
@@ -50,4 +54,6 @@ equation
   G = I_G_normal;
   P_DC = electricalPower;
 
+  connect(angleOfIncidence, physicalIAMmodel.angleOfIncidence)
+    annotation (Line(points={{-100,70},{-60,70}}, color={0,0,127}));
 end Danny;

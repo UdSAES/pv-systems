@@ -1,7 +1,7 @@
 within SolarPowerSystems.Components.SolarPowerPlants;
-model Isotropic_Danny
+model Perez_Danny
   "Model of a solar power plant that computes the expected power output as a function of the direct and diffuse horizontal irradiance based on the area and orientation of the plant"
-  extends Interfaces.PhotoVoltaicPowerPlant(redeclare PlantInEnvironment.Isotropic inclinationAndShadowing(arrayTilt=
+  extends Interfaces.PhotoVoltaicPowerPlant(redeclare PlantInEnvironment.Perez inclinationAndShadowing(arrayTilt=
           arrayTilt, arrayAzimuth=arrayAzimuth),
                           redeclare PhotoVoltaicArray.AreaBased.Danny
       plantIrradianceNormal(
@@ -23,4 +23,4 @@ equation
     annotation (Line(points={{-55.6,-40},{29,-40},{29,-10}}, color={0,0,127}));
   connect(windSpeed, plantIrradianceNormal.u) annotation (Line(points={{-100,-50},{29,-50},{29,-10}}, color={0,0,127}));
   annotation (__Dymola_Commands(file="Scripts/plot20181026detailed.mos" "plot20181026detailed"));
-end Isotropic_Danny;
+end Perez_Danny;
