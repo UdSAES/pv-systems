@@ -1,4 +1,4 @@
-within SolarPowerSystems.Validation;
+within SolarPowerSystems.WIP.Validation;
 model TGM_Trina_20160629_None_PhotoVoltaicsLib
   extends Modelica.Icons.Example;
   Modelica.Blocks.Sources.CombiTimeTable inputData(

@@ -2,14 +2,13 @@ within SolarPowerSystems.Components.PlantInEnvironment;
 model Isotropic "Transform horizontal irradiance to normal of arbitrarily oriented surface using an isotropic model"
   extends SolarPowerSystems.Interfaces.PlantInEnvironment;
   Buildings.BoundaryConditions.SolarIrradiation.BaseClasses.DiffuseIsotropic
-    diffuse(               rho=0.2, til=arrayTilt)
+    diffuse(                        til=arrayTilt, rho=albedo)
                                     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-4,0})));
   PlaneOfArrayIrradiance.DirectFromHorizontal
-    direct(arrayTilt=arrayTilt)
-           annotation (Placement(transformation(
+    direct annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={60,0})));
@@ -20,7 +19,6 @@ model Isotropic "Transform horizontal irradiance to normal of arbitrarily orient
         origin={6,48})));
 
 equation
-//   direct.HDirNor =noEvent(max(0, (directHorizontalIrradiance)))/noEvent(max(cos(solarZenith), 0.1));
   connect(globalHorizontalIrradiance.y, diffuse.HGloHor)
     annotation (Line(points={{6,37},{6,34},{1.77636e-15,34},{1.77636e-15,12}}, color={0,0,127}));
   connect(diffuse.HSkyDifTil, diffuseInclinedIrradiance)
@@ -41,9 +39,6 @@ equation
     annotation (Line(points={{30,-40},{-100,-40}}, color={0,0,127}));
   connect(angleOfIncidenceAsBlock.angleOfIncidence, direct.angleOfIncidence)
     annotation (Line(points={{30,-40},{24,-40},{24,16},{54,16},{54,10}}, color={0,0,127}));
-  annotation (Diagram(graphics={Text(
-          extent={{-94,70},{-32,76}},
-          lineColor={28,108,200},
-          textString="Variability 'albedo' higher than parameter
-=> __not used__")}));
+  connect(solarZenith, direct.solarZenith)
+    annotation (Line(points={{100,-20},{76,-20},{76,16},{66,16},{66,10}}, color={0,0,127}));
 end Isotropic;

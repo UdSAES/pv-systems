@@ -1,10 +1,10 @@
-within SolarPowerSystems.WIP;
-model AreaBasedNoInclination
+within SolarPowerSystems.Components.SolarPowerPlants;
+model None_Lukas
   "Model of a solar power plant that computes the expected power output as a function of the global irradiance normal to the PV array based on its area"
   extends Interfaces.PhotoVoltaicPowerPlant(
                                  redeclare Components.PlantInEnvironment.None inclinationAndShadowing(
-        surfaceTilt=Modelica.SIunits.Conversions.from_deg(panelTilt),
-        surfaceAzimuth=Modelica.SIunits.Conversions.from_deg(panelAzimuth)),
+        arrayTilt=arrayTilt,
+        arrayAzimuth=arrayAzimuth),
       redeclare Components.PhotoVoltaicArray.AreaBased.Lukas
       plantIrradianceNormal(
       panel_area=panelArea,
@@ -20,4 +20,4 @@ model AreaBasedNoInclination
 equation
   connect(internalHeatPort, plantIrradianceNormal.heatPort)
     annotation (Line(points={{-40,-80},{42,-80},{42,-10}}, color={191,0,0}));
-end AreaBasedNoInclination;
+end None_Lukas;

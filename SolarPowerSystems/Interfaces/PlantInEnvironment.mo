@@ -5,6 +5,8 @@ partial model PlantInEnvironment
 
   parameter Modelica.SIunits.Angle arrayTilt "Array tilt angle";
   parameter Modelica.SIunits.Angle arrayAzimuth "Azimuth angle of array (O° equals south, positive towards east)";
+  parameter Real albedo(min=0, max=1) = 0.2 "Ground reflectance/Albedo";
+
 
   Modelica.Blocks.Interfaces.RealInput diffuseHorizontalIrradiance(unit="W/m2")
     "Diffuse irradiance in horizontal plane"
@@ -17,12 +19,6 @@ partial model PlantInEnvironment
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={60,100})));
-  Modelica.Blocks.Interfaces.RealInput albedo
-    "The albedo of the plant's surroundings" annotation (Placement(
-        transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=270,
-        origin={-60,100})));
   Modelica.Blocks.Interfaces.RealOutput diffuseInclinedIrradiance(unit="W/m2")
     "Diffuse irradiance on arbitrarily oriented surface" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -59,9 +55,9 @@ partial model PlantInEnvironment
         origin={40,-40})));
 equation
   connect(solarZenith, angleOfIncidenceAsBlock.solarZenith)
-    annotation (Line(points={{100,-20},{70,-20},{70,-36},{50,-36}}, color={0,0,127}));
+    annotation (Line(points={{100,-20},{76,-20},{76,-36},{50,-36}}, color={0,0,127}));
   connect(solarAzimuth, angleOfIncidenceAsBlock.solarAzimuth)
-    annotation (Line(points={{100,-60},{70,-60},{70,-44},{50,-44}}, color={0,0,127}));
+    annotation (Line(points={{100,-60},{76,-60},{76,-44},{50,-44}}, color={0,0,127}));
   connect(angleOfIncidenceAsBlock.angleOfIncidence, angleOfIncidence)
     annotation (Line(points={{30,-40},{-100,-40}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(

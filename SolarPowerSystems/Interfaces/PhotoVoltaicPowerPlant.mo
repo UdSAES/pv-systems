@@ -11,12 +11,6 @@ partial model PhotoVoltaicPowerPlant
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(final T=constTemperature) if not useTemperatureInput
     annotation (Placement(transformation(extent={{-64,-70},{-56,-62}})));
 
-  parameter Boolean useAlbedoInput = false "=true, if environment albedo is provided" annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
-  parameter Real constAlbedo=0.2 "Fixed albedo value if useAlbedoInput = false"
-    annotation(Dialog(enable=not useAlbedoInput));
-  Modelica.Blocks.Sources.Constant fixedAlbedo(final k=constAlbedo) if not useAlbedoInput
-    annotation (Placement(transformation(extent={{-56,-24},{-64,-16}})));
-
   parameter Boolean useWindSpeedInput = false "=true, if wind speed is provided" annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
   parameter Modelica.SIunits.Velocity constWindSpeed=1 "Fixed wind speed value if useWindSpeedInput = false" annotation(Dialog(enable=not useWindSpeedInput));
   Modelica.Blocks.Sources.Constant fixedWindSpeed(y(unit="m/s"), final k=constWindSpeed) if not useWindSpeedInput annotation (Placement(transformation(extent={{-64,-44},
@@ -30,25 +24,19 @@ partial model PhotoVoltaicPowerPlant
     "Height above sea level (elevation) in metres" annotation(Dialog(group="Location"));
   parameter Modelica.SIunits.Angle arrayTilt(min = 0, max = 90) "Array tilt in degree (horizontal equals 0°, vertical equals 90°)" annotation(Dialog(group="PV Plant"));
   parameter Modelica.SIunits.Angle arrayAzimuth(min = -180, max = 180) "Array azimuth in degree (South equals 0°, positive towards west)" annotation(Dialog(group="PV Plant"));
+  parameter Real albedo=0.2 "Ground reflectance/Albedo" annotation(Dialog(group="PV Plant"));
 
   Modelica.Blocks.Interfaces.RealInput diffuseHorizontalIrradiance(unit="W/m2")
     "Diffuse irradiance in horizontal plane"
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
-        origin={-100,20})));
-
+        origin={-100,30})));
   Modelica.Blocks.Interfaces.RealInput directHorizontalIrradiance(unit="W/m2") "Direct irradiance in horizontal plane"
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
-        origin={-100,60})));
-  Modelica.Blocks.Interfaces.RealInput albedo if useAlbedoInput
-    "The albedo of the plant's surroundings (optional input)" annotation (Placement(
-        transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=0,
-        origin={-100,-20})));
+        origin={-100,80})));
   Modelica.Blocks.Interfaces.RealInput temperature(unit="K") if useTemperatureInput
     "The temperature at the plant's site (optional input)" annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
@@ -60,8 +48,8 @@ partial model PhotoVoltaicPowerPlant
   Modelica.Blocks.Interfaces.RealOutput totalEnergyDC(unit="kW.h")
     "The generated energy on the DC side"
     annotation (Placement(transformation(extent={{90,30},{110,50}})));
-  replaceable           PlantInEnvironment inclinationAndShadowing(arrayTilt=arrayTilt, arrayAzimuth=arrayAzimuth)
-                                                                   constrainedby PlantInEnvironment
+  replaceable           PlantInEnvironment inclinationAndShadowing(arrayTilt=arrayTilt, arrayAzimuth=arrayAzimuth,
+    albedo=albedo)                                                 constrainedby PlantInEnvironment
                        "Select model to account for inclination and shadowing"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -102,7 +90,8 @@ partial model PhotoVoltaicPowerPlant
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
-        origin={-100,-50})));
+        origin={-100,-30})));
+
 protected
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalHeatPort
     annotation (Placement(transformation(extent={{-44,-84},{-36,-76}})));
@@ -118,11 +107,9 @@ equation
   connect(globalIrradiance.y, plantIrradianceNormal.I_G_normal)
     annotation (Line(points={{8.8,0},{22,0}}, color={0,0,127}));
   connect(diffuseHorizontalIrradiance, inclinationAndShadowing.diffuseHorizontalIrradiance)
-    annotation (Line(points={{-100,20},{-72,20},{-72,4.44089e-16},{-42,4.44089e-16}}, color={0,0,127}));
+    annotation (Line(points={{-100,30},{-72,30},{-72,4.44089e-16},{-42,4.44089e-16}}, color={0,0,127}));
   connect(directHorizontalIrradiance, inclinationAndShadowing.directHorizontalIrradiance)
-    annotation (Line(points={{-100,60},{-70,60},{-70,6},{-42,6}}, color={0,0,127}));
-  connect(albedo, inclinationAndShadowing.albedo) annotation (Line(points={{-100,-20},{-70,-20},{-70,-6},{-42,-6}},
-                                             color={0,0,127}));
+    annotation (Line(points={{-100,80},{-70,80},{-70,6},{-42,6}}, color={0,0,127}));
   connect(solarAzimuth.y,inclinationAndShadowing.solarAzimuth)  annotation (
       Line(points={{-39,82.2},{-26,82.2},{-26,10}},        color={0,0,127}));
   connect(solarZenith.y,inclinationAndShadowing.solarZenith)  annotation (Line(
@@ -134,8 +121,6 @@ equation
     annotation (Line(points={{-56,-80},{-40,-80}}, color={191,0,0}));
   connect(fixedTemperature.port, internalHeatPort)
     annotation (Line(points={{-56,-66},{-40,-66},{-40,-80}}, color={191,0,0}));
-  connect(fixedAlbedo.y, inclinationAndShadowing.albedo) annotation (Line(
-        points={{-64.4,-20},{-70,-20},{-70,-6},{-42,-6}}, color={0,0,127}));
   connect(inclinationAndShadowing.directInclinedIrradiance, globalIrradiance.u1)
     annotation (Line(points={{-22,6},{-22,6.4},{-9.6,6.4}}, color={0,0,127}));
   connect(inclinationAndShadowing.diffuseInclinedIrradiance, globalIrradiance.u2)
@@ -146,7 +131,7 @@ equation
     annotation (Line(points={{-28,-10},{-28,-18},{25,-18},{25,-10}}, color={0,0,127}));
   connect(fixedWindSpeed.y, plantIrradianceNormal.u)
     annotation (Line(points={{-55.6,-40},{29,-40},{29,-10}}, color={0,0,127}));
-  connect(windSpeed, plantIrradianceNormal.u) annotation (Line(points={{-100,-50},{29,-50},{29,-10}}, color={0,0,127}));
+  connect(windSpeed, plantIrradianceNormal.u) annotation (Line(points={{-100,-30},{29,-30},{29,-10}}, color={0,0,127}));
   connect(internalHeatPort, plantIrradianceNormal.heatPort)
     annotation (Line(points={{-40,-80},{42,-80},{42,-10}}, color={191,0,0}));
   annotation (Icon(graphics={

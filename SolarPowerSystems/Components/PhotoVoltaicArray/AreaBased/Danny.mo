@@ -31,12 +31,12 @@ equation
 
   // Incidence angle losses
   // // ASHRAE IAM model (Souka and Safat, 1966) with limitation of angle to avoid division by zero
-  // performanceRatioIAM = - b0*(1/cos(min(Modelica.SIunits.Conversions.from_deg(80), angleOfIncidence)) - 1);
+  // performanceRatioIAM = 1 - b0*(1/cos(min(Modelica.SIunits.Conversions.from_deg(80), angleOfIncidence)) - 1);
 
   // Physical IAM model
   performanceRatioIAM = physicalIAMmodel.incidenceAngleModifier;
 
-  // suggestion Abella et al., 2003 for avoiding division by zero
+  // suggestion Abella et al., 2003 for avoiding division by zero when using the ASHRAE IAM model
   //   if angleOfIncidence > Modelica.SIunits.Conversions.from_deg(80) then
   //     performanceRatioIAM = ??;
   //   else

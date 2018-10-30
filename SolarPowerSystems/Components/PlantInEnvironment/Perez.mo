@@ -2,8 +2,7 @@ within SolarPowerSystems.Components.PlantInEnvironment;
 model Perez "Transform horizontal irradiance to normal of arbitrarily oriented surface using the model by Perez"
   extends SolarPowerSystems.Interfaces.PlantInEnvironment;
   PlaneOfArrayIrradiance.DirectFromHorizontal
-    direct(arrayTilt=arrayTilt)
-           annotation (Placement(transformation(
+    direct annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={60,0})));
@@ -13,7 +12,8 @@ model Perez "Transform horizontal irradiance to normal of arbitrarily oriented s
         rotation=270,
         origin={8,56})));
 
-  PlaneOfArrayIrradiance.DiffusePerez diffusePerez(til=arrayTilt, rho=0.2) annotation (Placement(transformation(
+  PlaneOfArrayIrradiance.DiffusePerez diffusePerez(til=arrayTilt, rho=albedo)
+                                                                           annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-4,-18})));
@@ -37,7 +37,6 @@ model Perez "Transform horizontal irradiance to normal of arbitrarily oriented s
         rotation=90,
         origin={-61,9})));
 equation
-//   direct.HDirNor =noEvent(max(0, (directHorizontalIrradiance)))/noEvent(max(cos(solarZenith), 0.1));
   connect(diffuseHorizontalIrradiance, globalHorizontalIrradiance.u2)
     annotation (Line(points={{0,100},{0,66},{4.4,66},{4.4,63.2}},               color={0,0,127}));
   connect(directHorizontalIrradiance, globalHorizontalIrradiance.u1)
@@ -83,9 +82,8 @@ equation
   connect(diffusePerez.HGroDifTil, reflectedInclinedIrradiance)
     annotation (Line(points={{-8,-29},{-8,-60},{-60,-60},{-60,-100}}, color={0,0,127}));
   connect(skyBri.skyBri, briCoe.skyBri) annotation (Line(points={{-43.4,20},{-27.2,20}}, color={0,0,127}));
-  annotation (Diagram(graphics={Text(
-          extent={{-94,70},{-32,76}},
-          lineColor={28,108,200},
-          textString="Variability 'albedo' higher than parameter
-=> __not used__")}));
+  connect(solarZenith, angleOfIncidenceAsBlock.solarZenith)
+    annotation (Line(points={{100,-20},{76,-20},{76,-36},{50,-36}}, color={0,0,127}));
+  connect(solarZenith, direct.solarZenith)
+    annotation (Line(points={{100,-20},{76,-20},{76,16},{66,16},{66,10}}, color={0,0,127}));
 end Perez;

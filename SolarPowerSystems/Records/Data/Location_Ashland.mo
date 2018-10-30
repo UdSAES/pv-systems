@@ -1,5 +1,5 @@
 within SolarPowerSystems.Records.Data;
-record Location_Ashland "Ashland Station of the University of Oregon Solar Radiation Monitoring Laboratory"
+record Location_Ashland "Police Department in Ashland, OR/USA"
   extends Base.Location(
     latitude = 42.194320,
     longitude = -122.698261,

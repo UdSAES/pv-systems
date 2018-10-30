@@ -1,4 +1,4 @@
-within SolarPowerSystems.WIP;
+within SolarPowerSystems.WIP.Obsolete;
 model ModuleBased
   "Calculate the electrical output of a solar array as a function of the direct and diffuse irradiance on a horizontal plane"
   extends Modelica.Icons.Example;
@@ -75,22 +75,23 @@ equation
     annotation (Line(points={{0,-60},{0,-86},{-48,-86}},
                                                        color={0,0,127}));
   connect(solarAzimuth.y,environmentModel.solarAzimuth)  annotation (Line(
-        points={{51,80.2},{60,80.2},{60,60},{3,60},{3,20}}, color={0,0,127}));
-  connect(solarZenith.y,environmentModel.solarZenith)  annotation (Line(points=
-          {{91,80.2},{96,80.2},{96,58},{7,58},{7,20}}, color={0,0,127}));
+        points={{51,80.2},{60,80.2},{60,60},{10,60},{10,4}},color={0,0,127}));
+  connect(solarZenith.y,environmentModel.solarZenith)  annotation (Line(points={{91,80.2},{96,80.2},{96,58},{10,58},{10,
+          8}},                                         color={0,0,127}));
   connect(ASWDIR_S__ASWDIFD_S.y[1], environmentModel.diffuseHorizontalIrradiance)
-    annotation (Line(points={{49,40},{-5,40},{-5,20}}, color={0,0,127}));
+    annotation (Line(points={{49,40},{0,40},{0,20}},   color={0,0,127}));
   connect(ASWDIR_S__ASWDIFD_S.y[2], environmentModel.directHorizontalIrradiance)
-    annotation (Line(points={{49,40},{-2,40},{-2,20}}, color={0,0,127}));
+    annotation (Line(points={{49,40},{6,40},{6,20}},   color={0,0,127}));
   connect(albedo.y, environmentModel.albedo)
-    annotation (Line(points={{-29,40},{-20,40},{-20,26},{-8,26},{-8,20}},
+    annotation (Line(points={{-29,40},{-20,40},{-20,26},{-6,26},{-6,20}},
                                                         color={0,0,127}));
   connect(environmentModel.diffuseInclinedIrradiance, add3_1.u3)
-    annotation (Line(points={{-6,0},{-8,0},{-8,-10}}, color={0,0,127}));
+    annotation (Line(points={{0,0},{-8,0},{-8,-10}},  color={0,0,127}));
   connect(environmentModel.directInclinedIrradiance, add3_1.u2)
-    annotation (Line(points={{0,0},{0,-10}}, color={0,0,127}));
+    annotation (Line(points={{6,0},{6,-6},{0,-6},{0,-10}},
+                                             color={0,0,127}));
   connect(environmentModel.reflectedInclinedIrradiance, add3_1.u1)
-    annotation (Line(points={{6,0},{8,0},{8,-10}}, color={0,0,127}));
+    annotation (Line(points={{-6,0},{8,0},{8,-10}},color={0,0,127}));
   connect(add3_1.y, plantModel.I_G_normal)
     annotation (Line(points={{0,-33},{0,-40}}, color={0,0,127}));
   connect(mpTracker.vRef,converter. vDCRef) annotation (

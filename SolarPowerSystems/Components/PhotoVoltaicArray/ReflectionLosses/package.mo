@@ -38,8 +38,4 @@ protected
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)));
   end PhysicalIAMmodel;
 
-  annotation (Icon(graphics={Text(
-          extent={{-78,44},{84,-42}},
-          lineColor={28,108,200},
-        textString="tbd")}));
 end ReflectionLosses;

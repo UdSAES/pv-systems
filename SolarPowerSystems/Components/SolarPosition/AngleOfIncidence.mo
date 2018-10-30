@@ -22,7 +22,7 @@ block AngleOfIncidence "SI2SO block that calculates the angle between sun beam a
         rotation=270,
         origin={0,-100})));
   Modelica.SIunits.Angle arrayAzimuthSolarCS "Array azimuth in the same coordinate system as the sun's position";
-  Modelica.SIunits.Angle solarHeight "Height of the sun";
+  Modelica.SIunits.Angle solarHeight = Modelica.SIunits.Conversions.from_deg(90 - solarZenith) "Height of the sun";
 
 equation
     arrayAzimuthSolarCS = arrayAzimuth + Modelica.Constants.pi;
@@ -38,7 +38,6 @@ equation
 //                                 - cos(solarHeight)*sin(arrayTilt)
 //                                 * cos(Modelica.SIunits.Conversions.from_deg(solarAzimuth) - arrayAzimuthSolarCS));
 
-    solarHeight = Modelica.SIunits.Conversions.from_deg(90 - solarZenith);
     angleOfIncidence = acos( cos( Modelica.SIunits.Conversions.from_deg(solarZenith))*cos(arrayTilt)
                                 + sin( Modelica.SIunits.Conversions.from_deg(solarZenith))*sin(arrayTilt)
                                 * cos(Modelica.SIunits.Conversions.from_deg(solarAzimuth) - arrayAzimuthSolarCS));

@@ -1,4 +1,4 @@
-within SolarPowerSystems.WIP.Validation;
+within SolarPowerSystems.WIP.Obsolete;
 model TGM_Trina_20160629_withTemperature
   "Measured irradiance model on 2016-06-29; Trina modules at TGM building in Vienna, Austria"
   extends Modelica.Icons.Example;
