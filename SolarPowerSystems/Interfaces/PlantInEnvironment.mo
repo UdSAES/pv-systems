@@ -3,8 +3,8 @@ partial model PlantInEnvironment
   "Accounts for inclination/orientation of a PV plant in its environment"
   extends Modelica.Blocks.Icons.Block;
 
-  parameter Modelica.SIunits.Angle arrayTilt "Array tilt angle";
-  parameter Modelica.SIunits.Angle arrayAzimuth "Azimuth angle of array (O° equals south, positive towards east)";
+  parameter Modelica.SIunits.Angle arrayTilt(min = 0, max = 90) "Array tilt in degree (horizontal equals 0°, vertical equals 90°)";
+  parameter Modelica.SIunits.Angle arrayAzimuth(min = -180, max = 180) "Array azimuth in degree (South equals 0°, positive towards west)";
   parameter Real albedo(min=0, max=1) = 0.2 "Ground reflectance/Albedo";
 
 
