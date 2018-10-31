@@ -44,7 +44,7 @@ model UO_SRML_Ashland2_201810_Danny
   Utilities.MeasurementDataAshland measurementDataAshland(epochOffset=epochOffset.k)
     annotation (Placement(transformation(extent={{-94,-22},{-48,24}})));
   Modelica.Blocks.Sources.Constant diffuseHorizontalIrradiance(k=0)
-    annotation (Placement(transformation(extent={{-70,30},{-58,42}})));
+    annotation (Placement(transformation(extent={{-72,30},{-60,42}})));
 equation
   connect(None_Danny.powerDC, absoluteErrorPowerDC.u1)
     annotation (Line(points={{10,42},{28,42}},                 color={0,0,127}));
@@ -55,7 +55,7 @@ equation
   connect(measurementDataAshland.powerDCsystem2, absoluteErrorPowerDC.u2)
     annotation (Line(points={{-48,-8.2},{-44,-8.2},{-44,-8},{20,-8},{20,30},{28,30}}, color={0,0,127}));
   connect(diffuseHorizontalIrradiance.y, None_Danny.diffuseHorizontalIrradiance)
-    annotation (Line(points={{-57.4,36},{-34,36},{-34,37},{-10,37}},
+    annotation (Line(points={{-59.4,36},{-34,36},{-34,37},{-10,37}},
                                                    color={0,0,127}));
   connect(measurementDataAshland.ambientTemperature, None_Danny.temperature)
     annotation (Line(points={{-48,-17.4},{-40,-17.4},{-40,-18},{-28,-18},{-28,26},{-10,26}}, color={0,0,127}));

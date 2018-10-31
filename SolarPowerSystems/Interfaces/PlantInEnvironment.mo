@@ -34,15 +34,18 @@ partial model PlantInEnvironment
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-60,-100})));
-  Modelica.Blocks.Interfaces.RealInput solarAzimuth "The azimuth angle of the sun" annotation (Placement(transformation(
+  Modelica.Blocks.Interfaces.RealInput solarAzimuth(unit="deg", displayUnit="deg")
+                                                    "The azimuth angle of the sun" annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=180,
         origin={100,-60})));
-  Modelica.Blocks.Interfaces.RealInput solarZenith "The zenith angle of the sun" annotation (Placement(transformation(
+  Modelica.Blocks.Interfaces.RealInput solarZenith(unit="deg", displayUnit="deg")
+                                                   "The zenith angle of the sun" annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=180,
         origin={100,-20})));
-  Modelica.Blocks.Interfaces.RealOutput angleOfIncidence "The angle of incidence between surface normal and sun beam"
+  Modelica.Blocks.Interfaces.RealOutput angleOfIncidence(unit="rad", displayUnit="deg")
+                                                         "The angle of incidence between surface normal and sun beam"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,

@@ -12,7 +12,8 @@ partial model PhotoVoltaicArray "PV array, irradiance normal to surface"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,-100})));
-  Modelica.Blocks.Interfaces.RealInput angleOfIncidence(final unit="rad") "Angle between direct beam and surface normal"
+  Modelica.Blocks.Interfaces.RealInput angleOfIncidence(final unit="rad", displayUnit="deg")
+                                                                          "Angle between direct beam and surface normal"
     annotation (Placement(transformation(extent={{-120,50},{-80,90}})));
   Modelica.Blocks.Interfaces.RealInput u(final unit="m/s") "Wind speed in PV plane"
     annotation (Placement(transformation(extent={{-120,10},{-80,50}})));
