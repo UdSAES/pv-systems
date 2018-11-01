@@ -1,17 +1,14 @@
 within SolarPowerSystems.Components.SolarPowerPlants;
 model None_PhotoVoltaicsLib
   "Model of a solar power plant that computes the electrical output as a function of the global irradiance on the plant based on a diode model and plant orientation"
-  extends Interfaces.PhotoVoltaicPowerPlant(redeclare PlantInEnvironment.None
-                                                                          inclinationAndShadowing(arrayTilt=arrayTilt,
-        arrayAzimuth=arrayAzimuth),
-                          redeclare PhotoVoltaicArray.ModuleBased.PhotoVoltaicsLib plantIrradianceNormal(
+  extends Interfaces.PhotoVoltaicPowerPlant(redeclare PlantInEnvironment.None inclinationAndShadowing(arrayTilt=
+          arrayTilt, arrayAzimuth=arrayAzimuth), redeclare PhotoVoltaicArray.ModuleBased.PhotoVoltaicsLib
+      plantIrradianceNormal(
       nsModule=8,
       npModule=1,
-      redeclare PhotoVoltaics.Records.TSM_230_PC05 moduleData,
       useHeatPort=true,
-      T=298.15));
-
-      // XXX initialization fails if useHeatPort = true for model PhotoVoltaicArray.ModuleBased.PhotoVoltaicsLib
+      T=298.15,
+      moduleData=moduleData));
 
 //    Modelica.Blocks.Interfaces.RealOutput powerAC
 //      "The generated power on the AC side"
@@ -40,6 +37,8 @@ model None_PhotoVoltaicsLib
     Placement(transformation(extent={{-4,-4},{4,4}},
         rotation=0,
         origin={58,-40})));
+  replaceable parameter PhotoVoltaics.Records.ModuleData moduleData constrainedby PhotoVoltaics.Records.ModuleData
+    annotation (Placement(transformation(extent={{10,72},{30,92}})), __Dymola_choicesAllMatching=true, Dialog(group="PV Modules"));
 equation
   connect(internalHeatPort, plantIrradianceNormal.heatPort)
     annotation (Line(points={{-40,-80},{42,-80},{42,-10}}, color={191,0,0}));

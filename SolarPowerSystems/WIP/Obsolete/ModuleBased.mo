@@ -23,10 +23,8 @@ model ModuleBased
   replaceable parameter Records.Data.PVplant_TGM_Trina plantRecord
     constrainedby Records.Base.PVplant annotation (Placement(transformation(
           extent={{-90,30},{-70,50}})),__Dymola_choicesAllMatching=true);
-  Components.PhotoVoltaicArray.ModuleBased.PhotoVoltaicsLib plantModel(
-    useHeatPort=false,
-    T=plantRecord.moduleTemperature,
-    redeclare PhotoVoltaics.Records.TSM_230_PC05 moduleData) annotation (Placement(transformation(
+  Components.PhotoVoltaicArray.ModuleBased.PhotoVoltaicsLib plantModel(useHeatPort=false, T=plantRecord.moduleTemperature)
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={0,-50})), __Dymola_choicesAllMatching=true);

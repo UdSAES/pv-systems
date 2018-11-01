@@ -6,11 +6,11 @@ model PhotoVoltaicsLib "Module-based PV plant model (PhotoVoltaics-Lib)"
     simplePlantSymmetric(
     T=T,
     useConstantIrradiance=false,
-    moduleData=moduleData,
     shadow=0,
     nsModule=nsModule,
     npModule=npModule,
-    useHeatPort=true)
+    useHeatPort=true,
+    moduleData=moduleData)
     annotation (Placement(transformation(extent={{10,-10},{-10,10}})));
   parameter Integer nsModule=1 "Number of series connected modules";
   parameter Integer npModule=1 "Number of parallel connected modules";
@@ -20,16 +20,13 @@ model PhotoVoltaicsLib "Module-based PV plant model (PhotoVoltaics-Lib)"
   Modelica.Electrical.Analog.Interfaces.NegativePin nv1
       "Negative pin, voltage path"
     annotation (Placement(transformation(extent={{40,-110},{60,-90}})));
-  replaceable parameter PhotoVoltaics.Records.ModuleData moduleData
-    constrainedby PhotoVoltaics.Records.ModuleData annotation (Placement(
-        transformation(extent={{50,52},{70,72}})), __Dymola_choicesAllMatching=
-        true);
   Modelica.Electrical.Analog.Interfaces.PositivePin p1
     "Positive pin Positive pin (potential p.v > n.v for positive voltage drop v)"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
   Modelica.Electrical.Analog.Interfaces.NegativePin n1
                 "Negative pin"
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+  parameter PhotoVoltaics.Records.ModuleData moduleData "Module parameters";
 equation
   connect(I_G_normal, simplePlantSymmetric.variableIrradiance)
     annotation (Line(points={{0,100},{0,12}}, color={0,0,127}));
