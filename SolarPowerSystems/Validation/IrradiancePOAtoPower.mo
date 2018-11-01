@@ -43,7 +43,9 @@ model IrradiancePOAtoPower
     albedo=plantRecord.environmentAlbedo,
     arrayTilt=Modelica.SIunits.Conversions.from_deg(plantRecord.panelTilt),
     arrayAzimuth=Modelica.SIunits.Conversions.from_deg(plantRecord.panelAzimuth),
-    redeclare Records.Data.Module_ASE300DGF50_270W moduleData)
+    redeclare Records.Data.Module_ASE300DGF50_270W moduleData,
+    nsModule=plantRecord.nsModule,
+    npModule=plantRecord.npModule)
     annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 equation
   connect(diffuseHorizontalIrradiance.y, None_Danny.diffuseHorizontalIrradiance)

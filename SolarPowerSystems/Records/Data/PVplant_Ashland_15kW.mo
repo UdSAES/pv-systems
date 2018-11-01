@@ -6,5 +6,7 @@ record PVplant_Ashland_15kW
     plantEfficiency=280/(1000*panelArea/64),
     panelTilt=15,
     panelAzimuth=0,
-    T_cell_ref=25);
+    T_cell_ref=25,
+    nsModule=8,
+    npModule=8);
 end PVplant_Ashland_15kW;

@@ -10,4 +10,6 @@ partial record PVplant
   parameter Real panelTilt(unit="deg", min = 0, max = 90) "Surface tilt in degree (Horizontal equals 0°, vertical equals 90°)";
   parameter Real panelAzimuth(unit="deg", min = -180, max = 180) "Surface azimuth in degree (South equals 0°, positive towards east)";
   parameter Real environmentAlbedo(min=0, max=1) = 0.2 "Albedo for isotropic estimation of irradiance by reflection";
+  parameter Integer nsModule = 1 "Number of series connected modules";
+  parameter Integer npModule = 1 "Number of parallel connected modules";
 end PVplant;

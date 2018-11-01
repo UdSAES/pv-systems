@@ -4,11 +4,11 @@ model None_PhotoVoltaicsLib
   extends Interfaces.PhotoVoltaicPowerPlant(redeclare PlantInEnvironment.None inclinationAndShadowing(arrayTilt=
           arrayTilt, arrayAzimuth=arrayAzimuth), redeclare PhotoVoltaicArray.ModuleBased.PhotoVoltaicsLib
       plantIrradianceNormal(
-      nsModule=8,
-      npModule=1,
       useHeatPort=true,
+      moduleData=moduleData,
       T=298.15,
-      moduleData=moduleData));
+      nsModule=nsModule,
+      npModule=npModule));
 
 //    Modelica.Blocks.Interfaces.RealOutput powerAC
 //      "The generated power on the AC side"
@@ -38,7 +38,10 @@ model None_PhotoVoltaicsLib
         rotation=0,
         origin={58,-40})));
   replaceable parameter PhotoVoltaics.Records.ModuleData moduleData constrainedby PhotoVoltaics.Records.ModuleData
-    annotation (Placement(transformation(extent={{10,72},{30,92}})), __Dymola_choicesAllMatching=true, Dialog(group="PV Modules"));
+    annotation (Placement(transformation(extent={{10,72},{30,92}})),                                   Dialog(group="PV Modules"),
+    __Dymola_choicesAllMatching=true);
+  parameter Integer nsModule=64 "Number of series connected modules" annotation (Dialog(group="PV Plant"));
+  parameter Integer npModule=1 "Number of parallel connected modules" annotation (Dialog(group="PV Plant"));
 equation
   connect(internalHeatPort, plantIrradianceNormal.heatPort)
     annotation (Line(points={{-40,-80},{42,-80},{42,-10}}, color={191,0,0}));
