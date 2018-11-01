@@ -15,7 +15,7 @@ model UO_SRML_Ashland2_201810_Danny
     useTemperatureInput=true,
     useWindSpeedInput=true,
     T_cell_ref=plantRecord.T_cell_ref,
-    albedo=plantRecord.environmentAlbedo)      annotation (Placement(transformation(extent={{-10,24},{10,44}})));
+    albedo=plantRecord.environmentAlbedo)      annotation (Placement(transformation(extent={{-10,30},{10,50}})));
   Records.Data.Location_Ashland                     location "TGM Vienna"
     annotation (Placement(transformation(extent={{-90,72},{-70,92}})), choicesAllMatching=true);
 
@@ -38,45 +38,77 @@ model UO_SRML_Ashland2_201810_Danny
     plantEfficiency=plantRecord.plantEfficiency)
                    annotation (Placement(transformation(extent={{-8,-50},{12,-30}})));
   Modelica.Blocks.Continuous.Integrator totalEnergyMeasuredDC(k=3.6e-6, y(unit="kW.h"))
-    annotation (Placement(transformation(extent={{30,-14},{42,-2}})));
+    annotation (Placement(transformation(extent={{14,-72},{26,-60}})));
   Modelica.Blocks.Sources.IntegerConstant epochOffset(k=1540191600)
     annotation (Placement(transformation(extent={{-10,70},{10,90}})));
   Utilities.MeasurementDataAshland measurementDataAshland(epochOffset=epochOffset.k)
-    annotation (Placement(transformation(extent={{-94,-22},{-48,24}})));
+    annotation (Placement(transformation(extent={{-88,-10},{-68,10}})));
   Modelica.Blocks.Sources.Constant diffuseHorizontalIrradiance(k=0)
-    annotation (Placement(transformation(extent={{-72,30},{-60,42}})));
+    annotation (Placement(transformation(extent={{-88,34},{-70,52}})));
   Utilities.errorMetrics errorMetricsEnergy(f=1/(60*5))
-    annotation (Placement(transformation(extent={{54,-16},{74,-36}})));
+    annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
   Utilities.errorMetrics errorMetricsPower(f=1/(60*5))
-    annotation (Placement(transformation(extent={{54,-44},{74,-64}})));
+    annotation (Placement(transformation(extent={{50,-16},{70,-36}})));
+  Interfaces.ValidationData validationData annotation (Placement(transformation(extent={{-56,-6},{-44,6}})));
 equation
-  connect(measurementDataAshland.globalIrradiancePOA, None_Danny.directHorizontalIrradiance)
-    annotation (Line(points={{-48,1},{-42,1},{-42,2},{-22,2},{-22,42},{-10,42}}, color={0,0,127}));
-  connect(measurementDataAshland.powerDCsystem2, totalEnergyMeasuredDC.u)
-    annotation (Line(points={{-48,-8.2},{-44,-8.2},{-44,-8},{28.8,-8}},                    color={0,0,127}));
   connect(diffuseHorizontalIrradiance.y, None_Danny.diffuseHorizontalIrradiance)
-    annotation (Line(points={{-59.4,36},{-34,36},{-34,37},{-10,37}},
-                                                   color={0,0,127}));
-  connect(measurementDataAshland.ambientTemperature, None_Danny.temperature)
-    annotation (Line(points={{-48,-17.4},{-36,-17.4},{-36,-18},{-28,-18},{-28,26},{-10,26}}, color={0,0,127}));
-  connect(measurementDataAshland.windSpeed, None_Danny.windSpeed)
-    annotation (Line(points={{-48,-12.8},{-40,-12.8},{-40,-12},{-30,-12},{-30,31},{-10,31}}, color={0,0,127}));
-  connect(measurementDataAshland.directHorizontalIrradiance, Perez_Danny.directHorizontalIrradiance)
-    annotation (Line(points={{-48,14.8},{-42,14.8},{-42,16},{-32,16},{-32,-32},{-8,-32}}, color={0,0,127}));
-  connect(measurementDataAshland.diffuseHorizontalIrradiance, Perez_Danny.diffuseHorizontalIrradiance)
-    annotation (Line(points={{-48,10.2},{-42,10.2},{-42,10},{-34,10},{-34,-37},{-8,-37}}, color={0,0,127}));
-  connect(measurementDataAshland.windSpeed, Perez_Danny.windSpeed)
-    annotation (Line(points={{-48,-12.8},{-40,-12.8},{-40,-12},{-30,-12},{-30,-43},{-8,-43}}, color={0,0,127}));
-  connect(measurementDataAshland.ambientTemperature, Perez_Danny.temperature)
-    annotation (Line(points={{-48,-17.4},{-36,-17.4},{-36,-48},{-8,-48}}, color={0,0,127}));
+    annotation (Line(points={{-69.1,43},{-10,43}}, color={0,0,127}));
   connect(totalEnergyMeasuredDC.y, errorMetricsEnergy.measuredValue)
-    annotation (Line(points={{42.6,-8},{46,-8},{46,-20},{54,-20}}, color={0,0,127}));
+    annotation (Line(points={{26.6,-66},{50,-66}},                 color={0,0,127}));
   connect(Perez_Danny.totalEnergyDC, errorMetricsEnergy.simulatedValue)
-    annotation (Line(points={{12,-36},{34,-36},{34,-32},{54,-32}}, color={0,0,127}));
-  connect(measurementDataAshland.powerDCsystem2, errorMetricsPower.measuredValue)
-    annotation (Line(points={{-48,-8.2},{-10,-8.2},{-10,-8},{24,-8},{24,-48},{54,-48}}, color={0,0,127}));
+    annotation (Line(points={{12,-36},{34,-36},{34,-54},{50,-54}}, color={0,0,127}));
   connect(Perez_Danny.powerDC, errorMetricsPower.simulatedValue)
-    annotation (Line(points={{12,-32},{20,-32},{20,-60},{54,-60}}, color={0,0,127}));
+    annotation (Line(points={{12,-32},{50,-32}},                   color={0,0,127}));
+  connect(measurementDataAshland.validationData, validationData)
+    annotation (Line(
+      points={{-68,0},{-50,0}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(validationData.directHorizontalIrradiance, Perez_Danny.directHorizontalIrradiance)
+    annotation (Line(
+      points={{-49.97,0.03},{-49.97,-32},{-8,-32}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(validationData.diffuseHorizontalIrradiance, Perez_Danny.diffuseHorizontalIrradiance)
+    annotation (Line(
+      points={{-49.97,0.03},{-49.97,-37},{-8,-37}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(validationData.windSpeed, Perez_Danny.windSpeed)
+    annotation (Line(
+      points={{-49.97,0.03},{-49.97,-43},{-8,-43}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(validationData.ambientTemperature, Perez_Danny.temperature)
+    annotation (Line(
+      points={{-49.97,0.03},{-49.97,-48},{-8,-48}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(validationData.windSpeed, None_Danny.windSpeed)
+    annotation (Line(
+      points={{-49.97,0.03},{-49.97,37},{-10,37}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(validationData.ambientTemperature, None_Danny.temperature)
+    annotation (Line(
+      points={{-49.97,0.03},{-49.97,32},{-10,32}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(validationData.powerDCsystem2, totalEnergyMeasuredDC.u)
+    annotation (Line(
+      points={{-50,0},{-50,-66},{12.8,-66}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(validationData.powerDCsystem2, errorMetricsPower.measuredValue)
+    annotation (Line(
+      points={{-50,0},{-50,-20},{50,-20}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(validationData.globalIrradiancePOA, None_Danny.directHorizontalIrradiance)
+    annotation (Line(
+      points={{-49.97,0.03},{-49.97,48},{-10,48}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (experiment(
       StartTime=18000,
       StopTime=176400,

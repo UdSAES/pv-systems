@@ -37,7 +37,7 @@ model UO_SRML_Ashland2_201810 "A 15kW-peak PV array installed in Ashland, OR; da
     annotation (Placement(transformation(extent={{-10,-90},{10,-70}})));
   Modelica.Blocks.Sources.IntegerConstant epochOffset(k=1540598400)
     annotation (Placement(transformation(extent={{-10,70},{10,90}})));
-  Utilities.MeasurementDataAshland measurementDataAshland(epochOffset=epochOffset.k)
+  Obsolete.MeasurementDataAshland measurementDataAshland(epochOffset=epochOffset.k)
     annotation (Placement(transformation(extent={{-94,-22},{-48,24}})));
   Modelica.Blocks.Sources.Constant diffuseHorizontalIrradiance(k=0)
     annotation (Placement(transformation(extent={{-70,30},{-58,42}})));

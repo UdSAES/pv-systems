@@ -14,46 +14,107 @@ model MeasurementDataAshland "Block for reading measurement data from the PV-pla
     fileName=fileName) annotation (Placement(transformation(extent={{-52,-10},{-32,10}})));
   Modelica.Blocks.Sources.Clock timeAsEpoch(offset=epochOffset)
     annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
-  Modelica.Blocks.Interfaces.RealOutput globalHorizontalIrradiance(unit="W/m2")
-    annotation (Placement(transformation(extent={{90,70},{110,90}})));
-  Modelica.Blocks.Interfaces.RealOutput directHorizontalIrradiance(unit="W/m2")
-    annotation (Placement(transformation(extent={{90,50},{110,70}})));
-  Modelica.Blocks.Interfaces.RealOutput diffuseHorizontalIrradiance(unit="W/m2")
-    annotation (Placement(transformation(extent={{90,30},{110,50}})));
-  Modelica.Blocks.Math.Add substract(k1=+1, k2=-1) annotation (Placement(transformation(extent={{50,50},{70,70}})));
+  Modelica.Blocks.Math.Add substract(k1=+1, k2=-1) annotation (Placement(transformation(extent={{34,54},{46,66}})));
 
-  Modelica.Blocks.Interfaces.RealOutput directNormalIrradiance(unit="W/m2") "DNI"
-    annotation (Placement(transformation(extent={{90,10},{110,30}})));
-  Modelica.Blocks.Interfaces.RealOutput globalIrradiancePOA(unit="W/m2")
-    annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-  Modelica.Blocks.Interfaces.RealOutput powerDCsystem1(unit="W")
-    annotation (Placement(transformation(extent={{90,-30},{110,-10}})));
-  Modelica.Blocks.Interfaces.RealOutput powerDCsystem2(unit="W")
-    annotation (Placement(transformation(extent={{90,-50},{110,-30}})));
-  Modelica.Blocks.Interfaces.RealOutput windSpeed(unit="m/s")
-    annotation (Placement(transformation(extent={{90,-70},{110,-50}})));
-  Modelica.Blocks.Interfaces.RealOutput ambientTemperature(unit="K", displayUnit="degC")
-    annotation (Placement(transformation(extent={{90,-90},{110,-70}})));
   Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin
-    annotation (Placement(transformation(extent={{50,-90},{70,-70}})));
+    annotation (Placement(transformation(extent={{30,-90},{50,-70}})));
+  Interfaces.ValidationData validationData annotation (Placement(transformation(extent={{80,-20},{120,20}})));
+
+protected
+  Modelica.Blocks.Routing.RealPassThrough realPassThrough
+    annotation (Placement(transformation(extent={{34,34},{46,46}})));
+  Modelica.Blocks.Routing.RealPassThrough realPassThrough1
+    annotation (Placement(transformation(extent={{34,74},{46,86}})));
+  Modelica.Blocks.Routing.RealPassThrough realPassThrough2
+    annotation (Placement(transformation(extent={{34,14},{46,26}})));
+  Modelica.Blocks.Routing.RealPassThrough realPassThrough3
+    annotation (Placement(transformation(extent={{34,-6},{46,6}})));
+  Modelica.Blocks.Routing.RealPassThrough realPassThrough4
+    annotation (Placement(transformation(extent={{34,-46},{46,-34}})));
+  Modelica.Blocks.Routing.RealPassThrough realPassThrough5
+    annotation (Placement(transformation(extent={{34,-26},{46,-14}})));
+  Modelica.Blocks.Routing.RealPassThrough realPassThrough6
+    annotation (Placement(transformation(extent={{34,-66},{46,-54}})));
 equation
   connect(timeAsEpoch.y, combiTable1Ds.u) annotation (Line(points={{-69,0},{-54,0}}, color={0,0,127}));
-  connect(combiTable1Ds.y[1], globalHorizontalIrradiance)
-    annotation (Line(points={{-31,0},{0,0},{0,80},{100,80}}, color={0,0,127}));
-  connect(substract.y, directHorizontalIrradiance) annotation (Line(points={{71,60},{100,60}}, color={0,0,127}));
-  connect(combiTable1Ds.y[1], substract.u1) annotation (Line(points={{-31,0},{0,0},{0,66},{48,66}}, color={0,0,127}));
-  connect(combiTable1Ds.y[3], diffuseHorizontalIrradiance)
-    annotation (Line(points={{-31,0},{0,0},{0,40},{100,40}}, color={0,0,127}));
-  connect(combiTable1Ds.y[3], substract.u2) annotation (Line(points={{-31,0},{0,0},{0,54},{48,54}}, color={0,0,127}));
-  connect(combiTable1Ds.y[2], directNormalIrradiance)
-    annotation (Line(points={{-31,0},{0,0},{0,20},{100,20}}, color={0,0,127}));
-  connect(combiTable1Ds.y[4], globalIrradiancePOA) annotation (Line(points={{-31,0},{100,0}}, color={0,0,127}));
-  connect(combiTable1Ds.y[5], powerDCsystem1)
-    annotation (Line(points={{-31,0},{0,0},{0,-20},{100,-20}}, color={0,0,127}));
-  connect(combiTable1Ds.y[6], powerDCsystem2)
-    annotation (Line(points={{-31,0},{0,0},{0,-40},{100,-40}}, color={0,0,127}));
-  connect(combiTable1Ds.y[7], windSpeed) annotation (Line(points={{-31,0},{0,0},{0,-60},{100,-60}}, color={0,0,127}));
+  connect(combiTable1Ds.y[1], substract.u1) annotation (Line(points={{-31,0},{0,0},{0,63.6},{32.8,63.6}},
+                                                                                                    color={0,0,127}));
+  connect(combiTable1Ds.y[3], substract.u2) annotation (Line(points={{-31,0},{0,0},{0,56.4},{32.8,56.4}},
+                                                                                                    color={0,0,127}));
   connect(combiTable1Ds.y[8], toKelvin.Celsius)
-    annotation (Line(points={{-31,0},{0,0},{0,-80},{48,-80}}, color={0,0,127}));
-  connect(toKelvin.Kelvin, ambientTemperature) annotation (Line(points={{71,-80},{100,-80}}, color={0,0,127}));
+    annotation (Line(points={{-31,0},{0,0},{0,-80},{28,-80}}, color={0,0,127}));
+  connect(substract.y, validationData.directHorizontalIrradiance) annotation (Line(points={{46.6,60},{80,60},{80,0.1},{100.1,
+          0.1}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(combiTable1Ds.y[3], realPassThrough.u)
+    annotation (Line(points={{-31,0},{0,0},{0,40},{32.8,40}}, color={0,0,127}));
+  connect(realPassThrough.y, validationData.diffuseHorizontalIrradiance) annotation (Line(points={{46.6,40},{80,40},{80,
+          0.1},{100.1,0.1}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(combiTable1Ds.y[1], realPassThrough1.u)
+    annotation (Line(points={{-31,0},{0,0},{0,80},{32.8,80}}, color={0,0,127}));
+  connect(realPassThrough1.y, validationData.globalHorizontalIrradiance) annotation (Line(points={{46.6,80},{80,80},{80,
+          0.1},{100.1,0.1}},
+                       color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(combiTable1Ds.y[2], realPassThrough2.u)
+    annotation (Line(points={{-31,0},{0,0},{0,20},{32.8,20}}, color={0,0,127}));
+  connect(realPassThrough2.y, validationData.directNormalIrradiance) annotation (Line(points={{46.6,20},{80,20},{80,0.1},
+          {100.1,0.1}},
+                   color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(combiTable1Ds.y[4], realPassThrough3.u) annotation (Line(points={{-31,0},{32.8,0}}, color={0,0,127}));
+  connect(realPassThrough3.y, validationData.globalIrradiancePOA) annotation (Line(points={{46.6,0},{74,0},{74,0.1},{
+          100.1,0.1}},                                                                                        color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(combiTable1Ds.y[5], realPassThrough5.u)
+    annotation (Line(points={{-31,0},{0,0},{0,-20},{32.8,-20}}, color={0,0,127}));
+  connect(realPassThrough5.y, validationData.powerDCsystem1) annotation (Line(points={{46.6,-20},{80,-20},{80,0},{100,0}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(combiTable1Ds.y[6], realPassThrough4.u)
+    annotation (Line(points={{-31,0},{0,0},{0,-40},{32.8,-40}}, color={0,0,127}));
+  connect(realPassThrough4.y, validationData.powerDCsystem2) annotation (Line(points={{46.6,-40},{80,-40},{80,0},{100,0}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(combiTable1Ds.y[7], realPassThrough6.u)
+    annotation (Line(points={{-31,0},{0,0},{0,-60},{32.8,-60}}, color={0,0,127}));
+  connect(realPassThrough6.y, validationData.windSpeed) annotation (Line(points={{46.6,-60},{80,-60},{80,0.1},{100.1,
+          0.1}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(toKelvin.Kelvin, validationData.ambientTemperature) annotation (Line(points={{51,-80},{80,-80},{80,0.1},{
+          100.1,0.1}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(realPassThrough4.y, validationData.powerDC)
+    annotation (Line(points={{46.6,-40},{80,-40},{80,0.1},{100.1,0.1}}, color={0,0,127}));
 end MeasurementDataAshland;

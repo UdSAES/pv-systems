@@ -2,7 +2,7 @@ within SolarPowerSystems.WIP.Obsolete;
 model HorizontalToInclinedDirect
   "Model for testing the transformation of direct irradiance on a horizontal plane to an arbitrarily oriented one"
   extends Modelica.Icons.Example;
-  Utilities.MeasurementDataAshland measurementDataAshland(epochOffset=startTime.k)
+  MeasurementDataAshland measurementDataAshland(epochOffset=startTime.k)
     annotation (Placement(transformation(extent={{-90,-32},{-26,32}})));
   Components.SolarPosition.SolarPositionAlgorithm.SolarAzimuth solarAzimuth(
     latitude=location.latitude,
