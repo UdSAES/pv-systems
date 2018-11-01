@@ -5,11 +5,11 @@ model None_PhotoVoltaicsLib
                                                                           inclinationAndShadowing(arrayTilt=arrayTilt,
         arrayAzimuth=arrayAzimuth),
                           redeclare PhotoVoltaicArray.ModuleBased.PhotoVoltaicsLib plantIrradianceNormal(
-        T=fixedTemperature.T,
       nsModule=8,
       npModule=1,
       redeclare PhotoVoltaics.Records.TSM_230_PC05 moduleData,
-      useHeatPort=false));
+      useHeatPort=true,
+      T=298.15));
 
       // XXX initialization fails if useHeatPort = true for model PhotoVoltaicArray.ModuleBased.PhotoVoltaicsLib
 

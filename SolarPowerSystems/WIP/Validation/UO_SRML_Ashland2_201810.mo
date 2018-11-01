@@ -22,7 +22,6 @@ model UO_SRML_Ashland2_201810 "A 15kW-peak PV array installed in Ashland, OR; da
     annotation (Placement(transformation(extent={{-50,72},{-30,92}})), __Dymola_choicesAllMatching=true);
   Modelica.Blocks.Math.Add absoluteErrorPowerDC(k1=-1) annotation (Placement(transformation(extent={{30,26},{50,46}})));
   Components.SolarPowerPlants.None_PhotoVoltaicsLib None_PhotoVoltaicsLib(
-    useTemperatureInput=false,
     useWindSpeedInput=false,
     constTemperature(displayUnit="K") = 287.7,
     latitude=location.latitude,
@@ -31,7 +30,9 @@ model UO_SRML_Ashland2_201810 "A 15kW-peak PV array installed in Ashland, OR; da
     arrayTilt=Modelica.SIunits.Conversions.from_deg(plantRecord.panelTilt),
     arrayAzimuth=Modelica.SIunits.Conversions.from_deg(plantRecord.panelAzimuth),
     epochOffset=epochOffset.k,
-    albedo=plantRecord.environmentAlbedo)
+    albedo=plantRecord.environmentAlbedo,
+    useTemperatureInput=true,
+    plantIrradianceNormal)
       annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
   Modelica.Blocks.Continuous.Integrator totalEnergyMeasuredDC(k=3.6e-6, y(unit="kW.h"))
     annotation (Placement(transformation(extent={{-10,-90},{10,-70}})));
@@ -61,6 +62,8 @@ equation
     annotation (Line(points={{-48,-17.4},{-40,-17.4},{-40,-18},{-28,-18},{-28,26},{-10,26}}, color={0,0,127}));
   connect(measurementDataAshland.windSpeed, None_Danny.windSpeed)
     annotation (Line(points={{-48,-12.8},{-40,-12.8},{-40,-12},{-30,-12},{-30,31},{-10,31}}, color={0,0,127}));
+  connect(measurementDataAshland.ambientTemperature, None_PhotoVoltaicsLib.temperature)
+    annotation (Line(points={{-48,-17.4},{-38,-17.4},{-38,-18},{-28,-18},{-28,-48},{-10,-48}}, color={0,0,127}));
   annotation (experiment(
       StartTime=43200,
       StopTime=86400,

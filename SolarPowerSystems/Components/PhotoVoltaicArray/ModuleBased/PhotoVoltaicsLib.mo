@@ -4,13 +4,13 @@ model PhotoVoltaicsLib "Module-based PV plant model (PhotoVoltaics-Lib)"
 
   PhotoVoltaics.Components.SimplePhotoVoltaics.SimplePlantSymmetric
     simplePlantSymmetric(
-    useHeatPort=useHeatPort,
     T=T,
     useConstantIrradiance=false,
     moduleData=moduleData,
     shadow=0,
     nsModule=nsModule,
-    npModule=npModule)
+    npModule=npModule,
+    useHeatPort=true)
     annotation (Placement(transformation(extent={{10,-10},{-10,10}})));
   parameter Integer nsModule=1 "Number of series connected modules";
   parameter Integer npModule=1 "Number of parallel connected modules";
@@ -45,4 +45,6 @@ equation
     annotation (Line(points={{10,0},{40,0}}, color={0,0,255}));
   connect(powerSensor.nc, p1)
     annotation (Line(points={{60,0},{100,0}}, color={0,0,255}));
+  connect(internalHeatPort, simplePlantSymmetric.heatPort)
+    annotation (Line(points={{-100,-80},{-100,-16},{10,-16},{10,-10}}, color={191,0,0}));
 end PhotoVoltaicsLib;
