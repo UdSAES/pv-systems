@@ -1,5 +1,6 @@
 within SolarPowerSystems.Utilities;
 model MeasurementDataAshland "Block for reading measurement data from the PV-plant in Ashland, OR"
+  extends Modelica.Blocks.Icons.Block;
   import ModelicaServices;
 
   parameter Modelica.SIunits.Time epochOffset=1540598400 "Time at the beginning of the simulation as unix epoch";
