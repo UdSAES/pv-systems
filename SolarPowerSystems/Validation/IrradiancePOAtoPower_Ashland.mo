@@ -1,5 +1,5 @@
 within SolarPowerSystems.Validation;
-model IrradiancePOAtoPower
+model IrradiancePOAtoPower_Ashland
   "Comparison area-based vs. diode-eq.-based model using data from 15kW-plant in Ashland, OR"
   extends Modelica.Icons.Example;
   Components.SolarPowerPlants.None_Danny None_Danny(
@@ -16,10 +16,10 @@ model IrradiancePOAtoPower
     useWindSpeedInput=true,
     T_cell_ref=plantRecord.T_cell_ref,
     albedo=plantRecord.environmentAlbedo)      annotation (Placement(transformation(extent={{-10,30},{10,50}})));
-  Records.Data.Location_Ashland                     location "TGM Vienna"
+  Records.Data.Location_Ashland                     location
     annotation (Placement(transformation(extent={{-90,72},{-70,92}})), choicesAllMatching=true);
 
-  Records.Data.PVplant_Ashland_15kW                plantRecord "TGM Trina"
+  Records.Data.PVplant_Ashland_15kW                plantRecord
     annotation (Placement(transformation(extent={{-50,72},{-30,92}})), __Dymola_choicesAllMatching=true);
   Modelica.Blocks.Continuous.Integrator totalEnergyMeasuredDC(k=3.6e-6, y(unit="kW.h"))
     annotation (Placement(transformation(extent={{14,-72},{26,-60}})));
@@ -67,11 +67,6 @@ equation
       points={{-49.97,0.03},{-49.97,32},{-10,32}},
       color={255,204,51},
       thickness=0.5));
-  connect(validationData.powerDCsystem2, totalEnergyMeasuredDC.u)
-    annotation (Line(
-      points={{-50,0},{-50,-66},{12.8,-66}},
-      color={255,204,51},
-      thickness=0.5));
   connect(validationData.globalIrradiancePOA, None_Danny.directHorizontalIrradiance)
     annotation (Line(
       points={{-49.97,0.03},{-49.97,48},{-10,48}},
@@ -88,8 +83,13 @@ equation
       points={{-49.97,0.03},{-50,0.03},{-50,-48},{-10,-48}},
       color={255,204,51},
       thickness=0.5));
+  connect(validationData.powerDC, totalEnergyMeasuredDC.u)
+    annotation (Line(
+      points={{-49.97,0.03},{-49.97,-66},{12.8,-66}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (experiment(
       StartTime=18000,
       StopTime=176400,
       Interval=60.00012), __Dymola_Commands(file="Scripts/plot_Validation_IrradiancePOAtoPower.mos" "plotResult"));
-end IrradiancePOAtoPower;
+end IrradiancePOAtoPower_Ashland;
