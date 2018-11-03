@@ -45,9 +45,9 @@ model UO_SRML_Ashland2_201810_Danny
     annotation (Placement(transformation(extent={{-88,-10},{-68,10}})));
   Modelica.Blocks.Sources.Constant diffuseHorizontalIrradiance(k=0)
     annotation (Placement(transformation(extent={{-88,34},{-70,52}})));
-  Utilities.errorMetrics errorMetricsEnergy(f=1/(60*5))
+  Utilities.ErrorMetrics errorMetricsEnergy(f=1/(60*5))
     annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
-  Utilities.errorMetrics errorMetricsPower(f=1/(60*5))
+  Utilities.ErrorMetrics errorMetricsPower(f=1/(60*5))
     annotation (Placement(transformation(extent={{50,-16},{70,-36}})));
   Interfaces.ValidationData validationData annotation (Placement(transformation(extent={{-56,-6},{-44,6}})));
 equation

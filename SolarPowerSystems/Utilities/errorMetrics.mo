@@ -1,5 +1,5 @@
 within SolarPowerSystems.Utilities;
-model errorMetrics "Block for calculating (n)MAE and (n)RMSE"
+model ErrorMetrics "Block for calculating (n)MAE and (n)RMSE"
   extends Modelica.Blocks.Icons.Block;
 
   parameter Modelica.SIunits.Frequency f "Base frequency";
@@ -53,4 +53,4 @@ equation
 //   connect(min.y, normalizedMAE.u2) annotation (Line(points={{8.8,0},{14,0},{14,16.4},{66.8,16.4}}, color={0,0,127}));
 //   connect(min.y, normalizedRMSE.u2) annotation (Line(points={{8.8,0},{14,0},{14,-63.6},{66.8,-63.6}}, color={0,0,127}));
 //   connect(mean.y, min.u1) annotation (Line(points={{-31.2,0},{-26,0},{-26,4.8},{-9.6,4.8}}, color={0,0,127}));
-end errorMetrics;
+end ErrorMetrics;
