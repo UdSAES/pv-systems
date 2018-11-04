@@ -28,7 +28,6 @@ The photovoltaic process inside a cell is caused by the irradiance normal to its
     ![comparison measured/calculated global irradiance POA](./docs/HorizontalToInclined_errorGlobalIrradiancePOA2.png)
 
     1. Since the direct irradiance in the plane of array needs to be calculated from the direct _horizontal_ irradiance (direct normal irradiance not available and massively complicated to estimate), a workaround for avoiding the unphysical spikes caused by the division of the cosine of the solar zenith angle around 90°/the sine of the solar height around 0° needs to be found. Because the direct irradiance in an inclined plane is always greater than or equal to the direct horizontal irradiance, it was decided to "slide" from equality to the actual equation as shown below.
-
     ```Modelica
     protected
         Real threshold = Modelica.SIunits.Conversions.from_deg(15);
@@ -46,22 +45,22 @@ The photovoltaic process inside a cell is caused by the irradiance normal to its
     end if;
     ```
 
-    Theoretically, the following code should be more correct, but the implementation above was observed to better fit the measured behaviour.
-    ```Modelica
-    if (solarHeight <= 0) then
-        directInclinedIrradiance = 0;
-    elseif (abs(sin(solarHeight)) < threshold) and (solarHeight > 0) then
-        // "slide" from one equation to the other
-        directInclinedIrradiance = max(0, b*(1 - f) + c*(f));
-    else
-        // equation c is now considered safe to use
-        directInclinedIrradiance = max(0, c);
-    end if;
-    ```
+        Theoretically, the following code should be more correct, but the implementation above was observed to better fit the measured behaviour.
+        ```Modelica
+        if (solarHeight <= 0) then
+            directInclinedIrradiance = 0;
+        elseif (abs(sin(solarHeight)) < threshold) and (solarHeight > 0) then
+            // "slide" from one equation to the other
+            directInclinedIrradiance = max(0, b*(1 - f) + c*(f));
+        else
+            // equation c is now considered safe to use
+            directInclinedIrradiance = max(0, c);
+        end if;
+        ```
 
-    Sliding from one equation to the other was found to perform better than just limiting the solar height using `solarHeight = Modelica.SIunits.Conversions.from_deg(max(10, (90 - solarZenith)))`, as shown below.
+        Sliding from one equation to the other was found to perform better than just limiting the solar height using `solarHeight = Modelica.SIunits.Conversions.from_deg(max(10, (90 - solarZenith)))`, as shown below.
 
-    ![old workaround division by zero direct from horizontal](./docs/HorizontalToInclined_errorGlobalIrradiancePOA2_before.png)
+        ![old workaround division by zero direct from horizontal](./docs/HorizontalToInclined_errorGlobalIrradiancePOA2_before.png)
 
     2. Perez vs Isotropic: lower error when using the model by Perez for estimating the diffuse irradiance in an inclined plane, therefore used in following calculations.
 
@@ -106,6 +105,10 @@ __To conclude__, I assume that there is something wrong with the tracker for `di
 Use `ModelManagement.Check.checkLibrary` and read the corresponding HTML-files to get an idea of the state of the library. In short: model behaviour validated/tested (but not in all possible configurations), documentation entirely missing, some issues with illegal model names, some non-functional models in `WIP`.
 
 ## References
-* [marion2014ea]: https://dx.doi.org/10.1109/PVSC.2014.6925171
-* [reda_andreas2003]: http://www.nrel.gov/docs/fy08osti/34302.pdf "Reda, I.; Andreas, A. (2003). Solar Position Algorithm for Solar Radiation Applications. 55 pp.; NREL Report No. TP-560-34302, Revised January 2008."
-* [reda_andreas2004]: "Reda, I.; Andreas, A., Solar Position Algorithm for Solar Radiation Applications, Solar Energy. Vol. 76(5), 2004; pp. 577-589"
+* [marion2014ea]
+* [reda_andreas2003]
+* [reda_andreas2004]
+
+[marion2014ea]: https://dx.doi.org/10.1109/PVSC.2014.6925171 "Marion, Bill et al. (2014). New data set for validating PV module performance models. Proceedings of the 2014 IEEE 40th Photovoltaic Specialist Conference (PVSC); pp. 1362-1366"
+[reda_andreas2003]: http://www.nrel.gov/docs/fy08osti/34302.pdf "Reda, I.; Andreas, A. (2003). Solar Position Algorithm for Solar Radiation Applications. 55 pp.; NREL Report No. TP-560-34302, Revised January 2008."
+[reda_andreas2004]: https://doi.org/10.1016/j.solener.2003.12.003 "Reda, I.; Andreas, A., Solar Position Algorithm for Solar Radiation Applications, Solar Energy. Vol. 76(5), 2004; pp. 577-589"
