@@ -5,5 +5,7 @@ record PVplant_TGM_Trina "The larger PV plant on the roof of TGM in Vienna"
     plantEfficiency=0.141,
     panelAzimuth=0,
     panelTilt=10,
-    T_cell_ref=25);
+    T_cell_ref=25,
+    nsModule=8,
+    npModule=1);
 end PVplant_TGM_Trina;

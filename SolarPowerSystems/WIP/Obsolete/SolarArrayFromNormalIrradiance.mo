@@ -60,7 +60,6 @@ model SolarArrayFromNormalIrradiance
   Components.PhotoVoltaicArray.ModuleBased.PhotoVoltaicsLib plantModelModuleBased(
     useHeatPort=false,
     T=plantRecord.moduleTemperature,
-    redeclare PhotoVoltaics.Records.TSM_230_PC05 moduleData,
     nsModule=8,
     npModule=1) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},

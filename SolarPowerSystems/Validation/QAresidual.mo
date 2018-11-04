@@ -18,11 +18,11 @@ model QAresidual
   Real globalHorizontalIrradianceFromDNIandDHI "GHI calculated from DHI, DNI, and solarZenith";
 
 equation
-  QAresidual = measurementDataAshland.diffuseHorizontalIrradiance
-    + measurementDataAshland.directNormalIrradiance*cos(Modelica.SIunits.Conversions.from_deg(solarZenith.y))
-    - measurementDataAshland.globalHorizontalIrradiance;
-  globalHorizontalIrradianceFromDNIandDHI = measurementDataAshland.diffuseHorizontalIrradiance
-    + measurementDataAshland.directNormalIrradiance*cos(Modelica.SIunits.Conversions.from_deg(solarZenith.y));
+  QAresidual = measurementDataAshland.validationData.diffuseHorizontalIrradiance
+    + measurementDataAshland.validationData.directNormalIrradiance*cos(Modelica.SIunits.Conversions.from_deg(solarZenith.y))
+    - measurementDataAshland.validationData.globalHorizontalIrradiance;
+  globalHorizontalIrradianceFromDNIandDHI = measurementDataAshland.validationData.diffuseHorizontalIrradiance
+    + measurementDataAshland.validationData.directNormalIrradiance*cos(Modelica.SIunits.Conversions.from_deg(solarZenith.y));
   annotation (experiment(
       StartTime=18000,
       StopTime=75600,

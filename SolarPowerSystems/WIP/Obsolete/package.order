@@ -2,7 +2,8 @@ Functions
 Simple
 AreaBasedLukas
 TGM_Trina_20160629
-IsotropicFromNormal
 TGM_Trina_20160629_withTemperature
 SolarArrayFromNormalIrradiance
 ModuleBased
+HorizontalToInclinedDirect
+MeasurementDataAshland

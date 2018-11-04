@@ -37,7 +37,6 @@ model TGM_Trina_20160629 "Measured irradiance model on 2016-06-29; Trina modules
   Components.PhotoVoltaicArray.ModuleBased.PhotoVoltaicsLib plantModelModuleBased(
     nsModule=nsModule,
     npModule=npModule,
-    redeclare PhotoVoltaics.Records.TSM_230_PC05 moduleData,
     useHeatPort=false)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
