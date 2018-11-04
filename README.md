@@ -28,6 +28,7 @@ The photovoltaic process inside a cell is caused by the irradiance normal to its
     ![comparison measured/calculated global irradiance POA](./docs/HorizontalToInclined_errorGlobalIrradiancePOA2.png)
 
     1. Since the direct irradiance in the plane of array needs to be calculated from the direct _horizontal_ irradiance (direct normal irradiance not available and massively complicated to estimate), a workaround for avoiding the unphysical spikes caused by the division of the cosine of the solar zenith angle around 90°/the sine of the solar height around 0° needs to be found. Because the direct irradiance in an inclined plane is always greater than or equal to the direct horizontal irradiance, it was decided to "slide" from equality to the actual equation as shown below.
+
     ```Modelica
     protected
         Real threshold = Modelica.SIunits.Conversions.from_deg(15);
@@ -45,22 +46,23 @@ The photovoltaic process inside a cell is caused by the irradiance normal to its
     end if;
     ```
 
-        Theoretically, the following code should be more correct, but the implementation above was observed to better fit the measured behaviour.
-        ```Modelica
-        if (solarHeight <= 0) then
-            directInclinedIrradiance = 0;
-        elseif (abs(sin(solarHeight)) < threshold) and (solarHeight > 0) then
-            // "slide" from one equation to the other
-            directInclinedIrradiance = max(0, b*(1 - f) + c*(f));
-        else
-            // equation c is now considered safe to use
-            directInclinedIrradiance = max(0, c);
-        end if;
-        ```
+    Theoretically, the following code should be more correct, but the implementation above was observed to better fit the measured behaviour.
 
-        Sliding from one equation to the other was found to perform better than just limiting the solar height using `solarHeight = Modelica.SIunits.Conversions.from_deg(max(10, (90 - solarZenith)))`, as shown below.
+    ```Modelica
+    if (solarHeight <= 0) then
+        directInclinedIrradiance = 0;
+    elseif (abs(sin(solarHeight)) < threshold) and (solarHeight > 0) then
+        // "slide" from one equation to the other
+        directInclinedIrradiance = max(0, b*(1 - f) + c*(f));
+    else
+        // equation c is now considered safe to use
+        directInclinedIrradiance = max(0, c);
+    end if;
+    ```
 
-        ![old workaround division by zero direct from horizontal](./docs/HorizontalToInclined_errorGlobalIrradiancePOA2_before.png)
+    Sliding from one equation to the other was found to perform better than just limiting the solar height using `solarHeight = Modelica.SIunits.Conversions.from_deg(max(10, (90 - solarZenith)))`, as shown below.
+
+    ![old workaround division by zero direct from horizontal](./docs/HorizontalToInclined_errorGlobalIrradiancePOA2_before.png)
 
     2. Perez vs Isotropic: lower error when using the model by Perez for estimating the diffuse irradiance in an inclined plane, therefore used in following calculations.
 
