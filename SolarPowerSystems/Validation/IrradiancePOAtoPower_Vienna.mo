@@ -44,8 +44,8 @@ model IrradiancePOAtoPower_Vienna
     arrayAzimuth=Modelica.SIunits.Conversions.from_deg(plantRecord.panelAzimuth),
     nsModule=plantRecord.nsModule,
     npModule=plantRecord.npModule,
-    useTemperatureInput=true,
-    redeclare PhotoVoltaics.Records.TSM_230_PC05 moduleData)
+    redeclare PhotoVoltaics.Records.TSM_230_PC05 moduleData,
+    useTemperatureInput=true)
     annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 equation
   connect(diffuseHorizontalIrradiance.y, None_Danny.diffuseHorizontalIrradiance)
@@ -74,13 +74,17 @@ equation
       points={{-49.97,0.03},{-49.97,-66},{12.8,-66}},
       color={255,204,51},
       thickness=0.5));
-  connect(validationData.T1, None_PhotoVoltaicsLib.temperature)
-    annotation (Line(
+  connect(validationData.T1, None_PhotoVoltaicsLib.temperature) annotation (Line(
       points={{-50,0},{-50,-48},{-10,-48}},
       color={255,204,51},
-      thickness=0.5));
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (experiment(
       StartTime=18000,
       StopTime=75600,
-      Interval=60.00012), __Dymola_Commands(file="Scripts/plot_Validation_IrradiancePOAtoPower.mos" "plotResult"));
+      Interval=60.00012), __Dymola_Commands(file="Scripts/plot_Validation_IrradiancePOAtoPower.mos" "plotResult", file=
+          "Scripts/plot_Validation_IrradiancePOAtoPower_Vienna.mos" "plotResultsVienna"));
 end IrradiancePOAtoPower_Vienna;
