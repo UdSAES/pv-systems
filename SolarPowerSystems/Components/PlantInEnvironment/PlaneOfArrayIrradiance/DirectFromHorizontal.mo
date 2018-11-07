@@ -37,12 +37,12 @@ equation
      directInclinedIrradiance = max(0, c); // equation c is now considered safe to use
    end if;
 
-  // // this should be more correct theoretically, but the implementation above fits the observer behaviour better
+  // // this should be more correct theoretically, but the implementation above fits the observed behaviour better
   // if (solarHeight <= 0) then
   //   directInclinedIrradiance = 0;
   // elseif (abs(sin(solarHeight)) < threshold) and (solarHeight > 0) then
   //   directInclinedIrradiance = max(0, b*(1 - f) + c*(f)); // "slide" from one equation to the other
   // else
-  //   directInclinedIrradiance = max(0, c); // equation c is now safe to use
+  //   directInclinedIrradiance = max(0, c); // equation c is now considered safe to use
   // end if;
 end DirectFromHorizontal;
