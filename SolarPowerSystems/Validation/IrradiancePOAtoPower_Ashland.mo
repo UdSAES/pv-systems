@@ -7,15 +7,16 @@ model IrradiancePOAtoPower_Ashland
     longitude=location.longitude,
     elevation=location.elevation,
     panelArea=plantRecord.panelArea,
-    plantEfficiency=plantRecord.plantEfficiency,
     arrayTilt=Modelica.SIunits.Conversions.from_deg(plantRecord.panelTilt),
     arrayAzimuth=Modelica.SIunits.Conversions.from_deg(plantRecord.panelAzimuth),
     constTemperature(displayUnit="K") = 287.7,
-    epochOffset=epochOffset.k,
+    epochOffset=startTime.k,
     useTemperatureInput=true,
     useWindSpeedInput=true,
     T_cell_ref=plantRecord.T_cell_ref,
-    albedo=plantRecord.environmentAlbedo)      annotation (Placement(transformation(extent={{-10,30},{10,50}})));
+    albedo=plantRecord.environmentAlbedo,
+    plantEfficiency=plantRecord.plantEfficiency)
+                                          annotation (Placement(transformation(extent={{-10,30},{10,50}})));
   Records.Data.Location_Ashland                     location
     annotation (Placement(transformation(extent={{-90,72},{-70,92}})), choicesAllMatching=true);
 
@@ -23,9 +24,10 @@ model IrradiancePOAtoPower_Ashland
     annotation (Placement(transformation(extent={{-50,72},{-30,92}})), __Dymola_choicesAllMatching=true);
   Modelica.Blocks.Continuous.Integrator totalEnergyMeasuredDC(k=3.6e-6, y(unit="kW.h"))
     annotation (Placement(transformation(extent={{14,-72},{26,-60}})));
-  Modelica.Blocks.Sources.IntegerConstant epochOffset(k=1540191600)
+  Modelica.Blocks.Sources.IntegerConstant startTime(k=972198000)
     annotation (Placement(transformation(extent={{-10,70},{10,90}})));
-  Utilities.MeasurementDataAshland measurementDataAshland(epochOffset=epochOffset.k)
+  Utilities.MeasurementDataAshland measurementDataAshland(epochOffset=startTime.k, fileName=
+        ModelicaServices.ExternalReferences.loadResource("modelica://SolarPowerSystems/Resources/200010_ashland.txt"))
     annotation (Placement(transformation(extent={{-88,-10},{-68,10}})));
   Modelica.Blocks.Sources.Constant diffuseHorizontalIrradiance(k=0)
     annotation (Placement(transformation(extent={{-88,34},{-70,52}})));
@@ -35,7 +37,7 @@ model IrradiancePOAtoPower_Ashland
 //     annotation (Placement(transformation(extent={{50,-16},{70,-36}})));
   Interfaces.ValidationData validationData annotation (Placement(transformation(extent={{-56,-6},{-44,6}})));
   Components.SolarPowerPlants.None_PhotoVoltaicsLib None_PhotoVoltaicsLib(
-    epochOffset=epochOffset.k,
+    epochOffset=startTime.k,
     useTemperatureInput=true,
     latitude=location.latitude,
     longitude=location.longitude,
@@ -45,8 +47,10 @@ model IrradiancePOAtoPower_Ashland
     arrayAzimuth=Modelica.SIunits.Conversions.from_deg(plantRecord.panelAzimuth),
     redeclare Records.Data.Module_ASE300DGF50_270W moduleData,
     nsModule=plantRecord.nsModule,
-    npModule=plantRecord.npModule)
-    annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+    npModule=plantRecord.npModule) annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+  Modelica.Blocks.Math.Feedback feedback annotation (Placement(transformation(extent={{46,38},{66,58}})));
+  Modelica.Blocks.Interfaces.RealOutput residual "Simulated value minus measured value"
+    annotation (Placement(transformation(extent={{90,38},{110,58}})));
 equation
   connect(diffuseHorizontalIrradiance.y, None_Danny.diffuseHorizontalIrradiance)
     annotation (Line(points={{-69.1,43},{-10,43}}, color={0,0,127}));
@@ -88,6 +92,16 @@ equation
       points={{-49.97,0.03},{-49.97,-66},{12.8,-66}},
       color={255,204,51},
       thickness=0.5));
+  connect(None_Danny.powerDC, feedback.u1) annotation (Line(points={{10,48},{48,48}}, color={0,0,127}));
+  connect(validationData.powerDC, feedback.u2) annotation (Line(
+      points={{-49.97,0.03},{-49.97,20},{56,20},{56,40}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(feedback.y, residual) annotation (Line(points={{65,48},{100,48}}, color={0,0,127}));
   annotation (experiment(
       StartTime=18000,
       StopTime=176400,
