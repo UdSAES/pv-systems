@@ -47,17 +47,18 @@ model TGM_Trina_20160629
     annotation (Placement(transformation(extent={{-10,70},{10,90}})));
 equation
   connect(inputData.y[1], None_Danny.directHorizontalIrradiance)
-    annotation (Line(points={{-69,40},{-10,40}}, color={0,0,127}));
+    annotation (Line(points={{-69,40},{-40,40},{-40,42},{-10,42}},
+                                                 color={0,0,127}));
   connect(None_Danny.powerDC, absoluteErrorPowerDC.u1)
     annotation (Line(points={{10,42},{28,42}},                 color={0,0,127}));
   connect(inputData.y[5], absoluteErrorPowerDC.u2)
     annotation (Line(points={{-69,40},{-60,40},{-60,20},{20,20},{20,30},{28,30}}, color={0,0,127}));
   connect(diffuseHorizontalIrradiance.y, None_Danny.diffuseHorizontalIrradiance)
-    annotation (Line(points={{-69,0},{-56,0},{-56,36},{-10,36}}, color={0,0,127}));
+    annotation (Line(points={{-69,0},{-56,0},{-56,37},{-10,37}}, color={0,0,127}));
   connect(inputData.y[1], None_PhotoVoltaicsLib.directHorizontalIrradiance)
-    annotation (Line(points={{-69,40},{-60,40},{-60,-34},{-10,-34}}, color={0,0,127}));
+    annotation (Line(points={{-69,40},{-60,40},{-60,-32},{-10,-32}}, color={0,0,127}));
   connect(diffuseHorizontalIrradiance.y, None_PhotoVoltaicsLib.diffuseHorizontalIrradiance)
-    annotation (Line(points={{-69,0},{-56,0},{-56,-38},{-10,-38}}, color={0,0,127}));
+    annotation (Line(points={{-69,0},{-56,0},{-56,-37},{-10,-37}}, color={0,0,127}));
   connect(inputData.y[5], totalEnergyMeasuredDC.u)
     annotation (Line(points={{-69,40},{-60,40},{-60,-80},{-12,-80}}, color={0,0,127}));
   annotation (experiment(StopTime=86400, Interval=60),Diagram(graphics={Text(

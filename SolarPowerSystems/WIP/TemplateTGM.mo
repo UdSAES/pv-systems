@@ -33,8 +33,9 @@ model TemplateTGM
     annotation (Placement(transformation(extent={{-50,72},{-30,92}})), __Dymola_choicesAllMatching=true);
 equation
   connect(diffuseHorizontalIrradiance.y, solarPowerPlantAreaBased.diffuseHorizontalIrradiance)
-    annotation (Line(points={{-69,-30},{-40,-30},{-40,2},{-10,2}}, color={0,0,127}));
+    annotation (Line(points={{-69,-30},{-40,-30},{-40,3},{-10,3}}, color={0,0,127}));
   connect(inputData.y[1], solarPowerPlantAreaBased.directHorizontalIrradiance)
-    annotation (Line(points={{-69,6},{-10,6}}, color={0,0,127}));
+    annotation (Line(points={{-69,6},{-40,6},{-40,8},{-10,8}},
+                                               color={0,0,127}));
   annotation (experiment(StopTime=86400, Interval=1));
 end TemplateTGM;
