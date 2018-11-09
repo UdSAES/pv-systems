@@ -15,7 +15,7 @@ model IrradiancePOAtoPower_Vienna
     albedo=plantRecord.environmentAlbedo,
     useTemperatureInput=false,
     useWindSpeedInput=false,
-    constTemperature(displayUnit="degC"))
+    constTemperature(displayUnit="degC") = 298.15)
     annotation (Placement(transformation(extent={{-10,30},{10,50}})));
 
   Records.Data.Location_TGMVienna                   location
