@@ -23,7 +23,7 @@ model IrradiancePOAtoPower_Ashland
   Records.Data.PVplant_Ashland_15kW                plantRecord
     annotation (Placement(transformation(extent={{-50,72},{-30,92}})), __Dymola_choicesAllMatching=true);
   Modelica.Blocks.Continuous.Integrator totalEnergyMeasuredDC(k=3.6e-6, y(unit="kW.h"))
-    annotation (Placement(transformation(extent={{14,-72},{26,-60}})));
+    annotation (Placement(transformation(extent={{-6,-6},{6,6}})));
   Modelica.Blocks.Sources.IntegerConstant startTime(k=972198000)
     annotation (Placement(transformation(extent={{-10,70},{10,90}})));
   Utilities.MeasurementDataAshland measurementDataAshland(epochOffset=startTime.k, fileName=
@@ -31,10 +31,6 @@ model IrradiancePOAtoPower_Ashland
     annotation (Placement(transformation(extent={{-88,-10},{-68,10}})));
   Modelica.Blocks.Sources.Constant diffuseHorizontalIrradiance(k=0)
     annotation (Placement(transformation(extent={{-88,34},{-70,52}})));
-//   Utilities.errorMetrics errorMetricsEnergy(f=1/(60*5))
-//     annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
-//   Utilities.errorMetrics errorMetricsPower(f=1/(60*5))
-//     annotation (Placement(transformation(extent={{50,-16},{70,-36}})));
   Interfaces.ValidationData validationData annotation (Placement(transformation(extent={{-56,-6},{-44,6}})));
   Components.SolarPowerPlants.None_PhotoVoltaicsLib None_PhotoVoltaicsLib(
     epochOffset=startTime.k,
@@ -48,14 +44,19 @@ model IrradiancePOAtoPower_Ashland
     redeclare Records.Data.Module_ASE300DGF50_270W moduleData,
     nsModule=plantRecord.nsModule,
     npModule=plantRecord.npModule) annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-  Modelica.Blocks.Math.Feedback feedback annotation (Placement(transformation(extent={{46,38},{66,58}})));
-  Modelica.Blocks.Interfaces.RealOutput residual "Simulated value minus measured value"
-    annotation (Placement(transformation(extent={{90,38},{110,58}})));
+  Utilities.ErrorMetrics errorMetricsAreaBased(
+    f=1/(5*60),
+    x0=0,
+    residual(y(unit="W", displayUnit="kW"))) "Error metrics for area-based plant model"
+    annotation (Placement(transformation(extent={{48,10},{68,30}})));
+  Utilities.ErrorMetrics errorMetricsDiodeBased(
+    f=1/(5*60),
+    x0=0,
+    residual(y(unit="W", displayUnit="kW"))) "Error metrics for plant model implementing diode equation"
+    annotation (Placement(transformation(extent={{48,-10},{68,-30}})));
 equation
   connect(diffuseHorizontalIrradiance.y, None_Danny.diffuseHorizontalIrradiance)
     annotation (Line(points={{-69.1,43},{-10,43}}, color={0,0,127}));
-//   connect(totalEnergyMeasuredDC.y, errorMetricsEnergy.measuredValue)
-//     annotation (Line(points={{26.6,-66},{50,-66}},                 color={0,0,127}));
   connect(measurementDataAshland.validationData, validationData)
     annotation (Line(
       points={{-68,0},{-50,0}},
@@ -89,19 +90,29 @@ equation
       thickness=0.5));
   connect(validationData.powerDC, totalEnergyMeasuredDC.u)
     annotation (Line(
-      points={{-49.97,0.03},{-49.97,-66},{12.8,-66}},
+      points={{-49.97,0.03},{-49.97,0},{-7.2,0}},
       color={255,204,51},
       thickness=0.5));
-  connect(None_Danny.powerDC, feedback.u1) annotation (Line(points={{10,48},{48,48}}, color={0,0,127}));
-  connect(validationData.powerDC, feedback.u2) annotation (Line(
-      points={{-49.97,0.03},{-49.97,20},{56,20},{56,40}},
+  connect(None_Danny.powerDC, errorMetricsAreaBased.simulatedValue)
+    annotation (Line(points={{10,48},{30,48},{30,26},{48,26}}, color={0,0,127}));
+  connect(None_PhotoVoltaicsLib.powerDC, errorMetricsDiodeBased.simulatedValue)
+    annotation (Line(points={{10,-32},{30,-32},{30,-26},{48,-26}}, color={0,0,127}));
+  connect(validationData.powerDC, errorMetricsAreaBased.measuredValue) annotation (Line(
+      points={{-49.97,0.03},{-49.97,14},{48,14}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
-      extent={{-3,-6},{-3,-6}},
+      extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(feedback.y, residual) annotation (Line(points={{65,48},{100,48}}, color={0,0,127}));
+  connect(validationData.powerDC, errorMetricsDiodeBased.measuredValue) annotation (Line(
+      points={{-49.97,0.03},{-49.97,-14},{48,-14},{48,-14}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (experiment(
       StartTime=18000,
       StopTime=176400,
