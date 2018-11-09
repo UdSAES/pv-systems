@@ -43,8 +43,10 @@ model HorizontalToInclined
     k2=1,
     k3=1) "Global irradiance normal to panel surface" annotation (Placement(transformation(extent={{32,-48},{48,-32}})));
   Modelica.Blocks.Sources.Constant c1(k=Modelica.SIunits.Conversions.from_deg(15))
+    "Array tilt angle in rad"
     annotation (Placement(transformation(extent={{-92,-58},{-72,-38}})));
   Modelica.Blocks.Sources.Constant c2(k=Modelica.SIunits.Conversions.from_deg(0))
+    "Array azimuth angle in rad"
     annotation (Placement(transformation(extent={{-92,-90},{-72,-70}})));
 
   Real errorGlobalIrradiancePOAIsotropic "Measured irradiance in POA compared to calculated one, positive if prediction is larger";

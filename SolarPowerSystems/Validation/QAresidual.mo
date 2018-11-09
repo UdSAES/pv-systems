@@ -26,5 +26,9 @@ equation
   annotation (experiment(
       StartTime=18000,
       StopTime=75600,
-      __Dymola_NumberOfIntervals=5000), __Dymola_Commands(file="Scripts/plot_Validation_QAresidual.mos" "plotResult"));
+      __Dymola_NumberOfIntervals=5000), __Dymola_Commands(file="Scripts/plot_Validation_QAresidual.mos" "plotResult"),
+    Diagram(graphics={Text(
+          extent={{4,86},{96,80}},
+          lineColor={28,108,200},
+          textString="Equations implemented on text layer only")}));
 end QAresidual;
