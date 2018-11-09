@@ -8,10 +8,8 @@ model ErrorMetrics "Block for calculating (n)MAE and (n)RMSE"
   Modelica.Blocks.Math.RectifiedMean meanAbsoluteError(f=f, x0=x0) annotation (Placement(transformation(extent={{30,50},{50,70}})));
   Modelica.Blocks.Math.RootMeanSquare rootMeanSquareError(f=f, x0=x0)
     annotation (Placement(transformation(extent={{28,-30},{48,-10}})));
-  Modelica.Blocks.Math.Variance variance annotation (Placement(transformation(extent={{-18,38},{-2,54}})));
-  Modelica.Blocks.Math.StandardDeviation standardDeviation
-    annotation (Placement(transformation(extent={{-18,18},{-2,34}})));
-  Modelica.Blocks.Math.Feedback absoluteError annotation (Placement(transformation(extent={{-70,50},{-50,70}})));
+  Modelica.Blocks.Math.Feedback residual "Absolute error (positive if simulated value > measured value)"
+    annotation (Placement(transformation(extent={{-70,50},{-50,70}})));
   Modelica.Blocks.Interfaces.RealInput simulatedValue
     annotation (Placement(transformation(extent={{-120,40},{-80,80}})));
   Modelica.Blocks.Interfaces.RealInput measuredValue
@@ -29,16 +27,12 @@ model ErrorMetrics "Block for calculating (n)MAE and (n)RMSE"
 //   Modelica.Blocks.Interfaces.RealOutput nRMSE annotation (Placement(transformation(extent={{90,-70},{110,-50}})));
 
 equation
-  connect(absoluteError.u1, simulatedValue) annotation (Line(points={{-68,60},{-100,60}}, color={0,0,127}));
-  connect(measuredValue, absoluteError.u2) annotation (Line(points={{-100,-60},{-60,-60},{-60,52}}, color={0,0,127}));
-  connect(absoluteError.y, meanAbsoluteError.u) annotation (Line(points={{-51,60},{28,60}}, color={0,0,127}));
-  connect(absoluteError.y, variance.u)
-    annotation (Line(points={{-51,60},{-40,60},{-40,46},{-19.6,46}}, color={0,0,127}));
-  connect(absoluteError.y, standardDeviation.u)
-    annotation (Line(points={{-51,60},{-40,60},{-40,26},{-19.6,26}}, color={0,0,127}));
+  connect(residual.u1, simulatedValue) annotation (Line(points={{-68,60},{-100,60}}, color={0,0,127}));
+  connect(measuredValue, residual.u2) annotation (Line(points={{-100,-60},{-60,-60},{-60,52}}, color={0,0,127}));
+  connect(residual.y, meanAbsoluteError.u) annotation (Line(points={{-51,60},{28,60}}, color={0,0,127}));
   connect(meanAbsoluteError.y, MAE) annotation (Line(points={{51,60},{100,60}}, color={0,0,127}));
   connect(rootMeanSquareError.y, RMSE) annotation (Line(points={{49,-20},{100,-20}}, color={0,0,127}));
-  connect(absoluteError.y, rootMeanSquareError.u)
+  connect(residual.y, rootMeanSquareError.u)
     annotation (Line(points={{-51,60},{20,60},{20,-20},{26,-20}}, color={0,0,127}));
 
 //   connect(meanAbsoluteError.y, normalizedMAE.u1)
