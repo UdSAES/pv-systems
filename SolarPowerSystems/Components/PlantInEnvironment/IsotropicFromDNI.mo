@@ -1,6 +1,5 @@
-within SolarPowerSystems.WIP;
-model IsotropicFromNormal
-  "Transform horizontal irradiance to normal of arbitrarily oriented surface using the `Buildings`-library"
+within SolarPowerSystems.Components.PlantInEnvironment;
+model IsotropicFromDNI "Transform DNI and DHI to normal of arbitrarily oriented surface using the `Buildings`-library"
   extends SolarPowerSystems.Interfaces.PlantInEnvironment;
   Buildings.BoundaryConditions.SolarIrradiation.BaseClasses.DiffuseIsotropic
     diffuse(               rho=0.2, til=arrayTilt)
@@ -43,4 +42,4 @@ equation
     annotation (Line(points={{30,-40},{-100,-40}}, color={0,0,127}));
   connect(angleOfIncidenceAsBlock.angleOfIncidence, direct.incAng)
     annotation (Line(points={{30,-40},{20,-40},{20,20},{54,20},{54,12}}, color={0,0,127}));
-end IsotropicFromNormal;
+end IsotropicFromDNI;

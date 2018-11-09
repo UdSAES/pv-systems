@@ -2,7 +2,7 @@ within SolarPowerSystems.Validation;
 model HorizontalToInclined
   "Model for testing the transformation of irradiance on a horizontal plane to an arbitrarily oriented one"
   extends Modelica.Icons.Example;
-  WIP.IsotropicFromNormal isotropicFromNormal(arrayTilt=c1.k, arrayAzimuth=c2.k)
+  Components.PlantInEnvironment.IsotropicFromDNI isotropicFromDNI(arrayTilt=c1.k, arrayAzimuth=c2.k)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -60,16 +60,15 @@ equation
   errorGlobalIrradiancePOAIsotropicFromNormal =globalIrradiancePOAIsotropicFromNormal.y - measurementDataAshland.validationData.globalIrradiancePOA;
   errorGlobalIrradiancePOAPerez =globalIrradiancePOAPerez.y - measurementDataAshland.validationData.globalIrradiancePOA;
 
-  connect(solarAzimuth.y, isotropicFromNormal.solarAzimuth)
-    annotation (Line(points={{-39,78.2},{6,78.2},{6,50}},  color={0,0,127}));
-  connect(solarZenith.y, isotropicFromNormal.solarZenith)
-    annotation (Line(points={{-39,56.2},{2,56.2},{2,50}},  color={0,0,127}));
-  connect(isotropicFromNormal.directInclinedIrradiance, globalIrradiancePOAIsotropicFromNormal.u1)
+  connect(solarAzimuth.y, isotropicFromDNI.solarAzimuth)
+    annotation (Line(points={{-39,78.2},{6,78.2},{6,50}}, color={0,0,127}));
+  connect(solarZenith.y, isotropicFromDNI.solarZenith)
+    annotation (Line(points={{-39,56.2},{2,56.2},{2,50}}, color={0,0,127}));
+  connect(isotropicFromDNI.directInclinedIrradiance, globalIrradiancePOAIsotropicFromNormal.u1)
     annotation (Line(points={{10,46},{30,46},{30,46.4},{30.4,46.4}}, color={0,0,127}));
-  connect(isotropicFromNormal.reflectedInclinedIrradiance, globalIrradiancePOAIsotropicFromNormal.u3)
-    annotation (Line(points={{10,34},{30,34},{30,33.6},{30.4,33.6}},
-                                                                 color={0,0,127}));
-  connect(isotropicFromNormal.diffuseInclinedIrradiance, globalIrradiancePOAIsotropicFromNormal.u2)
+  connect(isotropicFromDNI.reflectedInclinedIrradiance, globalIrradiancePOAIsotropicFromNormal.u3)
+    annotation (Line(points={{10,34},{30,34},{30,33.6},{30.4,33.6}}, color={0,0,127}));
+  connect(isotropicFromDNI.diffuseInclinedIrradiance, globalIrradiancePOAIsotropicFromNormal.u2)
     annotation (Line(points={{10,40},{30.4,40}}, color={0,0,127}));
   connect(measurementDataAshland.validationData, validationData)
     annotation (Line(
@@ -96,7 +95,7 @@ equation
     annotation (Line(points={{-39,56.2},{60,56.2},{60,22},{2,22},{2,10}}, color={0,0,127}));
   connect(solarZenith.y, perez.solarZenith)
     annotation (Line(points={{-39,56.2},{60,56.2},{60,-18},{2,-18},{2,-30}}, color={0,0,127}));
-  connect(validationData.diffuseHorizontalIrradiance, isotropicFromNormal.diffuseHorizontalIrradiance)
+  connect(validationData.diffuseHorizontalIrradiance, isotropicFromDNI.diffuseHorizontalIrradiance)
     annotation (Line(
       points={{-29.97,0.03},{-29.97,40},{-10,40}},
       color={255,204,51},
@@ -119,11 +118,11 @@ equation
       points={{-29.97,0.03},{-29.97,-40},{-10,-40}},
       color={255,204,51},
       thickness=0.5));
-  connect(validationData.directNormalIrradiance, isotropicFromNormal.directNormalIrradiance) annotation (Line(
+  connect(validationData.directNormalIrradiance, isotropicFromDNI.directNormalIrradiance) annotation (Line(
       points={{-29.97,0.03},{-29.97,54},{-4,54},{-4,50}},
       color={255,204,51},
       thickness=0.5));
-  connect(validationData.directHorizontalIrradiance, isotropicFromNormal.directHorizontalIrradiance)
+  connect(validationData.directHorizontalIrradiance, isotropicFromDNI.directHorizontalIrradiance)
     annotation (Line(
       points={{-29.97,0.03},{-29.97,46},{-10,46}},
       color={255,204,51},
