@@ -1,4 +1,4 @@
-within SolarPowerSystems.WIP.Validation;
+within SolarPowerSystems.WIP.Obsolete.Validation;
 model TGM_Trina_20160629_None_Danny
   extends Modelica.Icons.Example;
   Components.SolarPowerPlants.None_Danny None_Danny(

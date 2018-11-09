@@ -1,4 +1,4 @@
-within SolarPowerSystems.WIP;
+within SolarPowerSystems.WIP.Obsolete;
 model TemplateTGM
   "Template for quickly setting up an experiment for validation using the choicesAllMatching-mechanism and the data provided by TGM"
   extends Modelica.Icons.Example;

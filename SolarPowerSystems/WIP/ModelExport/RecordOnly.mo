@@ -1,7 +1,7 @@
 within SolarPowerSystems.WIP.ModelExport;
 model RecordOnly "Horizontal irradiance to power using the model of Perez and the modified model of Danny"
-  extends Interfaces.PhotoVoltaicPowerPlant(redeclare Components.PlantInEnvironment.Perez inclinationAndShadowing(arrayTilt
-        =arrayTilt, arrayAzimuth=arrayAzimuth),
+  extends Interfaces.PhotoVoltaicPowerPlant(redeclare Components.PlantInEnvironment.Perez inclinationAndShadowing(arrayTilt=
+         arrayTilt, arrayAzimuth=arrayAzimuth),
                           redeclare Components.PhotoVoltaicArray.AreaBased.Danny plantIrradianceNormal(
       useHeatPort=true,
       A_PV=panelArea,

@@ -1,4 +1,4 @@
-within SolarPowerSystems.WIP.Validation;
+within SolarPowerSystems.WIP.Obsolete.Validation;
 model UO_SRML_Ashland2_201810_Danny
   "A 15kW-peak PV array installed in Ashland, OR; data provided by UO, SRML; comparison of area-based models w/wo environment model"
   extends Modelica.Icons.Example;

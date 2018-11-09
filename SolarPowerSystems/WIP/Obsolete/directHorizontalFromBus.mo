@@ -1,4 +1,4 @@
-within SolarPowerSystems.WIP;
+within SolarPowerSystems.WIP.Obsolete;
 model directHorizontalFromBus
   Interfaces.ValidationData validationData annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
   Modelica.Blocks.Routing.RealPassThrough realPassThrough

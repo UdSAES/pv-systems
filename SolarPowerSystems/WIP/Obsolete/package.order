@@ -1,4 +1,5 @@
 Functions
+Validation
 Simple
 AreaBasedLukas
 TGM_Trina_20160629
@@ -7,3 +8,5 @@ SolarArrayFromNormalIrradiance
 ModuleBased
 HorizontalToInclinedDirect
 MeasurementDataAshland
+TemplateTGM
+directHorizontalFromBus

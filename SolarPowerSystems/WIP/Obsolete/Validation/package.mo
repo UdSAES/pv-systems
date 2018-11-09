@@ -1,3 +1,3 @@
-within SolarPowerSystems.WIP;
+within SolarPowerSystems.WIP.Obsolete;
 package Validation "Validation, WIP"
 end Validation;

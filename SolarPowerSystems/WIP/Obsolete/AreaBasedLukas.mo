@@ -1,7 +1,8 @@
 within SolarPowerSystems.WIP.Obsolete;
 model AreaBasedLukas
   "Model of a solar power plant that computes the expected power output as a function of the direct and diffuse irradiance on the horizontal plane based on the area and orientation of the plant"
-  extends Interfaces.PhotoVoltaicPowerPlant(redeclare IsotropicFromNormal inclinationAndShadowing,
+  extends Interfaces.PhotoVoltaicPowerPlant(redeclare Components.PlantInEnvironment.IsotropicFromDNI
+      inclinationAndShadowing,
                           redeclare Components.PhotoVoltaicArray.AreaBased.Lukas plantIrradianceNormal(
       panel_area=panelArea,
       overall_efficiency=plantEfficiency,
