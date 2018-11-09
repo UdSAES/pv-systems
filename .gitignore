@@ -1,2 +1,5 @@
 # Ignore temporary files
-bak-mo
+*.bak-mo
+
+# Ignore reference data for model checking
+**/ReferenceData/
