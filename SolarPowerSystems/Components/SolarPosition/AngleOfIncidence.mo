@@ -23,6 +23,8 @@ block AngleOfIncidence "SI2SO block that calculates the angle between sun beam a
         origin={0,-100})));
   Modelica.SIunits.Angle arrayAzimuthSolarCS "Array azimuth in the same coordinate system as the sun's position";
   Modelica.SIunits.Angle solarHeight = Modelica.SIunits.Conversions.from_deg(90 - solarZenith) "Height of the sun";
+protected
+  Modelica.SIunits.Angle angleOfIncidenceFullCircle;
 
 equation
     arrayAzimuthSolarCS = arrayAzimuth + Modelica.Constants.pi;
@@ -38,7 +40,18 @@ equation
 //                                 - cos(solarHeight)*sin(arrayTilt)
 //                                 * cos(Modelica.SIunits.Conversions.from_deg(solarAzimuth) - arrayAzimuthSolarCS));
 
-    angleOfIncidence = acos( cos( Modelica.SIunits.Conversions.from_deg(solarZenith))*cos(arrayTilt)
+    angleOfIncidenceFullCircle = acos( cos( Modelica.SIunits.Conversions.from_deg(solarZenith))*cos(arrayTilt)
                                 + sin( Modelica.SIunits.Conversions.from_deg(solarZenith))*sin(arrayTilt)
                                 * cos(Modelica.SIunits.Conversions.from_deg(solarAzimuth) - arrayAzimuthSolarCS));
+
+    if (angleOfIncidenceFullCircle > -2*Modelica.Constants.pi and angleOfIncidenceFullCircle < -3*Modelica.Constants.pi/2) then
+      angleOfIncidence = angleOfIncidenceFullCircle + 2*Modelica.Constants.pi;
+    elseif (angleOfIncidenceFullCircle < 2*Modelica.Constants.pi and angleOfIncidenceFullCircle > 3*Modelica.Constants.pi/2) then
+      angleOfIncidence = angleOfIncidenceFullCircle - 2*Modelica.Constants.pi;
+    elseif (angleOfIncidenceFullCircle < Modelica.Constants.pi/2 and angleOfIncidenceFullCircle > -Modelica.Constants.pi/2) then
+      angleOfIncidence = angleOfIncidenceFullCircle;
+    else
+      angleOfIncidence = angleOfIncidenceFullCircle;
+    end if;
+
 end AngleOfIncidence;
