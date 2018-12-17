@@ -8,7 +8,9 @@ model Perez_Danny
       useHeatPort=true,
       A_PV=panelArea,
       eta_ref=plantEfficiency,
-      T_cell_ref=T_cell_ref));
+      T_cell_ref=T_cell_ref),
+    solarAzimuth(simu_start_epochs=epochOffset),
+    solarZenith(simu_start_epochs=epochOffset));
 
   parameter Modelica.SIunits.Area panelArea "Overall surface area of all panels (combined)" annotation(Dialog(group="PV Plant"));
   parameter Modelica.SIunits.Efficiency plantEfficiency = 0.2 "Overall plant efficiency" annotation(Dialog(group="PV Plant"));
