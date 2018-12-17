@@ -4,8 +4,9 @@ model PhysicalIAM "Unit test for physical IAM model"
   Modelica.Blocks.Sources.Ramp ramp(
     duration=90,
     startTime=0,
-    offset=10,
-    height=85) annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+    height=360,
+    offset=-180)
+               annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Modelica.Blocks.Math.UnitConversions.From_deg from_deg
     annotation (Placement(transformation(extent={{-46,-6},{-34,6}})));
   SolarPowerSystems.Components.PhotoVoltaicArray.ReflectionLosses.PhysicalIAMmodel physicalIAMmodel

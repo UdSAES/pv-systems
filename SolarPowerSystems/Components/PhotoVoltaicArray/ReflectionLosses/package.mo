@@ -29,7 +29,13 @@ protected
     angleOfRefraction = asin(1/n * sin(angleOfIncidence));  // Snell's law
     incidenceAngleModifier = max(0, (tauTheta / tauZero));
 
-    tauTheta = exp( (-K*L)/cos(angleOfRefraction))  * k1;
+    // Work around division by 0 for angleOfIncidence == 0
+    if (abs(angleOfIncidence) < Modelica.Constants.eps) then
+      tauTheta = tauZero;
+    else
+      tauTheta = exp( (-K*L)/cos(angleOfRefraction))  * k1;
+    end if;
+
     k1 =( 1 - 0.5*(( sin(a1)^2)/(sin(a2)^2) + (tan(a1)^2)/(tan(a2)^2)));
 
     tauZero = exp(-K*L) * k2;
