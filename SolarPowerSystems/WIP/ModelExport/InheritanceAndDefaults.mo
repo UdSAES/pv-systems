@@ -2,7 +2,7 @@ within SolarPowerSystems.WIP.ModelExport;
 model InheritanceAndDefaults
   "Horizontal irradiance to power using the model of Perez and the modified model of Danny"
   extends Components.SolarPowerPlants.Perez_Danny(
-  epochOffset = 1542326400,
+  epochOffset = 1542412800,
   useTemperatureInput = true,
   latitude = 49.2553,
   longitude = 7.0405,
