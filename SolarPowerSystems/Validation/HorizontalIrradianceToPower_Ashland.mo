@@ -83,5 +83,7 @@ equation
       StopTime=176400,
       Interval=300),      __Dymola_Commands(file=
           "Scripts/plot_Validation_HorizontalIrradianceToPower_Ashland.mos"
-        "plotResult"));
+        "plotResult", file=
+          "Scripts/plot_Validation_HorizontalIrradianceToPower_Ashland_OverviewUsingDesignetzColours.mos"
+        "plotOverviewUsingDesignetzColours"));
 end HorizontalIrradianceToPower_Ashland;
