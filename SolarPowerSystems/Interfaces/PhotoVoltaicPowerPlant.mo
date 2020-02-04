@@ -92,6 +92,12 @@ partial model PhotoVoltaicPowerPlant
         rotation=0,
         origin={-100,-30})));
 
+  Modelica.Blocks.Math.Max max
+    annotation (Placement(transformation(extent={{-64,36},{-56,44}})));
+  Modelica.Blocks.Math.Max max1
+    annotation (Placement(transformation(extent={{-64,-4},{-56,4}})));
+  Modelica.Blocks.Sources.Constant const(k=0)
+    annotation (Placement(transformation(extent={{-56,16},{-64,24}})));
 protected
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalHeatPort
     annotation (Placement(transformation(extent={{-44,-84},{-36,-76}})));
@@ -106,10 +112,6 @@ equation
          {0,0,127}));
   connect(globalIrradiance.y, plantIrradianceNormal.I_G_normal)
     annotation (Line(points={{8.8,0},{22,0}}, color={0,0,127}));
-  connect(diffuseHorizontalIrradiance, inclinationAndShadowing.diffuseHorizontalIrradiance)
-    annotation (Line(points={{-100,30},{-72,30},{-72,4.44089e-16},{-42,4.44089e-16}}, color={0,0,127}));
-  connect(directHorizontalIrradiance, inclinationAndShadowing.directHorizontalIrradiance)
-    annotation (Line(points={{-100,80},{-70,80},{-70,6},{-42,6}}, color={0,0,127}));
   connect(solarAzimuth.y,inclinationAndShadowing.solarAzimuth)  annotation (
       Line(points={{-39,82.2},{-26,82.2},{-26,10}},        color={0,0,127}));
   connect(solarZenith.y,inclinationAndShadowing.solarZenith)  annotation (Line(
@@ -134,6 +136,19 @@ equation
   connect(windSpeed, plantIrradianceNormal.u) annotation (Line(points={{-100,-30},{29,-30},{29,-10}}, color={0,0,127}));
   connect(internalHeatPort, plantIrradianceNormal.heatPort)
     annotation (Line(points={{-40,-80},{42,-80},{42,-10}}, color={191,0,0}));
+  connect(const.y, max.u2) annotation (Line(points={{-64.4,20},{-68,20},{-68,
+          37.6},{-64.8,37.6}}, color={0,0,127}));
+  connect(const.y, max1.u1) annotation (Line(points={{-64.4,20},{-68,20},{-68,
+          2.4},{-64.8,2.4}}, color={0,0,127}));
+  connect(max.y, inclinationAndShadowing.directHorizontalIrradiance)
+    annotation (Line(points={{-55.6,40},{-50,40},{-50,6},{-42,6}}, color={0,0,
+          127}));
+  connect(max1.y, inclinationAndShadowing.diffuseHorizontalIrradiance)
+    annotation (Line(points={{-55.6,0},{-42,0}}, color={0,0,127}));
+  connect(diffuseHorizontalIrradiance, max1.u2) annotation (Line(points={{-100,
+          30},{-72,30},{-72,-2.4},{-64.8,-2.4}}, color={0,0,127}));
+  connect(directHorizontalIrradiance, max.u1) annotation (Line(points={{-100,80},
+          {-68,80},{-68,42.4},{-64.8,42.4}}, color={0,0,127}));
   annotation (Icon(graphics={
                      Rectangle(lineColor = {0, 0, 0}, fillPattern = FillPattern.Solid, extent = {{-76, 76}, {76, -76}}, fillColor = {85, 85, 255}), Line(points = {{-80, 0}, {80, 0}}, color = {255, 255, 255}), Rectangle(extent = {{-84, 84}, {84, -84}}, lineColor = {0, 0, 0}), Polygon(points = {{-84, 76}, {-76, 84}, {-68, 76}, {-76, 68}, {-84, 76}}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                                                                                                                        FillPattern.Solid, pattern = LinePattern.None), Line(points = {{-24, 76}, {-24, -76}}, color = {255, 255, 255}), Polygon(points = {{-8, 76}, {0, 84}, {8, 76}, {0, 68}, {-8, 76}}, fillColor = {255, 255, 255},
