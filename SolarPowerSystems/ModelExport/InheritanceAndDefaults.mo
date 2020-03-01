@@ -1,4 +1,4 @@
-within SolarPowerSystems.WIP.ModelExport;
+within SolarPowerSystems.ModelExport;
 model InheritanceAndDefaults
   "Horizontal irradiance to power using the model of Perez and the modified model of Danny"
   extends Components.SolarPowerPlants.Perez_Danny(
@@ -7,8 +7,10 @@ model InheritanceAndDefaults
   latitude = 49.2553,
   longitude = 7.0405,
   elevation = 273,
-  arrayTilt = Modelica.SIunits.Conversions.from_deg(30),
-  arrayAzimuth = 0,
-  panelArea = 64*216*1/100,
+  arrayTilt = data.panelTilt,
+  arrayAzimuth = data.panelAzimuth,
+  panelArea = data.panelArea,
   T_cell_ref = 25);                                      // angles in rad here!!!
+  ParameterSets.PVplant data
+    annotation (Placement(transformation(extent={{20,74},{40,94}})));
 end InheritanceAndDefaults;

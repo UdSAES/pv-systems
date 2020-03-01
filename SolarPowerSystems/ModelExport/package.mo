@@ -1,4 +1,4 @@
-within SolarPowerSystems.WIP;
+within SolarPowerSystems;
 package ModelExport "Models to be exported as FMU"
   extends Modelica.Icons.Package;
 
