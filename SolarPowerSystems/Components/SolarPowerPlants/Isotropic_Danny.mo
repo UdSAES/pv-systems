@@ -20,7 +20,7 @@ equation
   connect(inclinationAndShadowing.angleOfIncidence, plantIrradianceNormal.angleOfIncidence)
     annotation (Line(points={{-28,-10},{-28,-18},{25,-18},{25,-10}}, color={0,0,127}));
   connect(fixedWindSpeed.y, plantIrradianceNormal.u)
-    annotation (Line(points={{-55.6,-40},{29,-40},{29,-10}}, color={0,0,127}));
+    annotation (Line(points={{-55,6,-40},{29,-40},{29,-10}}, color={0,0,127}));
   connect(windSpeed, plantIrradianceNormal.u) annotation (Line(points={{-100,-30},{29,-30},{29,-10}}, color={0,0,127}));
 
 end Isotropic_Danny;

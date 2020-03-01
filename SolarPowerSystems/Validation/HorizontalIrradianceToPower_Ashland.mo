@@ -44,23 +44,23 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(validationData.windSpeed, Perez_Danny.windSpeed) annotation (Line(
-      points={{-49.97,0.03},{-49.97,-3},{-10,-3}},
+      points={{-49,97,0,03},{-49,97,-3},{-10,-3}},
       color={255,204,51},
       thickness=0.5));
   connect(validationData.ambientTemperature, Perez_Danny.temperature)
     annotation (Line(
-      points={{-49.97,0.03},{-49.97,-8},{-10,-8}},
+      points={{-49,97,0,03},{-49,97,-8},{-10,-8}},
       color={255,204,51},
       thickness=0.5));
   connect(validationData.powerDC, totalEnergyMeasuredDC.u)
     annotation (Line(
-      points={{-49.97,0.03},{-49.97,-40},{-7.2,-40}},
+      points={{-49,97,0,03},{-49,97,-40},{-7,2,-40}},
       color={255,204,51},
       thickness=0.5));
   connect(Perez_Danny.powerDC, feedback.u1)
     annotation (Line(points={{10,8},{30,8},{30,0},{42,0}}, color={0,0,127}));
   connect(validationData.powerDC, feedback.u2) annotation (Line(
-      points={{-49.97,0.03},{-49.97,-20},{50,-20},{50,-8}},
+      points={{-49,97,0,03},{-49,97,-20},{50,-20},{50,-8}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -70,12 +70,12 @@ equation
   connect(feedback.y, residual) annotation (Line(points={{59,0},{100,0}},   color={0,0,127}));
   connect(validationData.diffuseHorizontalIrradiance, Perez_Danny.diffuseHorizontalIrradiance)
     annotation (Line(
-      points={{-49.97,0.03},{-50,0.03},{-50,3},{-10,3}},
+      points={{-49,97,0,03},{-50,0,03},{-50,3},{-10,3}},
       color={255,204,51},
       thickness=0.5));
   connect(validationData.directHorizontalIrradiance, Perez_Danny.directHorizontalIrradiance)
     annotation (Line(
-      points={{-49.97,0.03},{-49.97,8},{-10,8}},
+      points={{-49,97,0,03},{-49,97,8},{-10,8}},
       color={255,204,51},
       thickness=0.5));
   annotation (experiment(

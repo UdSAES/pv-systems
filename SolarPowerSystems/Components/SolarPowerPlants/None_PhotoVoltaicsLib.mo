@@ -37,7 +37,8 @@ model None_PhotoVoltaicsLib
     Placement(transformation(extent={{-4,-4},{4,4}},
         rotation=0,
         origin={58,-40})));
-  replaceable parameter PhotoVoltaics.Records.ModuleData moduleData constrainedby PhotoVoltaics.Records.ModuleData
+  replaceable parameter PhotoVoltaics.Records.ModuleData moduleData constrainedby
+    PhotoVoltaics.Records.ModuleData
     annotation (Placement(transformation(extent={{10,72},{30,92}})),                                   Dialog(group="PV Modules"),
     __Dymola_choicesAllMatching=true);
   parameter Integer nsModule=64 "Number of series connected modules" annotation (Dialog(group="PV Plant"));
@@ -57,6 +58,6 @@ equation
   connect(plantIrradianceNormal.nv1, plantIrradianceNormal.n1)
     annotation (Line(points={{42,5},{46,5},{46,-18},{32,-18},{32,-10}}, color={0,0,255}));
   connect(plantIrradianceNormal.P_DC, mpTracker.power)
-    annotation (Line(points={{42,0},{50,0},{50,-40},{53.2,-40}}, color={0,0,127}));
-  connect(mpTracker.vRef, converter.vDCRef) annotation (Line(points={{62.4,-40},{64,-40},{64,-12}}, color={0,0,127}));
+    annotation (Line(points={{42,0},{50,0},{50,-40},{53,2,-40}}, color={0,0,127}));
+  connect(mpTracker.vRef, converter.vDCRef) annotation (Line(points={{62,4,-40},{64,-40},{64,-12}}, color={0,0,127}));
 end None_PhotoVoltaicsLib;

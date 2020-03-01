@@ -2,8 +2,8 @@ within SolarPowerSystems.WIP.Obsolete;
 model SolarArrayFromNormalIrradiance
   "Calculate the electrical output of a (concentrated) solar array as a function of the global irradiance normal to the panel surface"
   extends Modelica.Icons.Example;
-  replaceable parameter Records.Data.Location_UdS location constrainedby Records.Base.Location
-                          annotation (Placement(transformation(extent={{-90,70},
+  replaceable parameter Records.Data.Location_UdS location constrainedby
+    Records.Base.Location annotation (Placement(transformation(extent={{-90,70},
             {-70,90}})), __Dymola_choicesAllMatching=true);
   Modelica.Blocks.Sources.Constant       epochOffset(k=1356998400)
     "The time at the start of the simulation as Epoch in s"

@@ -27,9 +27,11 @@ model TemplateTGM
     annotation (Placement(transformation(extent={{-90,-4},{-70,16}})));
   Modelica.Blocks.Sources.Constant diffuseHorizontalIrradiance(k=0)
     annotation (Placement(transformation(extent={{-90,-40},{-70,-20}})));
-  replaceable Records.Data.Location_TGMVienna location constrainedby Records.Base.Location
+  replaceable Records.Data.Location_TGMVienna location constrainedby
+    Records.Base.Location
     annotation (Placement(transformation(extent={{-90,72},{-70,92}})), __Dymola_choicesAllMatching=true);
-  replaceable Records.Data.PVplant_TGM_Trina plantRecord constrainedby Records.Base.PVplant
+  replaceable Records.Data.PVplant_TGM_Trina plantRecord constrainedby
+    Records.Base.PVplant
     annotation (Placement(transformation(extent={{-50,72},{-30,92}})), __Dymola_choicesAllMatching=true);
 equation
   connect(diffuseHorizontalIrradiance.y, solarPowerPlantAreaBased.diffuseHorizontalIrradiance)
