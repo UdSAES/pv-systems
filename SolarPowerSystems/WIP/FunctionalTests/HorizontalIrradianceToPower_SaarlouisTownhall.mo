@@ -6,16 +6,15 @@ model HorizontalIrradianceToPower_SaarlouisTownhall
 
   Records.Data.Location_SWSLS_TH                    location
     annotation (Placement(transformation(extent={{-90,72},{-70,92}})), choicesAllMatching=true);
-  SolarPowerSystems.ModelExport.ParameterSets.PVplant plantRecord annotation (Placement(
+  Records.Data.PVplant_Saarlouis_TH                   plantRecord annotation (Placement(
         transformation(extent={{-50,72},{-30,92}})), __Dymola_choicesAllMatching=true);
   Modelica.Blocks.Sources.IntegerConstant startTime(k=1550707200)
     annotation (Placement(transformation(extent={{-10,70},{10,90}})));
   Modelica.Blocks.Tables.CombiTable1Ds inputData(
     tableOnFile=true,
     columns=2:4,
-    fileName=
-        "/home/modelica/current_simulation/20190121-24_swsls-th_weather-forecasts.txt",
-    tableName="swslsth")
+    tableName="swslsth",
+    fileName="/home/modelica/current_simulation/data/20190121-24_swsls-th_weather-forecasts.txt")
                  annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
 
   Modelica.Blocks.Sources.Clock timeAsEpoch(offset=startTime.k)
@@ -36,9 +35,8 @@ model HorizontalIrradianceToPower_SaarlouisTownhall
   Modelica.Blocks.Tables.CombiTable1Ds referenceData(
     tableOnFile=true,
     tableName="swsls",
-    fileName=
-        "/home/modelica/current_simulation/20190121-24_swsls-th_pv_systems-data.txt",
-    columns={2})
+    columns={2},
+    fileName="/home/modelica/current_simulation/data/20190121-24_swsls-th_pv_systems-data.txt")
     annotation (Placement(transformation(extent={{-50,-40},{-30,-20}})));
 
   Utilities.ErrorMetrics errorMetrics(f=1/(24*3600))
