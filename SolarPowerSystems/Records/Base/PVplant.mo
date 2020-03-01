@@ -4,6 +4,8 @@ partial record PVplant
   extends Modelica.Icons.Record;
   import SI = Modelica.SIunits;
 
+  parameter String fileName = "noFile" "Filepath to external file storing actual data";
+
   parameter SI.Area panelArea "Overall surface area of all panels (combined)";
   parameter SI.Efficiency plantEfficiency = 0.2 "Overall efficiency";
   parameter SI.Temp_C T_cell_ref "PV cell temperature at reference conditions (usually STC)";
