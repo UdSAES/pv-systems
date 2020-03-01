@@ -4,9 +4,10 @@ model HorizontalIrradianceToPower_SaarlouisTownhall
   import ModelicaServices;
   extends Modelica.Icons.Example;
 
-  Records.Data.Location_SWSLS_TH                    location
+  ModelExport.ParameterSets.Location                location(fileName=SolarPowerSystems.ModelExport.Directory.dataFolder + "Location/" + "swsls-th.txt")
     annotation (Placement(transformation(extent={{-90,72},{-70,92}})), choicesAllMatching=true);
-  Records.Data.PVplant_Saarlouis_TH                   plantRecord annotation (Placement(
+  ModelExport.ParameterSets.PVplant                   plantRecord(fileName=SolarPowerSystems.ModelExport.Directory.dataFolder + "PVplant/" + "swsls-th.txt")
+                                                                  annotation (Placement(
         transformation(extent={{-50,72},{-30,92}})), __Dymola_choicesAllMatching=true);
   Modelica.Blocks.Sources.IntegerConstant startTime(k=1550707200)
     annotation (Placement(transformation(extent={{-10,70},{10,90}})));

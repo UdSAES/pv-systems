@@ -19,7 +19,7 @@ model ParametersFromExternalFile
     arrayAzimuth=Modelica.SIunits.Conversions.from_deg(plantRecord.panelAzimuth),
     epochOffset=epochOffset)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-  ParameterSets.PVplant plantRecord(file=recordPVplant)
+  ParameterSets.PVplant plantRecord(fileName=recordPVplant)
     annotation (Placement(transformation(extent={{-10,72},{10,92}})));
   Modelica.Blocks.Interfaces.RealInput directHorizontalIrradiance
     "Direct irradiance in horizontal plane"
