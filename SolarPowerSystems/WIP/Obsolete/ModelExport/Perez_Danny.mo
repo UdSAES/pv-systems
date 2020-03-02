@@ -1,4 +1,4 @@
-within SolarPowerSystems.WIP.Obsolete;
+within SolarPowerSystems.WIP.Obsolete.ModelExport;
 partial record Perez_Danny "Record containing all parameters needed for Perez_Danny"
   extends Modelica.Icons.Record;
   replaceable Records.Base.Location location constrainedby Records.Base.Location

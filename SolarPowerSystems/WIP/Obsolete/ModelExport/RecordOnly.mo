@@ -1,6 +1,5 @@
-within SolarPowerSystems.WIP.Obsolete;
-model RecordOnly
-  "Horizontal irradiance to power using the model of Perez and the modified model of Danny"
+within SolarPowerSystems.WIP.Obsolete.ModelExport;
+model RecordOnly "Horizontal irradiance to power using the model of Perez and the modified model of Danny"
   extends Interfaces.PhotoVoltaicPowerPlant(redeclare Components.PlantInEnvironment.Perez inclinationAndShadowing(arrayTilt=
          arrayTilt, arrayAzimuth=arrayAzimuth),
                           redeclare Components.PhotoVoltaicArray.AreaBased.Danny plantIrradianceNormal(
@@ -13,8 +12,7 @@ model RecordOnly
   parameter Modelica.SIunits.Efficiency plantEfficiency = 0.2 "Overall plant efficiency" annotation(Dialog(group="PV Plant"));
 
   parameter Modelica.SIunits.Temp_C T_cell_ref "PV cell temperature at reference conditions (usually STC)" annotation(Dialog(group="PV Modules"));
-  replaceable Perez_Danny perez_Danny
-    annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+  replaceable ModelExport.Perez_Danny perez_Danny annotation (Placement(transformation(extent={{-10,70},{10,90}})));
 equation
   connect(internalHeatPort, plantIrradianceNormal.heatPort)
     annotation (Line(points={{-40,-80},{42,-80},{42,-10}}, color={191,0,0}));
