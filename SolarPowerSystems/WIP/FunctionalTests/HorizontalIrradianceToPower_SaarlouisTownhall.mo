@@ -4,18 +4,15 @@ model HorizontalIrradianceToPower_SaarlouisTownhall
   import ModelicaServices;
   extends Modelica.Icons.Example;
 
-  ModelExport.ParameterSets.Location                location(fileName=SolarPowerSystems.ModelExport.Directory.dataFolder + "Location/" + "swsls-th.txt")
-    annotation (Placement(transformation(extent={{-90,72},{-70,92}})), choicesAllMatching=true);
-  ModelExport.ParameterSets.PVplant                   plantRecord(fileName=SolarPowerSystems.ModelExport.Directory.dataFolder + "PVplant/" + "swsls-th.txt")
-                                                                  annotation (Placement(
-        transformation(extent={{-50,72},{-30,92}})), __Dymola_choicesAllMatching=true);
+  ModelExport.ParameterSets.LocationFromMat location(fileName=SolarPowerSystems.ModelExport.Directory.dataFolder + "Location/" + "swsls-th.mat") annotation (Placement(transformation(extent={{-90,72},{-70,92}})), choicesAllMatching=true);
+  ModelExport.ParameterSets.PVplantFromMAT plantRecord(fileName=SolarPowerSystems.ModelExport.Directory.dataFolder + "PVplant/" + "swsls-th.mat") annotation (Placement(transformation(extent={{-50,72},{-30,92}})), __Dymola_choicesAllMatching=true);
   Modelica.Blocks.Sources.IntegerConstant startTime(k=1550707200)
     annotation (Placement(transformation(extent={{-10,70},{10,90}})));
   Modelica.Blocks.Tables.CombiTable1Ds inputData(
     tableOnFile=true,
     columns=2:4,
     tableName="swslsth",
-    fileName="/home/modelica/current_simulation/data/20190121-24_swsls-th_weather-forecasts.txt")
+    fileName="/home/modelica/current_simulation/data/20190221-24_swsls-th_weather-forecasts.txt")
                  annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
 
   Modelica.Blocks.Sources.Clock timeAsEpoch(offset=startTime.k)
@@ -37,7 +34,7 @@ model HorizontalIrradianceToPower_SaarlouisTownhall
     tableOnFile=true,
     tableName="swsls",
     columns={2},
-    fileName="/home/modelica/current_simulation/data/20190121-24_swsls-th_pv_systems-data.txt")
+    fileName="/home/modelica/current_simulation/data/20190221-24_swsls-th_pv_systems-data.txt")
     annotation (Placement(transformation(extent={{-50,-40},{-30,-20}})));
 
   Utilities.ErrorMetrics errorMetrics(f=1/(24*3600))
