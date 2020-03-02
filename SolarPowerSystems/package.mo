@@ -3,5 +3,6 @@ package SolarPowerSystems "A model library of the components used in photovoltai
 annotation (uses(Modelica(version="3.2.2"), ModelicaServices(version="3.2.2"),
     PhotoVoltaics(version="1.X.X"),
     Buildings(version="6.0.0"),
-    PhotoVoltaics_TGM(version="1.X.X")));
+    PhotoVoltaics_TGM(version="1.X.X"),
+    DataFiles(version="1.0.4")));
 end SolarPowerSystems;
