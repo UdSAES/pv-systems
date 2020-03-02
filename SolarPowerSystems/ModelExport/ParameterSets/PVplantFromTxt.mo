@@ -1,6 +1,5 @@
 within SolarPowerSystems.ModelExport.ParameterSets;
-record PVplant
-  "Read parameters for PV system from external file during model initialization"
+record PVplantFromTxt "Read parameters for PV system from external .txt-file during model initialization"
   extends Records.Base.PVplant(
     panelArea=Modelica.Utilities.Examples.readRealParameter(fileName, "panelArea"),
     plantEfficiency=Modelica.Utilities.Examples.readRealParameter(fileName, "plantEfficiency"),
@@ -11,4 +10,4 @@ record PVplant
     nsModule=integer(Modelica.Utilities.Examples.readRealParameter(fileName, "nsModule")),
     npModule=integer(Modelica.Utilities.Examples.readRealParameter(fileName, "npModule")));
 
-end PVplant;
+end PVplantFromTxt;
