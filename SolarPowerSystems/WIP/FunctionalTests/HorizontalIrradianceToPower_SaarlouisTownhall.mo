@@ -11,8 +11,8 @@ model HorizontalIrradianceToPower_SaarlouisTownhall
   Modelica.Blocks.Tables.CombiTable1Ds inputData(
     tableOnFile=true,
     columns=2:4,
-    tableName="swslsth",
-    fileName="/home/modelica/current_simulation/data/20190221-24_swsls-th_weather-forecasts.txt")
+    fileName=SolarPowerSystems.ModelExport.Directory.dataFolder + "20190221-24_swsls-th_weather-forecasts.txt",
+    tableName="data")
                  annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
 
   Modelica.Blocks.Sources.Clock timeAsEpoch(offset=startTime.k)
@@ -32,9 +32,9 @@ model HorizontalIrradianceToPower_SaarlouisTownhall
 
   Modelica.Blocks.Tables.CombiTable1Ds referenceData(
     tableOnFile=true,
-    tableName="swsls",
     columns={2},
-    fileName="/home/modelica/current_simulation/data/20190221-24_swsls-th_pv_systems-data.txt")
+    fileName=SolarPowerSystems.ModelExport.Directory.dataFolder + "20190221-24_swsls-th_pv_systems-data.txt",
+    tableName="data")
     annotation (Placement(transformation(extent={{-50,-40},{-30,-20}})));
 
   Utilities.ErrorMetrics errorMetrics(f=1/(24*3600))

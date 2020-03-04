@@ -1,5 +1,5 @@
 #1
-double swslsth(384,4)
+double data(384,4)
 #epoch	irr_diffuse	irr_direct	temp_air
 1550707200	0.0	0.0	279.6719055175781
 1550708100	0.0	0.0	279.7016830444336

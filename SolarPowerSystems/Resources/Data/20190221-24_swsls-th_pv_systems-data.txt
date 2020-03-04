@@ -1,5 +1,5 @@
 #1
-double swsls(384,2)
+double data(384,2)
 #epoch	power
 1550707200	0
 1550708100	0

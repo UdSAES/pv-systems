@@ -25,8 +25,8 @@ model SelfContained "No input/output FMU parameterized from external data files 
   Modelica.Blocks.Tables.CombiTable1Ds inputData(
     tableOnFile=true,
     columns=2:4,
-    tableName="swslsth",
-    fileName=tableBoundaryConditions)
+    fileName=tableBoundaryConditions,
+    tableName="data")
                  annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
   Modelica.Blocks.Sources.Clock timeAsEpoch(offset=epochOffset)
     annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
