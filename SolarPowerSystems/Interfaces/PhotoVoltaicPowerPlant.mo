@@ -95,6 +95,10 @@ partial model PhotoVoltaicPowerPlant
     annotation (Placement(transformation(extent={{-64,-4},{-56,4}})));
   Modelica.Blocks.Sources.Constant const(k=0)
     annotation (Placement(transformation(extent={{-56,16},{-64,24}})));
+  Modelica.Blocks.Math.Add add(k1=-1, k2=+1) annotation (Placement(transformation(extent={{76,-84},{84,-76}})));
+  Modelica.Blocks.Sources.Constant transformFactor(k=90) "Factor to make angle positive iff sun is above horizon" annotation (Placement(transformation(extent={{54,-92},{62,-84}})));
+  Modelica.Blocks.Interfaces.RealOutput angleOfSunAboveHorizon(unit="deg") "Angle of Sun above horizon" annotation (Placement(transformation(extent={{90,-90},{110,-70}})));
+  Modelica.Blocks.Interfaces.RealOutput angleOfIncidence(unit="rad", displayUnit="deg") "The angle of incidence between surface normal and sun beam" annotation (Placement(transformation(extent={{90,-70},{110,-50}})));
 protected
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalHeatPort
     annotation (Placement(transformation(extent={{-44,-84},{-36,-76}})));
@@ -146,6 +150,10 @@ equation
           30},{-72,30},{-72,-2.4},{-64.8,-2.4}}, color={0,0,127}));
   connect(directHorizontalIrradiance, max.u1) annotation (Line(points={{-100,80},
           {-68,80},{-68,42.4},{-64.8,42.4}}, color={0,0,127}));
+  connect(solarZenith.y, add.u1) annotation (Line(points={{-39,60.2},{56,60.2},{56,-77.6},{75.2,-77.6}}, color={0,0,127}));
+  connect(transformFactor.y, add.u2) annotation (Line(points={{62.4,-88},{68,-88},{68,-82.4},{75.2,-82.4}}, color={0,0,127}));
+  connect(add.y, angleOfSunAboveHorizon) annotation (Line(points={{84.4,-80},{100,-80}}, color={0,0,127}));
+  connect(inclinationAndShadowing.angleOfIncidence, angleOfIncidence) annotation (Line(points={{-28,-10},{-28,-18},{50,-18},{50,-60},{100,-60}}, color={0,0,127}));
   annotation (Icon(graphics={
                      Rectangle(lineColor = {0, 0, 0}, fillPattern = FillPattern.Solid, extent = {{-76, 76}, {76, -76}}, fillColor = {85, 85, 255}), Line(points = {{-80, 0}, {80, 0}}, color = {255, 255, 255}), Rectangle(extent = {{-84, 84}, {84, -84}}, lineColor = {0, 0, 0}), Polygon(points = {{-84, 76}, {-76, 84}, {-68, 76}, {-76, 68}, {-84, 76}}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                                                                                                                        FillPattern.Solid, pattern = LinePattern.None), Line(points = {{-24, 76}, {-24, -76}}, color = {255, 255, 255}), Polygon(points = {{-8, 76}, {0, 84}, {8, 76}, {0, 68}, {-8, 76}}, fillColor = {255, 255, 255},
