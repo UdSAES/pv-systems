@@ -1,4 +1,4 @@
-within SolarPowerSystems.ModelExport;
+within SolarPowerSystems.WIP.Obsolete.ModelExport;
 model MISOparametersFromTxt "Multiple input, single output FMU parameterized from external .txt-files"
 
   parameter Integer epochOffset = 1550707200 "The time at the start of the simulation as Epoch in s, default 2019-02-21T00:00Z";
@@ -19,7 +19,7 @@ model MISOparametersFromTxt "Multiple input, single output FMU parameterized fro
     arrayAzimuth=Modelica.SIunits.Conversions.from_deg(plantRecord.panelAzimuth),
     epochOffset=epochOffset)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-  ParameterSets.PVplantFromTxt plantRecord(fileName=recordPVplant) annotation (Placement(transformation(extent={{-10,72},{10,92}})));
+  SolarPowerSystems.ModelExport.ParameterSets.PVplantFromTxt plantRecord(fileName=recordPVplant) annotation (Placement(transformation(extent={{-10,72},{10,92}})));
   Modelica.Blocks.Interfaces.RealInput directHorizontalIrradiance
     "Direct irradiance in horizontal plane"
     annotation (Placement(transformation(extent={{-110,70},{-90,90}})));
@@ -32,7 +32,7 @@ model MISOparametersFromTxt "Multiple input, single output FMU parameterized fro
   Modelica.Blocks.Interfaces.RealOutput powerDC
     "The generated power on the DC side"
     annotation (Placement(transformation(extent={{90,70},{110,90}})));
-  ParameterSets.LocationFromMat location(fileName=recordLocation) annotation (Placement(transformation(extent={{-40,72},{-20,92}})));
+  SolarPowerSystems.ModelExport.ParameterSets.LocationFromMat location(fileName=recordLocation) annotation (Placement(transformation(extent={{-40,72},{-20,92}})));
 equation
   connect(plantModel.directHorizontalIrradiance, directHorizontalIrradiance)
     annotation (Line(points={{-10,8},{-56,8},{-56,80},{-100,80}}, color={0,0,127}));
