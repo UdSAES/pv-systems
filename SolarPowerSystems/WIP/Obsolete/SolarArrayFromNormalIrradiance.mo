@@ -2,7 +2,7 @@ within SolarPowerSystems.WIP.Obsolete;
 model SolarArrayFromNormalIrradiance
   "Calculate the electrical output of a (concentrated) solar array as a function of the global irradiance normal to the panel surface"
   extends Modelica.Icons.Example;
-  replaceable parameter Records.Data.Location_UdS location constrainedby Records.Base.Location
+  replaceable parameter Records.Data.Location_UdS location constrainedby SolarPowerSystems.Records.Base.Location
                           annotation (Placement(transformation(extent={{-90,70},
             {-70,90}})), __Dymola_choicesAllMatching=true);
   Modelica.Blocks.Sources.Constant       epochOffset(k=1356998400)
@@ -23,7 +23,8 @@ model SolarArrayFromNormalIrradiance
         rotation=270,
         origin={-70,-78})));
   replaceable parameter Records.Data.PVplant_TGM_Trina plantRecord
-    constrainedby Records.Base.PVplant annotation (Placement(transformation(
+    constrainedby SolarPowerSystems.Records.Base.PVplant
+                                       annotation (Placement(transformation(
           extent={{-90,40},{-70,60}})),__Dymola_choicesAllMatching=true);
   Components.PhotoVoltaicArray.AreaBased.Lukas plantModelAreaBased(
     panel_area=plantRecord.panelArea,

@@ -2,7 +2,7 @@ within SolarPowerSystems.WIP.Obsolete;
 model ModuleBased
   "Calculate the electrical output of a solar array as a function of the direct and diffuse irradiance on a horizontal plane"
   extends Modelica.Icons.Example;
-  replaceable parameter Records.Data.Location_UdS location constrainedby Records.Base.Location
+  replaceable parameter Records.Data.Location_UdS location constrainedby SolarPowerSystems.Records.Base.Location
                           annotation (Placement(transformation(extent={{-90,70},
             {-70,90}})), __Dymola_choicesAllMatching=true);
   Modelica.Blocks.Sources.Constant       epochOffset(k=1356998400)
@@ -21,7 +21,8 @@ model ModuleBased
   Modelica.Blocks.Continuous.Integrator totalEnergy(k=3.6e-6)
     annotation (Placement(transformation(extent={{-50,-96},{-70,-76}})));
   replaceable parameter Records.Data.PVplant_TGM_Trina plantRecord
-    constrainedby Records.Base.PVplant annotation (Placement(transformation(
+    constrainedby SolarPowerSystems.Records.Base.PVplant
+                                       annotation (Placement(transformation(
           extent={{-90,30},{-70,50}})),__Dymola_choicesAllMatching=true);
   Components.PhotoVoltaicArray.ModuleBased.PhotoVoltaicsLib plantModel(useHeatPort=false, T=plantRecord.moduleTemperature)
     annotation (Placement(transformation(

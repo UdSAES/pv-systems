@@ -26,8 +26,7 @@ partial model PhotoVoltaicPowerPlant
   parameter Modelica.SIunits.Angle arrayAzimuth(min = -180, max = 180) "Array azimuth in degree (South equals 0°, positive towards west)" annotation(Dialog(group="PV Plant"));
   parameter Real albedo=0.2 "Ground reflectance/Albedo" annotation(Dialog(group="PV Plant"));
 
-  Modelica.Blocks.Interfaces.RealInput diffuseHorizontalIrradiance(unit="W/m2")
-    "Diffuse irradiance in horizontal plane"
+  Modelica.Blocks.Interfaces.RealInput diffuseHorizontalIrradiance(unit="W/m2") "Diffuse irradiance in horizontal plane"
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
@@ -37,16 +36,14 @@ partial model PhotoVoltaicPowerPlant
         extent={{-20,-20},{20,20}},
         rotation=0,
         origin={-100,80})));
-  Modelica.Blocks.Interfaces.RealInput temperature(unit="K") if useTemperatureInput
-    "The temperature at the plant's site (optional input)" annotation (Placement(transformation(
+  Modelica.Blocks.Interfaces.RealInput temperature(unit="K") if useTemperatureInput "The temperature at the plant's site (optional input)"
+                                                           annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
         origin={-100,-80})));
-  Modelica.Blocks.Interfaces.RealOutput powerDC(unit="W")
-    "The generated power on the DC side"
+  Modelica.Blocks.Interfaces.RealOutput powerDC(unit="W") "The generated power on the DC side"
     annotation (Placement(transformation(extent={{90,70},{110,90}})));
-  Modelica.Blocks.Interfaces.RealOutput totalEnergyDC(unit="kW.h")
-    "The generated energy on the DC side"
+  Modelica.Blocks.Interfaces.RealOutput totalEnergyDC(unit="kW.h") "The generated energy on the DC side"
     annotation (Placement(transformation(extent={{90,30},{110,50}})));
   replaceable           PlantInEnvironment inclinationAndShadowing(arrayTilt=arrayTilt, arrayAzimuth=arrayAzimuth,
     albedo=albedo)                                                 constrainedby PlantInEnvironment
