@@ -18,7 +18,7 @@ model MIMOinternalParameters "Multiple input, multiple output model parameterize
   Modelica.Blocks.Interfaces.RealInput temperature "The temperature at the plant's site (optional input)" annotation (Placement(transformation(extent={{-120,-80},{-80,-40}})));
   replaceable Records.Base.Location location annotation (choicesAllMatching=true,Placement(transformation(extent={{-48,72},{-32,88}})));
   replaceable Records.Base.PVplant plantRecord annotation (choicesAllMatching=true,Placement(transformation(extent={{-18,72},{-2,88}})));
-  Modelica.Blocks.Interfaces.RealOutput powerDC "The generated power on the DC side" annotation (Placement(transformation(extent={{90,50},{110,70}})));
+  Modelica.Blocks.Interfaces.RealOutput powerDC "The generated power on the DC side" annotation (Placement(transformation(extent={{90,30},{110,50}})));
   Modelica.Blocks.Interfaces.RealOutput totalEnergyDC "The generated energy on the DC side" annotation (Placement(transformation(extent={{90,10},{110,30}})));
   Modelica.Blocks.Interfaces.RealOutput angleOfIncidence "The angle of incidence between surface normal and sun beam" annotation (Placement(transformation(extent={{90,-30},{110,-10}})));
   Modelica.Blocks.Interfaces.RealOutput angleOfSunAboveHorizon "Angle of Sun above horizon" annotation (Placement(transformation(extent={{90,-50},{110,-30}})));
@@ -26,7 +26,7 @@ equation
   connect(plantModel.directHorizontalIrradiance, directHorizontalIrradiance) annotation (Line(points={{-12,8},{-60,8},{-60,60},{-100,60}}, color={0,0,127}));
   connect(plantModel.diffuseHorizontalIrradiance, diffuseHorizontalIrradiance) annotation (Line(points={{-12,3},{-64,3},{-64,20},{-100,20}}, color={0,0,127}));
   connect(plantModel.temperature, temperature) annotation (Line(points={{-12,-8},{-60,-8},{-60,-60},{-100,-60}}, color={0,0,127}));
-  connect(plantModel.powerDC, powerDC) annotation (Line(points={{8,8},{60,8},{60,60},{100,60}}, color={0,0,127}));
+  connect(plantModel.powerDC, powerDC) annotation (Line(points={{8,8},{60,8},{60,40},{100,40}}, color={0,0,127}));
   connect(plantModel.totalEnergyDC, totalEnergyDC) annotation (Line(points={{8,4},{64,4},{64,20},{100,20}}, color={0,0,127}));
   connect(plantModel.angleOfIncidence, angleOfIncidence) annotation (Line(points={{8,-6},{64,-6},{64,-20},{100,-20}}, color={0,0,127}));
   connect(plantModel.angleOfSunAboveHorizon, angleOfSunAboveHorizon) annotation (Line(points={{8,-8},{60,-8},{60,-40},{100,-40}}, color={0,0,127}));

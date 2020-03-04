@@ -44,8 +44,7 @@ partial model PlantInEnvironment
         extent={{-20,-20},{20,20}},
         rotation=180,
         origin={100,-20})));
-  Modelica.Blocks.Interfaces.RealOutput angleOfIncidence(unit="rad", displayUnit="deg")
-                                                         "The angle of incidence between surface normal and sun beam"
+  Modelica.Blocks.Interfaces.RealOutput angleOfIncidence(unit="rad", displayUnit="deg") "The angle of incidence between surface normal and sun beam"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
