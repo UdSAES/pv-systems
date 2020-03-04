@@ -27,7 +27,8 @@ model HorizontalIrradianceToPower_SaarlouisTownhall
     plantEfficiency=plantRecord.plantEfficiency,
     T_cell_ref=plantRecord.T_cell_ref,
     arrayTilt=Modelica.SIunits.Conversions.from_deg(plantRecord.panelTilt),
-    arrayAzimuth=Modelica.SIunits.Conversions.from_deg(plantRecord.panelAzimuth))
+    arrayAzimuth=Modelica.SIunits.Conversions.from_deg(plantRecord.panelAzimuth),
+    albedo=plantRecord.environmentAlbedo)
     annotation (Placement(transformation(extent={{-12,-10},{8,10}})));
 
   Modelica.Blocks.Tables.CombiTable1Ds referenceData(
