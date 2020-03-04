@@ -23,7 +23,7 @@ partial model PhotoVoltaicPowerPlant
   parameter Real elevation(unit = "m", min = 0, max = 8848)
     "Height above sea level (elevation) in metres" annotation(Dialog(group="Location"));
   parameter Modelica.SIunits.Angle arrayTilt(min = 0, max = 90) "Array tilt in degree (horizontal equals 0°, vertical equals 90°)" annotation(Dialog(group="PV Plant"));
-  parameter Modelica.SIunits.Angle arrayAzimuth(min = -180, max = 180) "Array azimuth in degree (South equals 0°, positive towards west)" annotation(Dialog(group="PV Plant"));
+  parameter Modelica.SIunits.Angle arrayAzimuth(min = -180, max = 180) "Array azimuth in degree (South equals 0°, positive towards east)" annotation(Dialog(group="PV Plant"));
   parameter Real albedo=0.2 "Ground reflectance/Albedo" annotation(Dialog(group="PV Plant"));
 
   Modelica.Blocks.Interfaces.RealInput diffuseHorizontalIrradiance(unit="W/m2") "Diffuse irradiance in horizontal plane"
