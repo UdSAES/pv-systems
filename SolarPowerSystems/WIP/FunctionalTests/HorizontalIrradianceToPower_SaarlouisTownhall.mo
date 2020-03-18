@@ -29,7 +29,7 @@ model HorizontalIrradianceToPower_SaarlouisTownhall
     arrayTilt=Modelica.SIunits.Conversions.from_deg(plantRecord.panelTilt),
     arrayAzimuth=Modelica.SIunits.Conversions.from_deg(plantRecord.panelAzimuth),
     albedo=plantRecord.environmentAlbedo)
-    annotation (Placement(transformation(extent={{-12,-10},{8,10}})));
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
   Modelica.Blocks.Tables.CombiTable1Ds referenceData(
     tableOnFile=true,
@@ -43,15 +43,15 @@ model HorizontalIrradianceToPower_SaarlouisTownhall
 equation
   connect(timeAsEpoch.y, inputData.u) annotation (Line(points={{-69,0},{-52,0}}, color={0,0,127}));
   connect(inputData.y[2], plantModel.directHorizontalIrradiance) annotation (
-      Line(points={{-29,0},{-20,0},{-20,8},{-12,8}}, color={0,0,127}));
+      Line(points={{-29,0},{-18,0},{-18,8},{-10,8}}, color={0,0,127}));
   connect(inputData.y[1], plantModel.diffuseHorizontalIrradiance) annotation (
-      Line(points={{-29,0},{-20,0},{-20,3},{-12,3}}, color={0,0,127}));
-  connect(inputData.y[3], plantModel.temperature) annotation (Line(points={{-29,
-          0},{-20,0},{-20,-8},{-12,-8}}, color={0,0,127}));
+      Line(points={{-29,0},{-18,0},{-18,3},{-10,3}}, color={0,0,127}));
+  connect(inputData.y[3], plantModel.temperature) annotation (Line(points={{-29,0},{-18,0},{-18,-8},{-10,-8}},
+                                         color={0,0,127}));
   connect(timeAsEpoch.y, referenceData.u) annotation (Line(points={{-69,0},{-60,
           0},{-60,-30},{-52,-30}}, color={0,0,127}));
   connect(plantModel.powerDC, errorMetrics.simulatedValue)
-    annotation (Line(points={{8,8},{30,8},{30,6},{50,6}}, color={0,0,127}));
+    annotation (Line(points={{10,8},{30,8},{30,6},{50,6}},color={0,0,127}));
   connect(referenceData.y[1], errorMetrics.measuredValue) annotation (Line(
         points={{-29,-30},{30,-30},{30,-6},{50,-6}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)),
