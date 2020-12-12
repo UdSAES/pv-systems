@@ -1,6 +1,6 @@
 within SolarPowerSystems.ModelExport.ParameterSets;
 record LocationFromMat
-  extends Records.Base.Location(
+  extends SolarPowerSystems.Records.Base.Location(
     latitude=scalar(DataFiles.readMATmatrix(fileName, "latitude")),
     longitude=scalar(DataFiles.readMATmatrix(fileName,
         "longitude")),

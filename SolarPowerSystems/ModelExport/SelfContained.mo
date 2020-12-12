@@ -18,8 +18,7 @@ model SelfContained "No input/output FMU parameterized from external data files 
     elevation=location.elevation,
     arrayTilt=Modelica.SIunits.Conversions.from_deg(plantRecord.panelTilt),
     arrayAzimuth=Modelica.SIunits.Conversions.from_deg(plantRecord.panelAzimuth),
-    epochOffset=epochOffset)
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+    epochOffset=epochOffset) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   ParameterSets.PVplantFromMAT plantRecord(fileName=recordPVplant) annotation (Placement(transformation(extent={{-10,72},{10,92}})));
   ParameterSets.LocationFromMat location(fileName=recordLocation) annotation (Placement(transformation(extent={{-40,72},{-20,92}})));
   Modelica.Blocks.Tables.CombiTable1Ds inputData(

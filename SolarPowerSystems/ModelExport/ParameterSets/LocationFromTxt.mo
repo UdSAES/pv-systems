@@ -1,6 +1,6 @@
 within SolarPowerSystems.ModelExport.ParameterSets;
 record LocationFromTxt
-  extends Records.Base.Location(
+  extends SolarPowerSystems.Records.Base.Location(
     latitude=Modelica.Utilities.Examples.readRealParameter(fileName, "latitude"),
     longitude=Modelica.Utilities.Examples.readRealParameter(fileName,
         "longitude"),

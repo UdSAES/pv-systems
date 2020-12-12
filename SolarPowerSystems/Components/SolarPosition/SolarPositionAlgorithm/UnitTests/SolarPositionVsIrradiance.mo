@@ -11,10 +11,9 @@ model SolarPositionVsIrradiance
     longitude=location.longitude*Modelica.Constants.pi/180,
     latitude=location.latitude*Modelica.Constants.pi/180)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-  replaceable parameter SolarPowerSystems.Records.Data.Location_UdS location
-    constrainedby SolarPowerSystems.Records.Data.Location_UdS annotation (
-      Placement(transformation(extent={{-10,70},{10,90}})),
-      __Dymola_choicesAllMatching=true);
+  replaceable parameter SolarPowerSystems.Records.Data.Location_UdS location constrainedby
+    SolarPowerSystems.Records.Data.Location_UdS
+    annotation (Placement(transformation(extent={{-10,70},{10,90}})), __Dymola_choicesAllMatching=true);
   Modelica.Blocks.Sources.Constant       epochOffset(k=1539817200)
     "The time at the start of the simulation as Epoch in s"
     annotation (Placement(transformation(extent={{30,70},{50,90}})));

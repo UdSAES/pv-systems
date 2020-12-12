@@ -83,7 +83,8 @@ partial model PhotoVoltaicPowerPlant
     environmentTemperature if useTemperatureInput "The temperature of the surrounding air"
     annotation (Placement(transformation(extent={{-64,-84},{-56,-76}})));
 
-  Modelica.Blocks.Interfaces.RealInput windSpeed if useWindSpeedInput "The wind speed at the plant's site (optional input)"
+  Modelica.Blocks.Interfaces.RealInput windSpeed if useWindSpeedInput
+    "The wind speed at the plant's site (optional input)"
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,

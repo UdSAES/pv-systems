@@ -1,10 +1,9 @@
 within SolarPowerSystems.Components.SolarPowerPlants;
 model Perez_Danny
   "Model of a solar power plant that computes the expected power output as a function of the direct and diffuse horizontal irradiance based on the area and orientation of the plant"
-  extends Interfaces.PhotoVoltaicPowerPlant(redeclare PlantInEnvironment.Perez inclinationAndShadowing(arrayTilt=
-          arrayTilt, arrayAzimuth=arrayAzimuth),
-                          redeclare PhotoVoltaicArray.AreaBased.Danny
-      plantIrradianceNormal(
+  extends Interfaces.PhotoVoltaicPowerPlant(redeclare Components.PlantInEnvironment.Perez inclinationAndShadowing(arrayTilt
+        =arrayTilt, arrayAzimuth=arrayAzimuth),
+                          redeclare Components.PhotoVoltaicArray.AreaBased.Danny plantIrradianceNormal(
       useHeatPort=true,
       A_PV=panelArea,
       eta_ref=plantEfficiency,
