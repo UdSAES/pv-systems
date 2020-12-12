@@ -100,6 +100,12 @@ partial model PhotoVoltaicPowerPlant
   Modelica.Blocks.Sources.Constant transformFactor(k=90) "Factor to make angle positive iff sun is above horizon" annotation (Placement(transformation(extent={{54,-92},{62,-84}})));
   Modelica.Blocks.Interfaces.RealOutput angleOfSunAboveHorizon(unit="deg") "Angle of Sun above horizon" annotation (Placement(transformation(extent={{90,-90},{110,-70}})));
   Modelica.Blocks.Interfaces.RealOutput angleOfIncidence(unit="rad", displayUnit="deg") "The angle of incidence between surface normal and sun beam" annotation (Placement(transformation(extent={{90,-70},{110,-50}})));
+  Modelica.Blocks.Math.Gain inverterEfficiency(k=k)
+    annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=90,
+        origin={48,24})));
+  parameter Modelica.SIunits.Efficiency k=1 "Constant overall efficiency of the DC-AC converter";
 protected
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalHeatPort
     annotation (Placement(transformation(extent={{-44,-84},{-36,-76}})));
@@ -107,11 +113,6 @@ protected
 equation
   connect(totalEnergyDC, integrator.y)
     annotation (Line(points={{100,40},{85,40}}, color={0,0,127}));
-  connect(plantIrradianceNormal.P_DC, powerDC) annotation (Line(points={{42,-4.44089e-16},
-          {46,-4.44089e-16},{46,0},{50,0},{50,80},{100,80}}, color={0,0,127}));
-  connect(plantIrradianceNormal.P_DC, integrator.u) annotation (Line(points={{42,
-          -4.44089e-16},{46,-4.44089e-16},{46,0},{50,0},{50,40},{62,40}}, color=
-         {0,0,127}));
   connect(globalIrradiance.y, plantIrradianceNormal.I_G_normal)
     annotation (Line(points={{8.8,0},{22,0}}, color={0,0,127}));
   connect(solarAzimuth.y,inclinationAndShadowing.solarAzimuth)  annotation (
@@ -155,6 +156,10 @@ equation
   connect(transformFactor.y, add.u2) annotation (Line(points={{62.4,-88},{68,-88},{68,-82.4},{75.2,-82.4}}, color={0,0,127}));
   connect(add.y, angleOfSunAboveHorizon) annotation (Line(points={{84.4,-80},{100,-80}}, color={0,0,127}));
   connect(inclinationAndShadowing.angleOfIncidence, angleOfIncidence) annotation (Line(points={{-28,-10},{-28,-18},{50,-18},{50,-60},{100,-60}}, color={0,0,127}));
+  connect(plantIrradianceNormal.P_DC, inverterEfficiency.u)
+    annotation (Line(points={{42,0},{48,0},{48,19.2}}, color={0,0,127}));
+  connect(inverterEfficiency.y, powerDC) annotation (Line(points={{48,28.4},{48,80},{100,80}}, color={0,0,127}));
+  connect(integrator.u, powerDC) annotation (Line(points={{62,40},{48,40},{48,80},{100,80}}, color={0,0,127}));
   annotation (Icon(graphics={
                      Rectangle(lineColor = {0, 0, 0}, fillPattern = FillPattern.Solid, extent = {{-76, 76}, {76, -76}}, fillColor = {85, 85, 255}), Line(points = {{-80, 0}, {80, 0}}, color = {255, 255, 255}), Rectangle(extent = {{-84, 84}, {84, -84}}, lineColor = {0, 0, 0}), Polygon(points = {{-84, 76}, {-76, 84}, {-68, 76}, {-76, 68}, {-84, 76}}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                                                                                                                        FillPattern.Solid, pattern = LinePattern.None), Line(points = {{-24, 76}, {-24, -76}}, color = {255, 255, 255}), Polygon(points = {{-8, 76}, {0, 84}, {8, 76}, {0, 68}, {-8, 76}}, fillColor = {255, 255, 255},
