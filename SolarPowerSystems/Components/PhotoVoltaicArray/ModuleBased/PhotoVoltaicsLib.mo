@@ -32,8 +32,8 @@ equation
     annotation (Line(points={{0,100},{0,12}}, color={0,0,127}));
   connect(powerSensor.pc, powerSensor.pv)
     annotation (Line(points={{40,0},{40,10},{50,10}}, color={0,0,255}));
-  connect(powerSensor.power, P_DC) annotation (Line(points={{42,-11},{42,-20},{0,
-          -20},{0,-100}}, color={0,0,127}));
+  connect(powerSensor.power, P_DC) annotation (Line(points={{40,-11},{40,-20},{0,-20},{0,-100}},
+                          color={0,0,127}));
   connect(powerSensor.nv, nv1)
     annotation (Line(points={{50,-10},{50,-100}}, color={0,0,255}));
   connect(simplePlantSymmetric.n, n1)
