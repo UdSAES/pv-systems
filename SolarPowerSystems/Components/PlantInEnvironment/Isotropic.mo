@@ -1,19 +1,17 @@
 within SolarPowerSystems.Components.PlantInEnvironment;
-model Isotropic "Transform horizontal irradiance to normal of arbitrarily oriented surface using an isotropic model"
+model Isotropic
+  "Transform horizontal irradiance to normal of arbitrarily oriented surface using an isotropic model"
   extends SolarPowerSystems.Interfaces.PlantInEnvironment;
-  Buildings.BoundaryConditions.SolarIrradiation.BaseClasses.DiffuseIsotropic
-    diffuse(                        til=arrayTilt, rho=albedo)
-                                    annotation (Placement(transformation(
+  Buildings.BoundaryConditions.SolarIrradiation.BaseClasses.DiffuseIsotropic diffuse(til=arrayTilt, rho=albedo)
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-4,0})));
-  PlaneOfArrayIrradiance.DirectFromHorizontal
-    direct annotation (Placement(transformation(
+  PlaneOfArrayIrradiance.DirectFromHorizontal direct annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={60,0})));
-  Modelica.Blocks.Math.Add globalHorizontalIrradiance
-    annotation (Placement(transformation(
+  Modelica.Blocks.Math.Add globalHorizontalIrradiance annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={6,48})));

@@ -18,7 +18,9 @@ equation
     annotation (Line(points={{-49,20.2},{-10.5,20.2},{-10.5,4},{30,4}}, color={0,0,127}));
   connect(solarAzimuth.y, angleOfIncidence.solarAzimuth)
     annotation (Line(points={{-49,-19.8},{-9.5,-19.8},{-9.5,-4},{30,-4}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)),
+  annotation (
+    Icon(coordinateSystem(preserveAspectRatio=false)),
+    Diagram(coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=86400),
     Documentation(info="<html>
 <p>Use this model to verify that the behaviour of the <a href=\"modelica://SolarPowerSystems/Components/SolarPosition/AngleOfIncidence.mo\">AngleOfIncidence</a>-model matches your expectations.</p>

@@ -11,7 +11,7 @@ model MeasurementDataTGM
     tableOnFile=true,
     fileName=fileName,
     tableName="trina",
-    columns=2:10)      annotation (Placement(transformation(extent={{-52,-10},{-32,10}})));
+    columns=2:10) annotation (Placement(transformation(extent={{-52,-10},{-32,10}})));
   Modelica.Blocks.Sources.Clock clock(offset=0) annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
 
   Interfaces.ValidationData validationData annotation (Placement(transformation(extent={{80,-20},{120,20}})));
@@ -37,9 +37,8 @@ protected
     annotation (Placement(transformation(extent={{34,-86},{46,-74}})));
 equation
   connect(clock.y, combiTable1Ds.u) annotation (Line(points={{-69,0},{-54,0}}, color={0,0,127}));
-  connect(realPassThrough3.y, validationData.globalIrradiancePOA) annotation (Line(points={{46.6,80},{80,80},{80,0.1},{
-          100.1,0.1}},                                                                                        color={0,0,
-          127}), Text(
+  connect(realPassThrough3.y, validationData.globalIrradiancePOA) annotation (Line(points={{46.6,80},{80,80},{80,0.1},
+          {100.1,0.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -95,16 +94,16 @@ equation
       horizontalAlignment=TextAlignment.Left));
   connect(combiTable1Ds.y[8], realPassThrough8.u)
     annotation (Line(points={{-31,0},{0,0},{0,-60},{32.8,-60}}, color={0,0,127}));
-  connect(realPassThrough8.y, validationData.T1) annotation (Line(points={{46.6,-60},{80,-60},{80,0},{100,0}}, color={0,
-          0,127}), Text(
+  connect(realPassThrough8.y, validationData.T1) annotation (Line(points={{46.6,-60},{80,-60},{80,0},{100,0}},
+        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(combiTable1Ds.y[9], realPassThrough9.u)
     annotation (Line(points={{-31,0},{0,0},{0,-80},{32.8,-80}}, color={0,0,127}));
-  connect(realPassThrough9.y, validationData.T2) annotation (Line(points={{46.6,-80},{80,-80},{80,0},{100,0}}, color={0,
-          0,127}), Text(
+  connect(realPassThrough9.y, validationData.T2) annotation (Line(points={{46.6,-80},{80,-80},{80,0},{100,0}},
+        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},

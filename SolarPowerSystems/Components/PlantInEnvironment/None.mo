@@ -1,8 +1,8 @@
 within SolarPowerSystems.Components.PlantInEnvironment;
-model None "Pass through: irradiance not modified, but angle of incidence calculated for arbitrary array orientation"
+model None
+  "Pass through: irradiance not modified, but angle of incidence calculated for arbitrary array orientation"
   extends Interfaces.PlantInEnvironment;
-  Modelica.Blocks.Sources.Constant const(k=0) annotation (Placement(
-        transformation(
+  Modelica.Blocks.Sources.Constant const(k=0) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-60,-60})));
