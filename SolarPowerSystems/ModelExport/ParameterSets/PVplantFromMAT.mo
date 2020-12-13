@@ -1,5 +1,6 @@
 within SolarPowerSystems.ModelExport.ParameterSets;
-record PVplantFromMAT "Read parameters for PV system from external .csv file during model initialization"
+record PVplantFromMAT
+  "Read parameters for PV system from external .csv file during model initialization"
   extends SolarPowerSystems.Records.Base.PVplant(
     panelArea=scalar(DataFiles.readMATmatrix(fileName, "panelArea")),
     plantEfficiency=scalar(DataFiles.readMATmatrix(fileName, "plantEfficiency")),

@@ -10,9 +10,7 @@ partial package RecordsPackage "Package containing records"
           fillPattern=FillPattern.Solid,
           extent={{-80,-60},{80,60}},
           radius=25.0),
-        Line(
-          points={{-80,0},{80,0}},
-          color={64,64,64}),
+        Line(points={{-80,0},{80,0}}, color={64,64,64}),
         Line(
           origin={0.0,-25.0},
           points={{0,65},{0,-55}},

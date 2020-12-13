@@ -37,64 +37,61 @@ protected
     annotation (Placement(transformation(extent={{34,-66},{46,-54}})));
 equation
   connect(timeAsEpoch.y, combiTable1Ds.u) annotation (Line(points={{-69,0},{-54,0}}, color={0,0,127}));
-  connect(combiTable1Ds.y[1], substract.u1) annotation (Line(points={{-31,0},{0,0},{0,63.6},{32.8,63.6}},
-                                                                                                    color={0,0,127}));
-  connect(combiTable1Ds.y[3], substract.u2) annotation (Line(points={{-31,0},{0,0},{0,56.4},{32.8,56.4}},
-                                                                                                    color={0,0,127}));
+  connect(combiTable1Ds.y[1], substract.u1)
+    annotation (Line(points={{-31,0},{0,0},{0,63.6},{32.8,63.6}}, color={0,0,127}));
+  connect(combiTable1Ds.y[3], substract.u2)
+    annotation (Line(points={{-31,0},{0,0},{0,56.4},{32.8,56.4}}, color={0,0,127}));
   connect(combiTable1Ds.y[8], toKelvin.Celsius)
     annotation (Line(points={{-31,0},{0,0},{0,-80},{28,-80}}, color={0,0,127}));
-  connect(substract.y, validationData.directHorizontalIrradiance) annotation (Line(points={{46.6,60},{80,60},{80,0.1},{100.1,
-          0.1}}, color={0,0,127}), Text(
+  connect(substract.y, validationData.directHorizontalIrradiance) annotation (Line(points={{46.6,60},{80,60},{80,0.1},
+          {100.1,0.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(combiTable1Ds.y[3], realPassThrough.u)
     annotation (Line(points={{-31,0},{0,0},{0,40},{32.8,40}}, color={0,0,127}));
-  connect(realPassThrough.y, validationData.diffuseHorizontalIrradiance) annotation (Line(points={{46.6,40},{80,40},{80,
-          0.1},{100.1,0.1}}, color={0,0,127}), Text(
+  connect(realPassThrough.y, validationData.diffuseHorizontalIrradiance) annotation (Line(points={{46.6,40},{80,40},
+          {80,0.1},{100.1,0.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(combiTable1Ds.y[1], realPassThrough1.u)
     annotation (Line(points={{-31,0},{0,0},{0,80},{32.8,80}}, color={0,0,127}));
-  connect(realPassThrough1.y, validationData.globalHorizontalIrradiance) annotation (Line(points={{46.6,80},{80,80},{80,
-          0.1},{100.1,0.1}},
-                       color={0,0,127}), Text(
+  connect(realPassThrough1.y, validationData.globalHorizontalIrradiance) annotation (Line(points={{46.6,80},{80,80},
+          {80,0.1},{100.1,0.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(combiTable1Ds.y[2], realPassThrough2.u)
     annotation (Line(points={{-31,0},{0,0},{0,20},{32.8,20}}, color={0,0,127}));
-  connect(realPassThrough2.y, validationData.directNormalIrradiance) annotation (Line(points={{46.6,20},{80,20},{80,0.1},
-          {100.1,0.1}},
-                   color={0,0,127}), Text(
+  connect(realPassThrough2.y, validationData.directNormalIrradiance) annotation (Line(points={{46.6,20},{80,20},{80,
+          0.1},{100.1,0.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(combiTable1Ds.y[4], realPassThrough3.u) annotation (Line(points={{-31,0},{32.8,0}}, color={0,0,127}));
-  connect(realPassThrough3.y, validationData.globalIrradiancePOA) annotation (Line(points={{46.6,0},{74,0},{74,0.1},{
-          100.1,0.1}},                                                                                        color={0,0,
-          127}), Text(
+  connect(realPassThrough3.y, validationData.globalIrradiancePOA) annotation (Line(points={{46.6,0},{74,0},{74,0.1},
+          {100.1,0.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(combiTable1Ds.y[5], realPassThrough5.u)
     annotation (Line(points={{-31,0},{0,0},{0,-20},{32.8,-20}}, color={0,0,127}));
-  connect(realPassThrough5.y, validationData.powerDCsystem1) annotation (Line(points={{46.6,-20},{80,-20},{80,0},{100,0}},
-        color={0,0,127}), Text(
+  connect(realPassThrough5.y, validationData.powerDCsystem1) annotation (Line(points={{46.6,-20},{80,-20},{80,0},{100,
+          0}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(combiTable1Ds.y[6], realPassThrough4.u)
     annotation (Line(points={{-31,0},{0,0},{0,-40},{32.8,-40}}, color={0,0,127}));
-  connect(realPassThrough4.y, validationData.powerDCsystem2) annotation (Line(points={{46.6,-40},{80,-40},{80,0},{100,0}},
-        color={0,0,127}), Text(
+  connect(realPassThrough4.y, validationData.powerDCsystem2) annotation (Line(points={{46.6,-40},{80,-40},{80,0},{100,
+          0}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
@@ -102,15 +99,13 @@ equation
   connect(combiTable1Ds.y[7], realPassThrough6.u)
     annotation (Line(points={{-31,0},{0,0},{0,-60},{32.8,-60}}, color={0,0,127}));
   connect(realPassThrough6.y, validationData.windSpeed) annotation (Line(points={{46.6,-60},{80,-60},{80,0.1},{100.1,
-          0.1}},
-        color={0,0,127}), Text(
+          0.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(toKelvin.Kelvin, validationData.ambientTemperature) annotation (Line(points={{51,-80},{80,-80},{80,0.1},{
-          100.1,0.1}},
-        color={0,0,127}), Text(
+  connect(toKelvin.Kelvin, validationData.ambientTemperature) annotation (Line(points={{51,-80},{80,-80},{80,0.1},{100.1,
+          0.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},

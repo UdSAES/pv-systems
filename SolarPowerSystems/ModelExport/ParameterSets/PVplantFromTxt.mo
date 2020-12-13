@@ -1,5 +1,6 @@
 within SolarPowerSystems.ModelExport.ParameterSets;
-record PVplantFromTxt "Read parameters for PV system from external .txt-file during model initialization"
+record PVplantFromTxt
+  "Read parameters for PV system from external .txt-file during model initialization"
   extends SolarPowerSystems.Records.Base.PVplant(
     panelArea=Modelica.Utilities.Examples.readRealParameter(fileName, "panelArea"),
     plantEfficiency=Modelica.Utilities.Examples.readRealParameter(fileName, "plantEfficiency"),
