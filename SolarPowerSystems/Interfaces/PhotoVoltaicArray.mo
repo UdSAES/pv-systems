@@ -1,5 +1,5 @@
 within SolarPowerSystems.Interfaces;
-partial model PhotoVoltaicArray "PV array, irradiance normal to surface"
+partial model PhotoVoltaicArray "Interface for models of PV arrays (total irradiance normal to surface -> power)"
   extends Modelica.Thermal.HeatTransfer.Interfaces.PartialConditionalHeatPort;
   Modelica.Blocks.Interfaces.RealInput I_G_normal(unit="W/m2", min=0) "Total irradiance normal to module surface"
     annotation (Placement(transformation(

@@ -1,6 +1,6 @@
 ﻿within SolarPowerSystems.Interfaces;
 partial model PhotoVoltaicPowerPlant
-  "Interface to be used by models to be exported as FMU in order to use it within MSaaS"
+  "Interface for models of entire conversion chain (horizontal irradiance, temperature, wind speed -> power, energy)"
   extends Modelica.Blocks.Icons.Block;
 
   parameter Integer epochOffset "The time at the start of the simulation as Epoch in s";

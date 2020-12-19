@@ -1,5 +1,5 @@
 ﻿within SolarPowerSystems.Interfaces;
-partial model PlantInEnvironment "Accounts for inclination/orientation of a PV plant in its environment"
+partial model PlantInEnvironment "Interface for models accounting for inclination/orientation of a PV plant in its environment"
   extends Modelica.Blocks.Icons.Block;
 
   parameter Modelica.SIunits.Angle arrayTilt(min=0, max=90)

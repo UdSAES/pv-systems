@@ -1,20 +1,20 @@
 within SolarPowerSystems.Components.SolarPosition.SolarPositionAlgorithm;
-model SolarZenith "topocentric zenith angle [degrees]"
+model SolarZenith "Block to calculate topocentric zenith angle / degrees"
   parameter Real latitude(
     unit="deg",
     min=47.0,
-    max=56.0) = 49.26 "pos north of entity";
+    max=56.0) = 49.26 "Position north of entity";
   parameter Real longitude(
     unit="deg",
     min=5.0,
-    max=16.0) = 7.04 "pos east of entity";
+    max=16.0) = 7.04 "Position east of entity";
   parameter Real height_above_sealevel(
     unit="m",
     min=0,
-    max=4000) = 230 "height above seelevel of entity";
+    max=4000) = 230 "Height above sealevel of entity";
   parameter Real simu_start_epochs(
     unit="s",
-    min=0) = 1388534400 "offset between simulation time and unix time (epochs), default 01/01/2014";
+    min=0) = 1388534400 "Offset between simulation time and unix time (epochs), default 01/01/2014";
   Real epoch_time;
 
   Modelica.Blocks.Interfaces.RealOutput y(unit="deg")

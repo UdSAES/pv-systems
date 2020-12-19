@@ -19,6 +19,6 @@ partial record PVplant "The parameters of the overall solar power plant (=a spec
   parameter Real environmentAlbedo(
     min=0,
     max=1) = 0.2 "Albedo for isotropic estimation of irradiance by reflection";
-  parameter Integer nsModule=1 "Number of series connected modules";
-  parameter Integer npModule=1 "Number of parallel connected modules";
+  parameter Integer nsModule=1 "Number of series connected modules (PhotoVoltaicsLib only)";
+  parameter Integer npModule=1 "Number of parallel connected modules (PhotoVoltaicsLib only)";
 end PVplant;
