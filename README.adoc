@@ -6,7 +6,9 @@ WARNING: This is a pre-release version of the library that is not yet intended f
 
 == Roadmap
 
-* [ ] Ensure that all models perform as intended.
+* [x] Ensure that all models perform as intended.
+* [ ] Remove non-redistributable data from repository and its history.
+* [ ] Ensure that scope, dependencies and licenses are clearly indicated in README
 * [ ] Add user's guide to library.
 * [ ] Point out differences and commonalities with other related libraries.
 * [ ] ...
