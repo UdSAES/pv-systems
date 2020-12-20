@@ -1,4 +1,4 @@
-within SolarPowerSystems.Components.PhotoVoltaicArray.ReflectionLosses;
+﻿within SolarPowerSystems.Components.PhotoVoltaicArray.ReflectionLosses;
 model PhysicalIAMmodel
   "Physical model for incident angle modifier by De Soto et al., 2006 (corrected version)"
 
@@ -40,5 +40,32 @@ equation
   tauZero = exp(-K*L)*k2;
   k2 = 1 - ((1 - n)/(1 + n))^2;
 
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+        Line(
+          points={{-60,48},{-60,-88},{80,-88}},
+          color={0,0,0},
+          thickness=0.5),
+        Line(
+          points={{-60,40},{-20,40},{20,36},{48,20},{62,-4},{70,-50},{74,-88}},
+          color={28,108,200},
+          thickness=0.5,
+          smooth=Smooth.Bezier),
+        Text(
+          extent={{64,-92},{78,-98}},
+          lineColor={28,108,200},
+          lineThickness=0.5,
+          textString="90°"),
+        Text(
+          extent={{-66,-92},{-52,-98}},
+          lineColor={28,108,200},
+          lineThickness=0.5,
+          textString="0°"),
+        Text(
+          extent={{-150,90},{150,50}},
+          textString="%name",
+          lineColor={0,0,255})}),                                   Diagram(coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<p>The incident angle-dependent reflection losses are modelled by the corrected version of the physical incident angle modifier model presented by the PVPerformance Modeling Collaborative at <a href=\"https://pvpmc.sandia.gov/modeling-steps/1-weather-design-inputs/shading-soiling-and-reflection-losses/incident-angle-reflection-losses/physical-model-of-iam\">https://pvpmc.sandia.gov/modeling-steps/1-weather-design-inputs/shading-soiling-and-reflection-losses/incident-angle-reflection-losses/physical-model-of-iam</a>, originally published by De Soto et al. (2006). The parameter values listed on the page are set as default values.</p>
+<p><br>Simulate the <span style=\"font-family: monospace;\">PhysicalIAM</span>-model in the <span style=\"font-family: monospace;\">Examples</span>-subpackage and run the corresponding plot script to verify the behaviour of the model.</p>
+</html>"));
 end PhysicalIAMmodel;
