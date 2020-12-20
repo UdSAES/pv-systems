@@ -62,7 +62,7 @@ equation
 <h4>References</h4>
 <p>Faiman, D. (2008). Assessing the Outdoor Operating Temperature of Photovoltaic Modules. Progress in Photovoltaics: Research and Applications 16, 307&ndash;315. <a href=\"https://doi.org/10.1002/pip.813
 \">doi:10.1002/pip.813</a></p>
-<p>Heydenreich, W., M&uuml;ller, B., and Reise, C. (2008). Describing the World with Three Parameters: A new approach to PV Module Power mOdelling. 23rd European Photovoltaic Solar Energy Conference and Exhibition, 1-5 September 2008, Valencia, Spain; 2786-2789 <a href=\"https://doi.org/10.4229/23rdeupvsec2008-4do.9.4\">doi:10.4229/23rdeupvsec2008-4do.9.4</a></p>
+<p>Heydenreich, W., M&uuml;ller, B., and Reise, C. (2008). Describing the World with Three Parameters: A new approach to PV Module Power Modelling. 23rd European Photovoltaic Solar Energy Conference and Exhibition, 1-5 September 2008, Valencia, Spain; 2786-2789 <a href=\"https://doi.org/10.4229/23rdeupvsec2008-4do.9.4\">doi:10.4229/23rdeupvsec2008-4do.9.4</a></p>
 <p>Jonas, D., Theis, D., and Frey, G. (2018). Implementation and Experimental Validation of a Photovoltaic- thermal (PVT) Collector Model in TRNSYS. In Proceedings of the 12th International Conference on Solar Energy for Buildings and Industry (EuroSun2018) (International Solar Energy Society). <a href=\"https://doi.org/10.18086/eurosun2018.02.16\">doi:10.18086/eurosun2018.02.16</a></p>
 <p>Jonas, D., L&auml;mmle, M., Theis, D. Schneider, S. and Frey, G. (2019). Performance modeling of PVT collectors: Implementation, validation and parameter identification approach using TRNSYS. Solar Energy 193, 51-64. <a href=\"https://doi.org/10.1016/j.solener.2019.09.047\">doi:10.1016/j.solener.2019.09.047</a></p>
 </html>"));
