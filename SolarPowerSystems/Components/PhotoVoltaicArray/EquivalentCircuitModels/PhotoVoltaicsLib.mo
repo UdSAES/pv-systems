@@ -1,4 +1,4 @@
-within SolarPowerSystems.Components.PhotoVoltaicArray.ModuleBased;
+within SolarPowerSystems.Components.PhotoVoltaicArray.EquivalentCircuitModels;
 model PhotoVoltaicsLib "Module-based PV plant model (PhotoVoltaics-Lib)"
   extends Interfaces.PhotoVoltaicArray;
 
