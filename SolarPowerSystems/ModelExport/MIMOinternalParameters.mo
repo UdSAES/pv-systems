@@ -1,7 +1,7 @@
 within SolarPowerSystems.ModelExport;
 model MIMOinternalParameters
   "Multiple input, multiple output model parameterized internally from records"
-  Components.SolarPowerPlants.Perez_Danny plantModel(
+  Components.SolarPowerPlants.Perez_EfficiencyIrradianceArea plantModel(
     useTemperatureInput=true,
     constWindSpeed=0,
     latitude=location.latitude,

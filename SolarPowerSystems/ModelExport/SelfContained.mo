@@ -8,7 +8,7 @@ model SelfContained
   parameter String recordLocation=SolarPowerSystems.ModelExport.Directory.dataFolder + "Location/" + "swsls-th.mat";
   parameter String tableBoundaryConditions=SolarPowerSystems.ModelExport.Directory.dataFolder + "20190221-24_swsls-th_weather-forecasts.txt";
 
-  Components.SolarPowerPlants.Perez_Danny plantModel(
+  Components.SolarPowerPlants.Perez_EfficiencyIrradianceArea plantModel(
     useTemperatureInput=true,
     constWindSpeed=0,
     albedo=plantRecord.environmentAlbedo,

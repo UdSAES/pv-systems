@@ -1,13 +1,16 @@
 within SolarPowerSystems.Components.SolarPowerPlants;
-model None_Danny
-  "Model of a solar power plant that computes the expected power output as a function of the unmodified direct and diffuse irradiance (input) based on the area and orientation of the plant"
-  extends Interfaces.PhotoVoltaicPowerPlant(redeclare Components.PlantInEnvironment.None inclinationAndShadowing(
-        arrayTilt=arrayTilt, arrayAzimuth=arrayAzimuth), redeclare PhotoVoltaicArray.ModuleOutputDC.Danny
-      plantIrradianceNormal(
+model Perez_EfficiencyIrradianceArea
+  "Model of a solar power plant that computes the expected power output as a function of the direct and diffuse horizontal irradiance based on the area and orientation of the plant"
+  extends Interfaces.PhotoVoltaicPowerPlant(
+    redeclare Components.PlantInEnvironment.Perez inclinationAndShadowing(arrayTilt=arrayTilt, arrayAzimuth=
+          arrayAzimuth),
+    redeclare PhotoVoltaicArray.ModuleOutputDC.EfficiencyIrradianceArea plantIrradianceNormal(
       useHeatPort=true,
       A_PV=panelArea,
       eta_ref=plantEfficiency,
-      T_cell_ref=T_cell_ref));
+      T_cell_ref=T_cell_ref),
+    solarAzimuth(simu_start_epochs=epochOffset),
+    solarZenith(simu_start_epochs=epochOffset));
 
   parameter Modelica.SIunits.Area panelArea "Overall surface area of all panels (combined)"
     annotation (Dialog(group="PV Plant"));
@@ -25,4 +28,5 @@ equation
     annotation (Line(points={{-55.6,-40},{29,-40},{29,-10}}, color={0,0,127}));
   connect(windSpeed, plantIrradianceNormal.u)
     annotation (Line(points={{-100,-30},{29,-30},{29,-10}}, color={0,0,127}));
-end None_Danny;
+
+end Perez_EfficiencyIrradianceArea;
