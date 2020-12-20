@@ -4,7 +4,6 @@ model Danny "TRNSYS Type 835 mode 2 (Danny)"
 
   parameter Modelica.SIunits.Area A_PV "The total area of the PV modules";
   parameter Modelica.SIunits.Efficiency eta_ref "Electrical efficiency at reference conditions (gross area)";
-  parameter Real b0 = 0.07 "Constant for IAM" annotation(Dialog(group="Incidence angle losses"));
   parameter Real a(final unit="m2/W") = -0.0000109 "compare Jonas et al. 2018, tab. 2"
     annotation (Dialog(group="Irradiance losses"));
   parameter Real b=-0.047 "compare Jonas et al. 2018, tab. 2" annotation (Dialog(group="Irradiance losses"));
@@ -38,19 +37,8 @@ equation
   electricalPower = eta_electrical*G*A_PV;
   performanceRatioOverall = performanceRatioIAM*performanceRatioIrradiance*performanceRatioTemperature;
 
-  // Incidence angle losses
-  // // ASHRAE IAM model (Souka and Safat, 1966) with limitation of angle to avoid division by zero
-  // performanceRatioIAM = 1 - b0*(1/cos(min(Modelica.SIunits.Conversions.from_deg(80), angleOfIncidence)) - 1);
-
   // Physical IAM model
   performanceRatioIAM = physicalIAMmodel.incidenceAngleModifier;
-
-  // suggestion Abella et al., 2003 for avoiding division by zero when using the ASHRAE IAM model
-  //   if angleOfIncidence > Modelica.SIunits.Conversions.from_deg(80) then
-  //     performanceRatioIAM = ??;
-  //   else
-  //     performanceRatioIAM = 1 - b0*(1/cos(angleOfIncidence) - 1);
-  //   end if;
 
   // Irradiance losses (Heydenreich et al., 2008)
   performanceRatioIrradiance = a*G + b*log(G + 1) + c*((log(G + Modelica.Constants.e))^2/(G + 1) - 1);
