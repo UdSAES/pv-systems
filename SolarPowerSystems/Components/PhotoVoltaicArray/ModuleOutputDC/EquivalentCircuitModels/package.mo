@@ -1,0 +1,3 @@
+within SolarPowerSystems.Components.PhotoVoltaicArray.ModuleOutputDC;
+package EquivalentCircuitModels "Equivalent circuit models"
+end EquivalentCircuitModels;

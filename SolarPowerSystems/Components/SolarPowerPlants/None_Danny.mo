@@ -2,7 +2,7 @@ within SolarPowerSystems.Components.SolarPowerPlants;
 model None_Danny
   "Model of a solar power plant that computes the expected power output as a function of the unmodified direct and diffuse irradiance (input) based on the area and orientation of the plant"
   extends Interfaces.PhotoVoltaicPowerPlant(redeclare Components.PlantInEnvironment.None inclinationAndShadowing(
-        arrayTilt=arrayTilt, arrayAzimuth=arrayAzimuth), redeclare Components.PhotoVoltaicArray.AreaBased.Danny
+        arrayTilt=arrayTilt, arrayAzimuth=arrayAzimuth), redeclare PhotoVoltaicArray.ModuleOutputDC.Danny
       plantIrradianceNormal(
       useHeatPort=true,
       A_PV=panelArea,

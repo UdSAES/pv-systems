@@ -4,7 +4,7 @@ model Perez_Danny
   extends Interfaces.PhotoVoltaicPowerPlant(
     redeclare Components.PlantInEnvironment.Perez inclinationAndShadowing(arrayTilt=arrayTilt, arrayAzimuth=
           arrayAzimuth),
-    redeclare Components.PhotoVoltaicArray.AreaBased.Danny plantIrradianceNormal(
+    redeclare PhotoVoltaicArray.ModuleOutputDC.Danny plantIrradianceNormal(
       useHeatPort=true,
       A_PV=panelArea,
       eta_ref=plantEfficiency,

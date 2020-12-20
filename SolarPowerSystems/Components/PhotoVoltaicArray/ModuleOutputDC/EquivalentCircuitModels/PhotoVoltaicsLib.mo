@@ -1,5 +1,5 @@
-within SolarPowerSystems.Components.PhotoVoltaicArray.EquivalentCircuitModels;
-model PhotoVoltaicsLib "Module-based PV plant model (PhotoVoltaics-Lib)"
+within SolarPowerSystems.Components.PhotoVoltaicArray.ModuleOutputDC.EquivalentCircuitModels;
+model PhotoVoltaicsLib "Model for using the simple symmetric plant model provided in the PhotoVoltaics-library"
   extends Interfaces.PhotoVoltaicArray;
 
   PhotoVoltaics.Components.SimplePhotoVoltaics.SimplePlantSymmetric simplePlantSymmetric(

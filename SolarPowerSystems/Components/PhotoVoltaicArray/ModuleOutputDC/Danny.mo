@@ -1,4 +1,4 @@
-within SolarPowerSystems.Components.PhotoVoltaicArray.AreaBased;
+within SolarPowerSystems.Components.PhotoVoltaicArray.ModuleOutputDC;
 model Danny "PV power output as a function of a varying efficiency factor, global POA irradiance and total area"
   extends Interfaces.PhotoVoltaicArray;
 
