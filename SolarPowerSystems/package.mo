@@ -2,7 +2,7 @@ within ;
 package SolarPowerSystems "A model library of the components used in photovoltaic power systems"
   annotation (
     preferredView="info",
-    version="0.9.0 Alpha 1",
+    version="0.9.0 Beta 0",
     uses(
       ModelicaServices(version="3.2.2"),
       PhotoVoltaics(version="1.X.X"),

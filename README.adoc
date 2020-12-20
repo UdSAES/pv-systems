@@ -6,13 +6,19 @@ WARNING: This is a pre-release version of the library that is not yet intended f
 
 == Roadmap
 
-* [x] Ensure that all models perform as intended.
-* [x] Remove non-redistributable data from repository and its history.
-* [ ] Ensure that scope, dependencies and licenses are clearly indicated in README
-* [ ] Add user's guide to library.
-* [ ] Point out differences and commonalities with other related libraries.
-* [ ] ...
-* [ ] Public release of version 1.0.0 according to the https://semver.org/[semver-specification].
+* [ ] Clean up library
+** [x] Double-check that all models perform as intended
+** [x] Remove non-redistributable data from repository and its history
+** [x] Ensure that all model names and docstrings are descriptive and consistent
+** [ ] Add examples and plot scripts for the most important models
+* [ ] Ensure that there is a concise, but helpful README
+** [ ] Indicate scope, dependencies and license information
+** [ ] Add required logos/funding information
+* [ ] Add user's guide to library
+** [ ] Document coordinate systems used
+** [ ] Point out differences and commonalities with other related libraries
+** [ ] ...
+* [ ] Public release of version 1.0.0 according to the https://semver.org/[semver-specification]
 
 == Dependencies
 The library depends on several other Modelica-libraries as well as the reference-implementation of the solar position algorithm. The exact versions of the Modelica libraries are specified in the `uses`-annotation in the top-level `package.mo`.
