@@ -1,20 +1,20 @@
 within SolarPowerSystems.Components.PhotoVoltaicArray.AreaBased;
-model Danny "TRNSYS Type 835 mode 2 (Danny)"
+model Danny "PV power output as a function of a varying efficiency factor, global POA irradiance and total area"
   extends Interfaces.PhotoVoltaicArray;
 
   parameter Modelica.SIunits.Area A_PV "The total area of the PV modules";
-  parameter Modelica.SIunits.Efficiency eta_ref "Electrical efficiency at reference conditions (gross area)";
-  parameter Real a(final unit="m2/W") = -0.0000109 "compare Jonas et al. 2018, tab. 2"
+  parameter Modelica.SIunits.Efficiency eta_ref "Electrical efficiency at reference conditions";
+  parameter Real a(final unit="m2/W") = -0.0000109 "Irradiance losses according to Heydenreich et al. (2008, equation 3); parameter a"
     annotation (Dialog(group="Irradiance losses"));
-  parameter Real b=-0.047 "compare Jonas et al. 2018, tab. 2" annotation (Dialog(group="Irradiance losses"));
-  parameter Real c=-1.4 "compare Jonas et al. 2018, tab. 2" annotation (Dialog(group="Irradiance losses"));
+  parameter Real b=-0.047 "Irradiance losses according to Heydenreich et al. (2008, equation 3); parameter b" annotation (Dialog(group="Irradiance losses"));
+  parameter Real c=-1.4 "Irradiance losses according to Heydenreich et al. (2008, equation 3); parameter c" annotation (Dialog(group="Irradiance losses"));
   parameter Modelica.SIunits.Temp_C T_cell_ref "PV cell temperature at reference conditions (usually STC)"
     annotation (Dialog(group="Temperature dependency"));
   parameter Real beta(final unit="1/K") = 0.43/100 "Power temperature coefficient"
     annotation (Dialog(group="Temperature dependency"));
-  parameter Real U_0(final unit="W/(m2.K)") = 25 "Coefficient accounting for heating by radiation"
+  parameter Real U_0(final unit="W/(m2.K)") = 25 "Heat loss coefficient of the PV module"
     annotation (Dialog(group="Temperature dependency"));
-  parameter Real U_1(final unit="W.s/(m3.K)") = 6.84 "Coefficient accounting for cooling by wind"
+  parameter Real U_1(final unit="W.s/(m3.K)") = 6.84 "Wind dependent heat loss coefficient of the PV module"
     annotation (Dialog(group="Temperature dependency"));
 
   Modelica.SIunits.Power electricalPower "Electrical power output";
@@ -43,10 +43,9 @@ equation
   // Irradiance losses (Heydenreich et al., 2008)
   performanceRatioIrradiance = a*G + b*log(G + 1) + c*((log(G + Modelica.Constants.e))^2/(G + 1) - 1);
 
-  // Temperature dependency
+  // Temperature dependency (Faiman (2008, equation 5))
   performanceRatioTemperature = 1 - beta*(T_cell - T_cell_ref);
   T_cell = Modelica.SIunits.Conversions.to_degC(internalHeatPort.T) + G/(U_0 + U_1*u);
-  // Faiman, 2008
 
   // Input-Output-Mapping
   G = I_G_normal;
@@ -54,4 +53,8 @@ equation
 
   connect(angleOfIncidence, physicalIAMmodel.angleOfIncidence)
     annotation (Line(points={{-100,70},{-60,70}}, color={0,0,127}));
+  annotation (Diagram(graphics={Text(
+          extent={{4,74},{98,56}},
+          lineColor={28,108,200},
+          textString="Non-graphical implementation (see text layer)")}));
 end Danny;
