@@ -1,4 +1,4 @@
 within SolarPowerSystems.Records;
 package Base "Partial records (to be extended)"
-  extends SolarPowerSystems.Icons.RecordsPackage;
+  extends Modelica.Icons.RecordsPackage;
 end Base;
