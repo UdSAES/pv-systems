@@ -9,15 +9,6 @@ model None_PhotoVoltaicsLib
       T=298.15,
       nsModule=nsModule,
       npModule=npModule));
-
-  //    Modelica.Blocks.Interfaces.RealOutput powerAC
-  //      "The generated power on the AC side"
-  //      annotation (Placement(transformation(extent={{90,-50},{110,-30}})));
-  //    Modelica.Blocks.Interfaces.RealOutput totalEnergyAC
-  //      "The generated energy on the AC side"
-  //      annotation (Placement(transformation(extent={{90,-90},{110,-70}})));
-  //   Modelica.Blocks.Continuous.Integrator integrator1(k=3.6e-6)
-  //     annotation (Placement(transformation(extent={{64,-90},{84,-70}})));
   PhotoVoltaics.Components.Converters.QuasiStaticSinglePhaseConverter converter
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
   Modelica.Electrical.QuasiStationary.SinglePhase.Sources.VoltageSource voltageSource(

@@ -56,8 +56,8 @@ partial model PhotoVoltaicPowerPlant
         extent={{-20,-20},{20,20}},
         rotation=0,
         origin={-100,30})));
-  Modelica.Blocks.Interfaces.RealInput directHorizontalIrradiance(unit="W/m2")
-    "Direct irradiance in horizontal plane" annotation (Placement(transformation(
+  Modelica.Blocks.Interfaces.RealInput directHorizontalIrradiance(unit="W/m2") "Direct irradiance in horizontal plane"
+                                            annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
         origin={-100,80})));
@@ -125,7 +125,7 @@ partial model PhotoVoltaicPowerPlant
     annotation (Placement(transformation(extent={{90,-90},{110,-70}})));
   Modelica.Blocks.Interfaces.RealOutput angleOfIncidence(unit="rad", displayUnit="deg")
     "The angle of incidence between surface normal and sun beam"
-    annotation (Placement(transformation(extent={{90,-70},{110,-50}})));
+    annotation (Placement(transformation(extent={{90,-50},{110,-30}})));
   Modelica.Blocks.Math.Gain inverterEfficiency(k=k)
     annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
@@ -180,7 +180,7 @@ equation
     annotation (Line(points={{62.4,-88},{68,-88},{68,-82.4},{75.2,-82.4}}, color={0,0,127}));
   connect(add.y, angleOfSunAboveHorizon) annotation (Line(points={{84.4,-80},{100,-80}}, color={0,0,127}));
   connect(inclinationAndShadowing.angleOfIncidence, angleOfIncidence)
-    annotation (Line(points={{-28,-10},{-28,-18},{50,-18},{50,-60},{100,-60}}, color={0,0,127}));
+    annotation (Line(points={{-28,-10},{-28,-18},{50,-18},{50,-40},{100,-40}}, color={0,0,127}));
   connect(plantIrradianceNormal.P_DC, inverterEfficiency.u)
     annotation (Line(points={{42,0},{48,0},{48,19.2}}, color={0,0,127}));
   connect(inverterEfficiency.y, powerDC) annotation (Line(points={{48,28.4},{48,80},{100,80}}, color={0,0,127}));

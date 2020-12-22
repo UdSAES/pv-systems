@@ -4,20 +4,21 @@ model AngleOfIncidence "A model for proofing the angleOfIncidence-model"
 
   Components.SolarPosition.AngleOfIncidence angleOfIncidence(arrayTilt=0.5235987755983, arrayAzimuth=-1.5707963267949)
     annotation (Placement(transformation(
-        extent={{10,-10},{-10,10}},
-        rotation=90,
-        origin={40,0})));
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={0,-40})));
   Components.SolarPosition.SolarPositionAlgorithm.SolarZenith solarZenith(simu_start_epochs=epochOffset.k)
     annotation (Placement(transformation(extent={{-70,10},{-50,30}})));
   Components.SolarPosition.SolarPositionAlgorithm.SolarAzimuth solarAzimuth(simu_start_epochs=epochOffset.k)
-    annotation (Placement(transformation(extent={{-70,-30},{-50,-10}})));
+    annotation (Placement(transformation(extent={{-48,-20},{-28,0}})));
   Modelica.Blocks.Sources.IntegerConstant epochOffset(k=1537667580)
     annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
 equation
   connect(solarZenith.y, angleOfIncidence.solarZenith)
-    annotation (Line(points={{-49,20.2},{-10.5,20.2},{-10.5,4},{30,4}}, color={0,0,127}));
+    annotation (Line(points={{-49,20.2},{-4.5,20.2},{-4.5,-30},{-4,-30}},
+                                                                        color={0,0,127}));
   connect(solarAzimuth.y, angleOfIncidence.solarAzimuth)
-    annotation (Line(points={{-49,-19.8},{-9.5,-19.8},{-9.5,-4},{30,-4}}, color={0,0,127}));
+    annotation (Line(points={{-27,-9.8},{4,-9.8},{4,-30}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
