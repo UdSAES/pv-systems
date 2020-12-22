@@ -35,6 +35,14 @@ model IrradianceTemperature2Power
   Modelica.Blocks.Interfaces.RealOutput power(unit="W") "The generated power"
     annotation (Placement(transformation(extent={{90,70},{110,90}})));
 
+  Modelica.Blocks.Interfaces.RealOutput energy(unit="kW.h") "The generated energy"
+    annotation (Placement(transformation(extent={{90,30},{110,50}})));
+  Modelica.Blocks.Interfaces.RealOutput angleOfSunAboveHorizon(unit="deg") "Angle of Sun above horizon"
+    annotation (Placement(transformation(extent={{90,-90},{110,-70}})));
+  Modelica.Blocks.Interfaces.RealOutput angleOfIncidence(unit="rad", displayUnit="deg")
+    "The angle of incidence between surface normal and sun beam"
+    annotation (Placement(transformation(extent={{90,-50},{110,-30}})));
+
 equation
   connect(plantModel.directHorizontalIrradiance, directIrradiance)
     annotation (Line(points={{-10,8},{-60,8},{-60,80},{-100,80}}, color={0,0,127}));
@@ -42,6 +50,11 @@ equation
     annotation (Line(points={{-10,3},{-64,3},{-64,30},{-100,30}}, color={0,0,127}));
   connect(plantModel.temperature, temperature)
     annotation (Line(points={{-10,-8},{-64,-8},{-64,-30},{-100,-30}}, color={0,0,127}));
-  connect(plantModel.powerDC, power) annotation (Line(points={{10,8},{36,8},{36,80},{100,80}}, color={0,0,127}));
+  connect(plantModel.powerDC, power) annotation (Line(points={{10,8},{40,8},{40,80},{100,80}}, color={0,0,127}));
+  connect(plantModel.totalEnergyDC, energy) annotation (Line(points={{10,4},{44,4},{44,40},{100,40}}, color={0,0,127}));
+  connect(plantModel.angleOfIncidence, angleOfIncidence)
+    annotation (Line(points={{10,-4},{46,-4},{46,-40},{100,-40}}, color={0,0,127}));
+  connect(plantModel.angleOfSunAboveHorizon, angleOfSunAboveHorizon)
+    annotation (Line(points={{10,-8},{40,-8},{40,-80},{100,-80}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)));
 end IrradianceTemperature2Power;
