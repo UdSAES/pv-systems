@@ -20,9 +20,9 @@ model MIMOinternalParameters
     annotation (Placement(transformation(extent={{-120,0},{-80,40}})));
   Modelica.Blocks.Interfaces.RealInput temperature "The temperature at the plant's site (optional input)"
     annotation (Placement(transformation(extent={{-120,-80},{-80,-40}})));
-  replaceable Records.Data.Location_Eugene location constrainedby Records.Base.Location
+  replaceable Records.Base.Location        location constrainedby Records.Base.Location
     annotation (choicesAllMatching=true, Placement(transformation(extent={{-48,72},{-32,88}})));
-  replaceable DN_PV_Prognose.Records.Data.PVplant_HIT05667 plantRecord constrainedby Records.Base.PVplant
+  replaceable Records.Base.PVplant                         plantRecord constrainedby Records.Base.PVplant
     annotation (choicesAllMatching=true, Placement(transformation(extent={{-18,72},{-2,88}})));
   Modelica.Blocks.Interfaces.RealOutput powerDC "The generated power on the DC side"
     annotation (Placement(transformation(extent={{90,30},{110,50}})));
