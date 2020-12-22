@@ -43,6 +43,14 @@ partial model PhotoVoltaicPowerPlant
     "Array azimuth in degree (South equals 0°, positive towards east)" annotation (Dialog(group="PV Plant"));
   parameter Real albedo=0.2 "Ground reflectance/Albedo" annotation (Dialog(group="PV Plant"));
 
+  parameter Modelica.SIunits.Area panelArea "Overall surface area of all panels (combined)"
+    annotation (Dialog(group="PV Plant"));
+  parameter Modelica.SIunits.Efficiency plantEfficiency=0.2 "Overall plant efficiency"
+    annotation (Dialog(group="PV Plant"));
+
+  parameter Modelica.SIunits.Temp_C T_cell_ref "PV cell temperature at reference conditions (usually STC)"
+    annotation (Dialog(group="PV Modules"));
+
   Modelica.Blocks.Interfaces.RealInput diffuseHorizontalIrradiance(unit="W/m2")
     "Diffuse irradiance in horizontal plane" annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},

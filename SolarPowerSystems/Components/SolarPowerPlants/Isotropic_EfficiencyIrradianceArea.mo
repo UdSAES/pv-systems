@@ -8,14 +8,6 @@ model Isotropic_EfficiencyIrradianceArea
       A_PV=panelArea,
       eta_ref=plantEfficiency,
       T_cell_ref=T_cell_ref));
-
-  parameter Modelica.SIunits.Area panelArea "Overall surface area of all panels (combined)"
-    annotation (Dialog(group="PV Plant"));
-  parameter Modelica.SIunits.Efficiency plantEfficiency=0.2 "Overall plant efficiency"
-    annotation (Dialog(group="PV Plant"));
-
-  parameter Modelica.SIunits.Temp_C T_cell_ref "PV cell temperature at reference conditions (usually STC)"
-    annotation (Dialog(group="PV Modules"));
 equation
   connect(internalHeatPort, plantIrradianceNormal.heatPort)
     annotation (Line(points={{-40,-80},{42,-80},{42,-10}}, color={191,0,0}));
