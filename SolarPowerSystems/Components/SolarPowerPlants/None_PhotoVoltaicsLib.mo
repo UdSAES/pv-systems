@@ -1,6 +1,6 @@
 within SolarPowerSystems.Components.SolarPowerPlants;
 model None_PhotoVoltaicsLib
-  "Model of a solar power plant that computes the electrical output as a function of the global irradiance on the plant based on a diode model and plant orientation"
+  "POA irradiance; equivalent circuit model from PhotoVoltaics-library"
   extends Interfaces.PhotoVoltaicPowerPlant(redeclare Components.PlantInEnvironment.None inclinationAndShadowing(
         arrayTilt=arrayTilt, arrayAzimuth=arrayAzimuth), redeclare
       PhotoVoltaicArray.ModuleOutputDC.EquivalentCircuitModels.PhotoVoltaicsLib plantIrradianceNormal(

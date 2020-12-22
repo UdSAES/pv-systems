@@ -1,6 +1,6 @@
 within SolarPowerSystems.Components.SolarPowerPlants;
 model Perez_EfficiencyIrradianceArea
-  "Model of a solar power plant that computes the expected power output as a function of the direct and diffuse horizontal irradiance based on the area and orientation of the plant"
+  "Anisotropic conversion horizontal to POA irradiance (Perez); efficiency factor model"
   extends Interfaces.PhotoVoltaicPowerPlant(
     redeclare Components.PlantInEnvironment.Perez inclinationAndShadowing(arrayTilt=arrayTilt, arrayAzimuth=
           arrayAzimuth),
