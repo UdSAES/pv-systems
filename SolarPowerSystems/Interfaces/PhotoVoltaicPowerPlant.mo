@@ -1,7 +1,7 @@
 ﻿within SolarPowerSystems.Interfaces;
 partial model PhotoVoltaicPowerPlant
   "Interface for models of entire conversion chain (horizontal irradiance, temperature, wind speed -> power, energy)"
-  extends Modelica.Blocks.Icons.Block;
+  extends SolarPowerSystems.Icons.PVSystem;
 
   parameter Integer epochOffset "The time at the start of the simulation as Epoch in s";
   parameter Boolean useTemperatureInput=false "=true, if environment temperature is provided"
@@ -177,62 +177,4 @@ equation
     annotation (Line(points={{42,0},{48,0},{48,19.2}}, color={0,0,127}));
   connect(inverterEfficiency.y, powerDC) annotation (Line(points={{48,28.4},{48,80},{100,80}}, color={0,0,127}));
   connect(integrator.u, powerDC) annotation (Line(points={{62,40},{48,40},{48,80},{100,80}}, color={0,0,127}));
-  annotation (Icon(graphics={
-        Rectangle(
-          lineColor={0,0,0},
-          fillPattern=FillPattern.Solid,
-          extent={{-76,76},{76,-76}},
-          fillColor={85,85,255}),
-        Line(points={{-80,0},{80,0}}, color={255,255,255}),
-        Rectangle(extent={{-84,84},{84,-84}}, lineColor={0,0,0}),
-        Polygon(
-          points={{-84,76},{-76,84},{-68,76},{-76,68},{-84,76}},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),
-        Line(points={{-24,76},{-24,-76}}, color={255,255,255}),
-        Polygon(
-          points={{-8,76},{0,84},{8,76},{0,68},{-8,76}},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),
-        Polygon(
-          points={{68,76},{76,84},{84,76},{76,68},{68,76}},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),
-        Polygon(
-          points={{68,0},{76,8},{84,0},{76,-8},{68,0}},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),
-        Polygon(
-          points={{68,-76},{76,-68},{84,-76},{76,-84},{68,-76}},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),
-        Polygon(
-          points={{-84,-76},{-76,-68},{-68,-76},{-76,-84},{-84,-76}},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),
-        Line(points={{-54,76},{-54,-76}}, color={255,255,255}),
-        Polygon(
-          points={{-84,0},{-76,8},{-68,0},{-76,-8},{-84,0}},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),
-        Polygon(
-          points={{-8,0},{0,8},{8,0},{0,-8},{-8,0}},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),
-        Polygon(
-          points={{-8,-76},{0,-68},{8,-76},{0,-84},{-8,-76}},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),
-        Line(points={{0,76},{0,-76}}, color={255,255,255}),
-        Line(points={{24,76},{24,-76}}, color={255,255,255}),
-        Line(points={{54,76},{54,-76}}, color={255,255,255})}));
 end PhotoVoltaicPowerPlant;
