@@ -22,7 +22,7 @@ model HorizontalIrradianceToPower
 equation
   connect(timeAsEpoch.y, inputData.u) annotation (Line(points={{-59,0},{-52,0}}, color={0,0,127}));
   connect(inputData.y[1], PhotoVoltaicSystem.temperature)
-    annotation (Line(points={{-29,0},{-18,0},{-18,-3},{-10,-3}}, color={0,0,127}));
+    annotation (Line(points={{-29,0},{-18,0},{-18,-8},{-10,-8}}, color={0,0,127}));
   connect(inputData.y[2], PhotoVoltaicSystem.directIrradiance)
     annotation (Line(points={{-29,0},{-18,0},{-18,8},{-10,8}}, color={0,0,127}));
   connect(inputData.y[3], PhotoVoltaicSystem.diffuseIrradiance)

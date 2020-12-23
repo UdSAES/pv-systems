@@ -32,7 +32,7 @@ model IrradianceTemperature2Power
   Modelica.Blocks.Interfaces.RealInput diffuseIrradiance(unit="W/m2") "Diffuse irradiance "
     annotation (Placement(transformation(extent={{-120,10},{-80,50}})));
   Modelica.Blocks.Interfaces.RealInput temperature(unit="K") "The temperature at the plant's site"
-    annotation (Placement(transformation(extent={{-120,-50},{-80,-10}})));
+    annotation (Placement(transformation(extent={{-120,-100},{-80,-60}})));
   Modelica.Blocks.Interfaces.RealOutput power(unit="W") "The generated power"
     annotation (Placement(transformation(extent={{90,70},{110,90}})));
 
@@ -51,7 +51,7 @@ equation
   connect(plantModel.diffuseHorizontalIrradiance, diffuseIrradiance)
     annotation (Line(points={{-10,3},{-64,3},{-64,30},{-100,30}}, color={0,0,127}));
   connect(plantModel.temperature, temperature)
-    annotation (Line(points={{-10,-8},{-64,-8},{-64,-30},{-100,-30}}, color={0,0,127}));
+    annotation (Line(points={{-10,-8},{-60,-8},{-60,-80},{-100,-80}}, color={0,0,127}));
   connect(plantModel.powerDC, power) annotation (Line(points={{10,8},{40,8},{40,80},{100,80}}, color={0,0,127}));
   connect(plantModel.totalEnergyDC, energy) annotation (Line(points={{10,4},{44,4},{44,40},{100,40}}, color={0,0,127}));
   connect(plantModel.angleOfIncidence, angleOfIncidence)
