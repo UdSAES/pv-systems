@@ -14,11 +14,11 @@ The library contains models for three main aspects:
 *Getting Started*
 
 * Download the latest stable version of the library from the https://github.com/UdSAES/pv-systems/releases[releases-page on GitHub] or clone the repository locally.
-* Ensure that all link:.#dependencies[dependencies] are resolved.
+* Ensure that all link:.#dependencies[dependencies] are installed.
 * Open the library in your Modelica-IDE of choice (note that the library was developed using Dymola 2021 and has not been tested with other tools).
 * Open `SolarPowerSystems.Examples.PVSystem`; simulate it; and plot a selection of relevant quantities by running the provided plot script (choose `Commands > plotResult` in the Simuation-tab in Dymola).
 
-*Adding New Instances*
+*Creating New Instances*
 
 * Depending on the input data available, instantiate one of `Irradiance2Power`, `IrradianceTemperature2Power` or `IrradianceTemperatureWindSpeed2Power` in the subpackage `Components`.
 * Create new records that inherit from the partial records in `SolarPowerSystems.Records.Base.*` to store the parameter values of the system under investigation.
@@ -29,6 +29,26 @@ Currently, there are four choices: two that expect direct and diffuse in the hor
 * Load your input data and connect it to the model instance.
 * Simulate 😎
 
+
+== Library Design
+The `SolarPowerSystems`-library relies on the https://mbe.modelica.university/components/architectures/[architecture pattern] for facilitating the creation and maintenance of system level models.
+
+Partial models are used to specify the interfaces of component models; specific implementations (or data records) realize these interfaces. System-level models are pre-connected and the fitting use of `redeclare`, `constrainedby` and `choicesAllMatching` ensure that users can quickly assemble and parameterize complete system models by choosing from the available options via drop-down menus in the Parameters-dialog.
+
+While some component models were implemented from scratch, the library heavily reuses work provided by others. Below, these external dependencies as well as the core models of the library are outlined.
+
+=== Dependencies
+The library depends on several other Modelica-libraries as well as the reference-implementation of the solar position algorithm. The exact versions of the Modelica libraries are specified in the `uses`-annotation in the top-level `package.mo`.
+
+**The following dependencies MUST to be resolved by the user before the models in the library can be used:**
+
+* https://github.com/lbl-srg/modelica-buildings[Modelica `Buildings` library] -- for estimation of diffuse irradiance on the tilted plane; and
+* the reference implementation of NREL's Solar Position Algorithm (SPA) available at https://midcdmz.nrel.gov/spa/[https://midcdmz.nrel.gov/spa/].
+
+The implementation of the SPA consists of two files, `spa.h` and `spa.c`, which MUST be put in the directory `./SolarPowerSystems/Resources/Include/`.
+
+=== Core Models
+...
 == Project Status/Roadmap
 The library is versioned using https://semver.org/spec/v2.0.0.html[Semantic Versioning 2.0.0] (semver) and follows the semver specification.
 
