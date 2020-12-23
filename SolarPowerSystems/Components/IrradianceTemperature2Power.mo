@@ -55,7 +55,7 @@ equation
   connect(plantModel.powerDC, power) annotation (Line(points={{10,8},{40,8},{40,80},{100,80}}, color={0,0,127}));
   connect(plantModel.totalEnergyDC, energy) annotation (Line(points={{10,4},{44,4},{44,40},{100,40}}, color={0,0,127}));
   connect(plantModel.angleOfIncidence, angleOfIncidence)
-    annotation (Line(points={{10,-4},{46,-4},{46,-40},{100,-40}}, color={0,0,127}));
+    annotation (Line(points={{10,-4},{44,-4},{44,-40},{100,-40}}, color={0,0,127}));
   connect(plantModel.angleOfSunAboveHorizon, angleOfSunAboveHorizon)
     annotation (Line(points={{10,-8},{40,-8},{40,-80},{100,-80}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)));
