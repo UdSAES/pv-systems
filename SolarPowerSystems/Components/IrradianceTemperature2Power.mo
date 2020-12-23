@@ -11,7 +11,8 @@ model IrradianceTemperature2Power
     Dialog(group="Parameterization"),
     Placement(transformation(extent={{-10,48},{10,68}})));
 
-  replaceable Interfaces.PhotoVoltaicPowerPlant plantModel constrainedby Interfaces.PhotoVoltaicPowerPlant(
+  replaceable Interfaces.PhotoVoltaicPowerPlant plantModel(k=constInverterEfficiency)
+                                                           constrainedby Interfaces.PhotoVoltaicPowerPlant(
     epochOffset=epochOffset,
     useTemperatureInput=true,
     latitude=location.latitude,
@@ -43,6 +44,7 @@ model IrradianceTemperature2Power
     "The angle of incidence between surface normal and sun beam"
     annotation (Placement(transformation(extent={{90,-50},{110,-30}})));
 
+  parameter Modelica.SIunits.Efficiency constInverterEfficiency=1 "Constant overall efficiency of the DC-AC converter";
 equation
   connect(plantModel.directHorizontalIrradiance, directIrradiance)
     annotation (Line(points={{-10,8},{-60,8},{-60,80},{-100,80}}, color={0,0,127}));
