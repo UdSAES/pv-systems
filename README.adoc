@@ -31,7 +31,7 @@ Currently, there are four choices: two that expect direct and diffuse in the hor
 
 
 == Library Design
-The `SolarPowerSystems`-library relies on the https://mbe.modelica.university/components/architectures/[architecture pattern] for facilitating the creation and maintenance of system level models.
+The `SolarPowerSystems`-library relies on the https://mbe.modelica.university/components/architectures/[architecture pattern] for facilitating the creation and use of system level models.
 
 Partial models are used to specify the interfaces of component models; specific implementations (or data records) realize these interfaces. System-level models are pre-connected and the fitting use of `redeclare`, `constrainedby` and `choicesAllMatching` ensure that users can quickly assemble and parameterize complete system models by choosing from the available options via drop-down menus in the Parameters-dialog.
 
@@ -47,6 +47,8 @@ The library depends on several other Modelica-libraries as well as the reference
 * the reference implementation of NREL's Solar Position Algorithm (SPA) available at https://midcdmz.nrel.gov/spa/[https://midcdmz.nrel.gov/spa/].
 
 The implementation of the SPA consists of two files, `spa.h` and `spa.c`, which MUST be put in the directory `./SolarPowerSystems/Resources/Include/`.
+
+Additionally, the https://github.com/christiankral/PhotoVoltaics/[`PhotoVoltaics`] library is necessary if a more detailed analysis of the electrical quantities based on diode-based equivalent circuit models is preferred over the efficiency factor model.
 
 === Core Models
 * `AngleOfIncidence` -- calculate the angle between the module's surface normal and the sun rays based on the solar zenith and azimuth angles and the panels tilt and orientation.
@@ -64,19 +66,23 @@ The semver specification is about the _public interface_ of a software package; 
 === v0.9.0
 Planned release in December 2020
 
-* [ ] Clean up library
+* [x] Clean up library
 ** [x] Double-check that all models perform as intended
 ** [x] Remove non-redistributable data from repository and its history
 ** [x] Ensure that all model names and docstrings are descriptive and consistent
 ** [x] Draw helpful icons
-** [ ] Add examples and plot scripts for the most important models
+** [x] Add examples and plot scripts for the most important models
 * [ ] Ensure that there is a concise, but helpful README
-** [ ] Indicate scope, dependencies and license information
-** [ ] Add required logos/funding information
+** [x] Add required logos/funding information
+** [x] Indicate scope, dependencies and license information
+** [ ] Explain validation
 
 === v1.0.0
 Estimated realization in the first quarter of 2021
 
+* [ ] Bring back...
+** [ ] Subpackage `Validation`
+** [ ] Model export with paramters read from files
 * [ ] Add user's guide to library
 ** [ ] Document coordinate systems used
 ** [ ] Point out differences and commonalities with other related libraries
