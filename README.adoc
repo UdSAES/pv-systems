@@ -49,10 +49,10 @@ The library depends on several other Modelica-libraries as well as the reference
 The implementation of the SPA consists of two files, `spa.h` and `spa.c`, which MUST be put in the directory `./SolarPowerSystems/Resources/Include/`.
 
 === Core Models
-* `AngleOfIncidence`
-* `PlantInEnvironment` (partial)
-* `EfficiencyIrradianceArea`
-* `PhotoVoltaicPowerPlant` (partial)
+* `AngleOfIncidence` -- calculate the angle between the module's surface normal and the sun rays based on the solar zenith and azimuth angles and the panels tilt and orientation.
+* `PlantInEnvironment` (partial) -- models that estimate POA irradiance for arbitrarily oriented modules.
+* `EfficiencyIrradianceArea` -- the main model calculating the power output as the product of an efficiency factor that varies based on the environmental conditions; the total irradiance in the POA; and the overall area of the PV modules.
+* `PhotoVoltaicPowerPlant` (partial) -- models that combine the estimatiation of POA irradiance with the models for calculating the power output.
 
 ...
 
