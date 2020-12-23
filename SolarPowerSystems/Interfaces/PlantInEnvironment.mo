@@ -1,6 +1,6 @@
 ﻿within SolarPowerSystems.Interfaces;
 partial model PlantInEnvironment "Interface for models accounting for inclination/orientation of a PV plant in its environment"
-  extends Modelica.Blocks.Icons.Block;
+  extends SolarPowerSystems.Icons.AngleOfIncidence;
 
   parameter Modelica.SIunits.Angle arrayTilt(min=0, max=90)
     "Array tilt in degree (horizontal equals 0°, vertical equals 90°)";
