@@ -4,7 +4,7 @@ package SolarPowerSystems "A model library of the components used in photovoltai
     preferredView="info",
     version="0.9.0 Beta 0",
     uses(
-      PhotoVoltaics(version="1.X.X"),
+      PhotoVoltaics(version="1.6.0"),
       Buildings(version="7.0.0"),
       Modelica(version="3.2.3")),
     Documentation(info="<html>
