@@ -85,3 +85,5 @@ Estimated realization in the first quarter of 2021
 * [ ] Public release of version 1.0.0; addition to list on Modelica-homepage?
 
 
+== License Information
+The source code of the SolarPowerSystems-library (Modelica, C) is released under the link:./LICENSES/MIT.txt[MIT license].
