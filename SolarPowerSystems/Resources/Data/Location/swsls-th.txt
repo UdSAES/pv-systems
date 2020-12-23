@@ -1,3 +1,0 @@
-latitude = 49.316590;
-longitude = 6.749953;
-elevation = 181;
