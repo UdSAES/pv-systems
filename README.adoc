@@ -14,7 +14,7 @@ The library contains models for three main aspects:
 *Getting Started*
 
 * Download the latest stable version of the library from the https://github.com/UdSAES/pv-systems/releases[releases-page on GitHub] or clone the repository locally.
-* Ensure that all https://github.com/UdSAES/pv-systems#dependencies[dependencies] are installed.
+* Ensure that all link:README.adoc#dependencies[dependencies] are installed.
 * Open the library in your Modelica-IDE of choice (note that the library was developed using Dymola 2021 and has not been tested with other tools).
 * Open `SolarPowerSystems.Examples.PVSystem`; simulate it; and plot a selection of relevant quantities by running the provided plot script (choose `Commands > plotResult` in the Simuation-tab in Dymola).
 
