@@ -2,7 +2,7 @@ within SolarPowerSystems.Icons;
 model PVModule "Icon for a photovoltaic array or module"
   extends Modelica.Blocks.Icons.Block;
 
-  annotation (Icon(graphics={
+  annotation (preferredView="icon", Icon(graphics={
         Rectangle(
           lineColor={0,0,0},
           fillPattern=FillPattern.Solid,

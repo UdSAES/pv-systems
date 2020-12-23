@@ -1,8 +1,8 @@
 within SolarPowerSystems.Icons;
-model AngleOfIncidence "Icon indicating the angle of incidence on the tilted plane"
+block AngleOfIncidence "Icon indicating the angle of incidence on the tilted plane"
   extends Modelica.Blocks.Icons.Block;
 
-  annotation (Icon(graphics={
+  annotation (preferredView="icon", Icon(graphics={
         Line(
           points={{-40,-80},{80,-42}},
           color={28,108,200},

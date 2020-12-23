@@ -1,7 +1,8 @@
 within SolarPowerSystems.Icons;
-model PVSystem "Icon for overall PV system models including models for the position of the sun/POA conversion"
+model PVSystem
+  "Icon for overall PV system models including models for the position of the sun/POA conversion"
   extends Modelica.Blocks.Icons.Block;
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+  annotation (preferredView="icon", Icon(coordinateSystem(preserveAspectRatio=false), graphics={
       Line(
         points={{-76,44},{-88,32}},
         color={255,223,6},
