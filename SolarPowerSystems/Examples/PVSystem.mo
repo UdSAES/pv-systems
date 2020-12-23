@@ -1,6 +1,5 @@
 within SolarPowerSystems.Examples;
-model HorizontalIrradianceToPower
-  "A fictive 15kWp power plant located in Saarbruecken, Germany on 2018-11-07 (perfectly sunny day)"
+model PVSystem "A fictive 15kWp power plant located in Saarbruecken, Germany on 2018-11-07 (perfectly sunny day)"
   import ModelicaServices;
   extends Modelica.Icons.Example;
 
@@ -36,4 +35,4 @@ equation
       Interval=60,
       __Dymola_Algorithm="Dassl"),
     __Dymola_Commands(file="Scripts/plot_Examples_HorizontalIrradianceToPower.mos" "plotResult"));
-end HorizontalIrradianceToPower;
+end PVSystem;
