@@ -34,5 +34,5 @@ equation
       StopTime=64800,
       Interval=60,
       __Dymola_Algorithm="Dassl"),
-    __Dymola_Commands(file="Scripts/plot_Examples_HorizontalIrradianceToPower.mos" "plotResult"));
+    __Dymola_Commands(file="Scripts/plot_Examples_PVSystem.mos" "plotResult"));
 end PVSystem;
