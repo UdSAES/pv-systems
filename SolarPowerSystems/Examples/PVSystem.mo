@@ -34,5 +34,11 @@ equation
       StopTime=64800,
       Interval=60,
       __Dymola_Algorithm="Dassl"),
-    __Dymola_Commands(file="Scripts/plot_Examples_PVSystem.mos" "plotResult"));
+    __Dymola_Commands(file="Scripts/plot_Examples_PVSystem.mos" "plotResult"),
+    Documentation(info="<html>
+<p>Full PV system model that estimates the system behaviour based on diffuse and direct irradiance in the horizontal plane, air temperature and wind speed at the site.</p>
+<p>For conversion to POA irradiance, the model by Perez is used; calculation of the power output is done using the efficiency factor model <a href=\"modelica://SolarPowerSystems.Components.PhotoVoltaicArray.ModuleOutputDC.EfficiencyIrradianceArea\">SolarPowerSystems.Components.PhotoVoltaicArray.ModuleOutputDC.EfficiencyIrradianceArea</a>.</p>
+<p>As input data, weather forecasts for the location of the campus of Saarland university from 2018-06-06 to 2018-07-06 (summer solstice +/- 15 days) are provided as <span style=\"font-family: monospace;\">SolarPowerSystems.Resources.20180606T0000--20180706T2359+0000_uds-campus.txt</span>. The parameter values for the PV plant are made up, meaning that the simulation results do not represent a real system.</p>
+<p><br>Use the default simulation parameters to simulate 2018-07-01--2018-07-03; then use the provided plot script (Commands &gt; plotResult) to get an overview of key quantities. Extend the simulation period and/or change the value of the <span style=\"font-family: monospace;\">startTime</span>-block to investigate additional days.</p>
+</html>"));
 end PVSystem;
