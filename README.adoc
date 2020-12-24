@@ -4,6 +4,10 @@ A Modelica-library that enables the design and investigation of immobile PV syst
 
 image::./docs/logos_uds_aes_designetz_bmwi.png[]
 
+This work was supported by the SINTEG-project https://www.designetz.de["`Designetz`"] funded by the German Federal Ministry of Economic Affairs and Energy (BMWi) under grant 03SIN224.
+
+'''
+
 The library contains models for three main aspects:
 
 . the calculation of the sun's position with respect to the system's location;
@@ -56,15 +60,13 @@ Additionally, the https://github.com/christiankral/PhotoVoltaics/[`PhotoVoltaics
 * `EfficiencyIrradianceArea` -- the main model calculating the power output as the product of an efficiency factor that varies based on the environmental conditions; the total irradiance in the POA; and the overall area of the PV modules.
 * `PhotoVoltaicPowerPlant` (partial) -- models that combine the estimatiation of POA irradiance with the models for calculating the power output.
 
-...
-
 == Project Status/Roadmap
 The library is versioned using https://semver.org/spec/v2.0.0.html[Semantic Versioning 2.0.0] (semver) and follows the semver specification.
 
 The semver specification is about the _public interface_ of a software package; here, the partial models in `SolarPowerSystems/Interfaces/` are seen as the public interface of this library.
 
 === v0.9.0
-Planned release in December 2020
+Released 2020-12-24
 
 * [x] Clean up library
 ** [x] Double-check that all models perform as intended
@@ -72,19 +74,18 @@ Planned release in December 2020
 ** [x] Ensure that all model names and docstrings are descriptive and consistent
 ** [x] Draw helpful icons
 ** [x] Add examples and plot scripts for the most important models
-* [ ] Ensure that there is a concise, but helpful README
+* [x] Ensure that there is a helpful README
 ** [x] Add required logos/funding information
 ** [x] Indicate scope, dependencies and license information
-** [ ] Explain validation
 
 === v1.0.0
 Estimated realization in the first quarter of 2021
 
 * [ ] Bring back...
-** [ ] Subpackage `Validation`
+** [ ] Subpackage `Validation`; explain in README
 ** [ ] Model export with paramters read from files
 * [ ] Add user's guide to library
-** [ ] Document coordinate systems used
+** [ ] Graphically document coordinate systems used
 ** [ ] Point out differences and commonalities with other related libraries
 ** [ ] ...
 * [ ] Convert to MSL 4.0.0
