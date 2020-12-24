@@ -2,5 +2,6 @@ SolarPosition
 PlantInEnvironment
 PhotoVoltaicArray
 SolarPowerPlants
+Irradiance2Power
 IrradianceTemperature2Power
 IrradianceTemperatureWindSpeed2Power
