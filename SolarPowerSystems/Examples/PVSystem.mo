@@ -4,8 +4,8 @@ model PVSystem "A fictive 15kWp power plant located in Saarbruecken, Germany on 
   extends Modelica.Icons.Example;
 
   Components.IrradianceTemperature2Power PhotoVoltaicSystem(
-    redeclare Records.Data.Location_UdS location,
-    redeclare Records.Data.PVplant_15kWp plantRecord,
+    redeclare Records.Data.Location1 location,
+    redeclare Records.Data.PVplant1 plantRecord,
     redeclare Components.SolarPowerPlants.Perez_EfficiencyIrradianceArea plantModel,
     epochOffset=startTime.k) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.IntegerConstant startTime(k=1542412800)
