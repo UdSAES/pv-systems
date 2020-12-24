@@ -9,14 +9,14 @@ model PVSystem
     redeclare Records.Data.PVplant1 plantRecord,
     redeclare Components.SolarPowerPlants.Perez_EfficiencyIrradianceArea plantModel,
     epochOffset=startTime.k) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-  Modelica.Blocks.Sources.IntegerConstant startTime(k=1542412800)
+  Modelica.Blocks.Sources.IntegerConstant startTime(k=1530403200)
     annotation (Placement(transformation(extent={{-80,30},{-60,50}})));
   Modelica.Blocks.Tables.CombiTable1Ds inputData(
     tableOnFile=true,
-    tableName="saarbruecken",
+    tableName="data",
     fileName=ModelicaServices.ExternalReferences.loadResource(
-        "modelica://SolarPowerSystems/Resources/20181117_t_2m_aswdir_s_aswdifd_s_saarbruecken_60min.txt"),
-    columns=2:4) annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
+        "modelica://SolarPowerSystems/Resources/20180606T0000--20180706T2359+0000_uds-campus.txt"),
+    columns=2:5) annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
   Modelica.Blocks.Sources.Clock timeAsEpoch(offset=startTime.k)
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 equation
