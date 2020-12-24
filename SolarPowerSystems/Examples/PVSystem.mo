@@ -33,9 +33,9 @@ equation
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     experiment(
-      StartTime=18000,
-      StopTime=64800,
       Interval=60,
+      StartTime=10800,
+      StopTime=259200,
       __Dymola_Algorithm="Dassl"),
     __Dymola_Commands(file="Scripts/plot_Examples_PVSystem.mos" "plotResult"),
     Documentation(info="<html>
