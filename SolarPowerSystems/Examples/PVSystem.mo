@@ -1,9 +1,10 @@
 within SolarPowerSystems.Examples;
-model PVSystem "A fictive 15kWp power plant located in Saarbruecken, Germany on 2018-11-07 (perfectly sunny day)"
+model PVSystem
+  "A fictive PV power plant located in Saarbruecken, Germany at the beginning of July 2018"
   import ModelicaServices;
   extends Modelica.Icons.Example;
 
-  Components.IrradianceTemperature2Power PhotoVoltaicSystem(
+  Components.IrradianceTemperatureWindSpeed2Power PhotoVoltaicSystem(
     redeclare Records.Data.Location1 location,
     redeclare Records.Data.PVplant1 plantRecord,
     redeclare Components.SolarPowerPlants.Perez_EfficiencyIrradianceArea plantModel,
@@ -20,12 +21,14 @@ model PVSystem "A fictive 15kWp power plant located in Saarbruecken, Germany on 
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 equation
   connect(timeAsEpoch.y, inputData.u) annotation (Line(points={{-59,0},{-52,0}}, color={0,0,127}));
-  connect(inputData.y[1], PhotoVoltaicSystem.temperature)
-    annotation (Line(points={{-29,0},{-18,0},{-18,-8},{-10,-8}}, color={0,0,127}));
-  connect(inputData.y[2], PhotoVoltaicSystem.directIrradiance)
-    annotation (Line(points={{-29,0},{-18,0},{-18,8},{-10,8}}, color={0,0,127}));
-  connect(inputData.y[3], PhotoVoltaicSystem.diffuseIrradiance)
-    annotation (Line(points={{-29,0},{-18,0},{-18,3},{-10,3}}, color={0,0,127}));
+  connect(inputData.y[1], PhotoVoltaicSystem.directIrradiance)
+    annotation (Line(points={{-29,0},{-20,0},{-20,8},{-10,8}}, color={0,0,127}));
+  connect(inputData.y[2], PhotoVoltaicSystem.diffuseIrradiance)
+    annotation (Line(points={{-29,0},{-20,0},{-20,3},{-10,3}}, color={0,0,127}));
+  connect(inputData.y[4], PhotoVoltaicSystem.windSpeed)
+    annotation (Line(points={{-29,0},{-20,0},{-20,-4},{-10,-4}}, color={0,0,127}));
+  connect(inputData.y[3], PhotoVoltaicSystem.temperature)
+    annotation (Line(points={{-29,0},{-20,0},{-20,-8},{-10,-8}}, color={0,0,127}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
