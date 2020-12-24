@@ -1,19 +1,21 @@
 within SolarPowerSystems.Components;
 model IrradianceTemperatureWindSpeed2Power
-  "Overall model calculating the PV output based on supplied irradiance in the horizontal plane; ambient temperature and wind speed at the site."
+  "Overall model calculating the PV output based on supplied irradiance; ambient temperature and wind speed at the site."
   extends SolarPowerSystems.Icons.PVSystem;
 
   parameter Integer epochOffset "The time at the start of the simulation as Epoch in s";
+  parameter Modelica.SIunits.Efficiency constInverterEfficiency=1 "Constant overall efficiency of the DC-AC converter";
 
-  replaceable parameter Records.Base.Location location annotation (choicesAllMatching=true,Dialog(group="Parameterization"),Placement(transformation(extent={{-50,48},{-30,68}})));
+  replaceable parameter Records.Base.Location location annotation (choicesAllMatching=true,Dialog(group="Parameter Sets"),Placement(transformation(extent={{-50,48},{-30,68}})));
   replaceable parameter Records.Base.PVplant plantRecord annotation (
     choicesAllMatching=true,
-    Dialog(group="Parameterization"),
+    Dialog(group="Parameter Sets"),
     Placement(transformation(extent={{-10,48},{10,68}})));
 
-  replaceable Interfaces.PhotoVoltaicPowerPlant plantModel(useWindSpeedInput=true, k=constInverterEfficiency)
-                                                           constrainedby Interfaces.PhotoVoltaicPowerPlant(
+  replaceable Interfaces.PhotoVoltaicPowerPlant plantModel constrainedby Interfaces.PhotoVoltaicPowerPlant(
     epochOffset=epochOffset,
+    useWindSpeedInput=true,
+    k=constInverterEfficiency,
     useTemperatureInput=true,
     latitude=location.latitude,
     longitude=location.longitude,
@@ -33,6 +35,8 @@ model IrradianceTemperatureWindSpeed2Power
     annotation (Placement(transformation(extent={{-120,10},{-80,50}})));
   Modelica.Blocks.Interfaces.RealInput temperature(unit="K") "The temperature at the plant's site"
     annotation (Placement(transformation(extent={{-120,-100},{-80,-60}})));
+  Modelica.Blocks.Interfaces.RealInput windSpeed(unit="m/s") "The wind speed at the plant's site"
+    annotation (Placement(transformation(extent={{-120,-60},{-80,-20}})));
   Modelica.Blocks.Interfaces.RealOutput power(unit="W") "The generated power"
     annotation (Placement(transformation(extent={{90,70},{110,90}})));
 
@@ -44,9 +48,6 @@ model IrradianceTemperatureWindSpeed2Power
     "The angle of incidence between surface normal and sun beam"
     annotation (Placement(transformation(extent={{90,-50},{110,-30}})));
 
-  parameter Modelica.SIunits.Efficiency constInverterEfficiency=1 "Constant overall efficiency of the DC-AC converter";
-  Modelica.Blocks.Interfaces.RealInput windSpeed(unit="m/s") "The wind speed at the plant's site (optional input)"
-    annotation (Placement(transformation(extent={{-120,-60},{-80,-20}})));
 equation
   connect(plantModel.directHorizontalIrradiance, directIrradiance)
     annotation (Line(points={{-10,8},{-60,8},{-60,80},{-100,80}}, color={0,0,127}));

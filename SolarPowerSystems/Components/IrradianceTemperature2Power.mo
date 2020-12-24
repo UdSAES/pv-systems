@@ -1,19 +1,22 @@
 within SolarPowerSystems.Components;
 model IrradianceTemperature2Power
-  "Overall model calculating the PV output based on supplied irradiance in the horizontal plane and ambient temperature at the site. A constant wind speed is assumed."
+  "Overall model calculating the PV output based on supplied irradiance and ambient temperature at the site. A constant wind speed is assumed."
   extends SolarPowerSystems.Icons.PVSystem;
 
   parameter Integer epochOffset "The time at the start of the simulation as Epoch in s";
+  parameter Modelica.SIunits.Efficiency constInverterEfficiency=1 "Constant overall efficiency of the DC-AC converter";
+  parameter Modelica.SIunits.Velocity constWindSpeed=1 "Fixed wind speed value";
 
-  replaceable parameter Records.Base.Location location annotation (choicesAllMatching=true,Dialog(group="Parameterization"),Placement(transformation(extent={{-50,48},{-30,68}})));
+  replaceable parameter Records.Base.Location location annotation (choicesAllMatching=true,Dialog(group="Parameter Sets"),Placement(transformation(extent={{-50,48},{-30,68}})));
   replaceable parameter Records.Base.PVplant plantRecord annotation (
     choicesAllMatching=true,
-    Dialog(group="Parameterization"),
+    Dialog(group="Parameter Sets"),
     Placement(transformation(extent={{-10,48},{10,68}})));
 
-  replaceable Interfaces.PhotoVoltaicPowerPlant plantModel(k=constInverterEfficiency)
-                                                           constrainedby Interfaces.PhotoVoltaicPowerPlant(
+  replaceable Interfaces.PhotoVoltaicPowerPlant plantModel constrainedby Interfaces.PhotoVoltaicPowerPlant(
     epochOffset=epochOffset,
+    k=constInverterEfficiency,
+    constWindSpeed=constWindSpeed,
     useTemperatureInput=true,
     latitude=location.latitude,
     longitude=location.longitude,
@@ -44,7 +47,6 @@ model IrradianceTemperature2Power
     "The angle of incidence between surface normal and sun beam"
     annotation (Placement(transformation(extent={{90,-50},{110,-30}})));
 
-  parameter Modelica.SIunits.Efficiency constInverterEfficiency=1 "Constant overall efficiency of the DC-AC converter";
 equation
   connect(plantModel.directHorizontalIrradiance, directIrradiance)
     annotation (Line(points={{-10,8},{-60,8},{-60,80},{-100,80}}, color={0,0,127}));
