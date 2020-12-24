@@ -2,7 +2,7 @@ within ;
 package SolarPowerSystems "A model library of the components used in photovoltaic power systems"
   annotation (
     preferredView="info",
-    version="0.9.0 Beta 0",
+    version="0.9.0",
     uses(
       PhotoVoltaics(version="1.6.0"),
       Buildings(version="7.0.0"),
